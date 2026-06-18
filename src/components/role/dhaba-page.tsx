@@ -81,7 +81,25 @@ export function DhabaPage() {
 
                     {/* Chalkboard menu mock */}
                     <Reveal delay={0.2}>
-                        <MenuBoard />
+                        <div className="relative mt-12 md:mt-16">
+                            {/* Subtle floating dhaba icons pinned to the mock */}
+                            <motion.div
+                                animate={{ rotate: [0, 8, 0, -8, 0] }}
+                                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                                className="absolute -right-16 -top-20 z-0 text-orange/10"
+                            >
+                                <ChefHat className="h-64 w-64" />
+                            </motion.div>
+                            <motion.div
+                                animate={{ rotate: [0, -10, 0, 10, 0] }}
+                                transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+                                className="absolute -left-12 bottom-0 z-0 text-orange/10"
+                            >
+                                <UtensilsCrossed className="h-48 w-48" />
+                            </motion.div>
+
+                            <MenuBoard />
+                        </div>
                     </Reveal>
                 </div>
             </section>
@@ -176,7 +194,7 @@ function MenuBoard() {
         { n: "Masala Chai", p: "₹20" },
     ];
     return (
-        <div className="relative mx-auto max-w-md rounded-3xl border-4 border-orange/30 bg-[#0d0803] p-6 shadow-[0_0_80px_-20px_var(--orange-glow)]">
+        <div className="relative z-10 mx-auto max-w-md rounded-3xl border-4 border-orange/30 bg-[#0d0803] p-6 shadow-[0_0_80px_-20px_var(--orange-glow)]">
             <div className="rounded-2xl border border-orange/20 bg-[#160d04] p-6">
                 <div className="mb-4 flex items-center justify-between border-b border-dashed border-orange/30 pb-3">
                     <span className="font-display text-lg font-bold text-orange">Highway Dhaba</span>

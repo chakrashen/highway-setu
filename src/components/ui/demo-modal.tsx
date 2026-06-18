@@ -6,8 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-// Swap this src with a real product demo video when available.
-const DEMO_VIDEO_SRC = "https://www.w3schools.com/html/mov_bbb.mp4";
+const DEMO_VIDEO_SRC = "/my-demo.mp4";
 
 export function DemoModal({ trigger }: { trigger: React.ReactNode }) {
   return (
@@ -27,9 +26,6 @@ export function DemoModal({ trigger }: { trigger: React.ReactNode }) {
           </video>
           <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
         </div>
-        <p className="px-2 py-3 text-center text-sm text-muted-foreground">
-          Placeholder demo — replace with the official Highway Setu walkthrough.
-        </p>
       </DialogContent>
     </Dialog>
   );
