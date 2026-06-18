@@ -1,13 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { motion, useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
-import {
-  ArrowRight,
-  Truck,
-  Wrench,
-  UtensilsCrossed,
-  LayoutDashboard,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { GradientText } from "@/components/ui/gradient-text";
 import { DemoModal, DemoTriggerButton } from "@/components/ui/demo-modal";
 
@@ -167,35 +161,7 @@ export function Hero() {
           />
         </motion.div>
 
-        {/* Floating role chips */}
-        <div className="mt-14 flex flex-wrap items-center justify-center gap-3">
-          {[
-            { icon: Truck, label: "Drivers", c: "text-blue" },
-            { icon: Wrench, label: "Mechanics", c: "text-purple" },
-            { icon: UtensilsCrossed, label: "Dhabas", c: "text-orange" },
-            { icon: LayoutDashboard, label: "Fleets", c: "text-emerald" },
-          ].map((chip, i) => (
-            <motion.div
-              key={chip.label}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 1.7 + i * 0.12 }}
-            >
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{
-                  duration: 3 + i,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="glass flex items-center gap-2 rounded-full px-4 py-2 text-sm"
-              >
-                <chip.icon className={`h-4 w-4 ${chip.c}`} />
-                {chip.label}
-              </motion.div>
-            </motion.div>
-          ))}
-        </div>
+
       </motion.div>
     </section>
   );

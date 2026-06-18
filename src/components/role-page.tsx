@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { Check, ArrowRight, Sparkles } from "lucide-react";
+import { Check, ArrowRight, Sparkles, Truck } from "lucide-react";
 import { ACCENT_META, type RoleData } from "@/lib/roles";
 import { Reveal } from "@/components/ui/reveal";
 import { TiltCard } from "@/components/ui/tilt-card";
@@ -19,6 +19,24 @@ export function RolePage({ role }: { role: RoleData }) {
 
       {/* Hero */}
       <section className="relative px-4 pb-20 pt-36 md:pt-44">
+        {role.slug === "/drivers" && (
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="absolute bottom-4 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent md:bottom-10">
+              <motion.div
+                initial={{ x: "-10vw" }}
+                animate={{ x: "110vw" }}
+                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                className="absolute -top-7 flex items-center"
+              >
+                {/* Truck Body Glow */}
+                <div className="absolute left-0 top-1/2 h-10 w-16 -translate-y-1/2 rounded-full bg-blue/20 blur-xl" />
+                <Truck className="relative z-10 h-8 w-8 text-blue drop-shadow-[0_0_12px_rgba(59,130,246,0.8)]" />
+                {/* Headlight beams */}
+                <div className="absolute left-6 top-[60%] h-3 w-40 -translate-y-1/2 bg-gradient-to-r from-blue-glow/50 to-transparent blur-md" />
+              </motion.div>
+            </div>
+          </div>
+        )}
         <div className="mx-auto max-w-7xl">
           <Reveal>
             <span

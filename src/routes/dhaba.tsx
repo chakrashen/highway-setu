@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { RolePage } from "@/components/role-page";
-import { roleBySlug } from "@/lib/roles";
+import { DhabaPage } from "@/components/role/dhaba-page";
 
 export const Route = createFileRoute("/dhaba")({
   head: () => ({
@@ -18,5 +17,5 @@ export const Route = createFileRoute("/dhaba")({
       },
     ],
   }),
-  component: () => <RolePage role={roleBySlug("/dhaba")} />,
+  component: () => <DhabaPage />,
 });

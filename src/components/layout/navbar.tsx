@@ -8,6 +8,7 @@ import {
   Wrench,
   UtensilsCrossed,
   LayoutDashboard,
+  Home,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -53,8 +54,9 @@ export function Navbar() {
             scrolled ? "glass-strong" : "border border-transparent",
           )}
         >
-          <Link to="/" className="text-lg font-bold tracking-tight">
-            Highway<span className="text-gradient"> Setu</span>
+          <Link to="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
+            <Home className="h-5 w-5" />
+            <span>Highway<span className="text-gradient"> Setu</span></span>
           </Link>
 
           <div className="hidden items-center gap-1 lg:flex">

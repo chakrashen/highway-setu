@@ -432,31 +432,43 @@ export function PlatformFeatures() {
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {platformFeatures.map((f, i) => (
             <Reveal key={f.title} delay={(i % 4) * 0.05}>
-              <motion.div
-                onHoverStart={() => setActive(i)}
-                onHoverEnd={() => setActive(null)}
-                className="glass relative h-full overflow-hidden rounded-2xl p-6"
-              >
-                <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-blue to-purple text-white">
-                  <f.icon className="h-5 w-5" />
+              <div className="relative h-full w-full">
+                {/* Invisible placeholder maintains the grid layout size */}
+                <div className="pointer-events-none invisible p-6">
+                  <div className="h-11 w-11" />
+                  <h3 className="mt-4 font-semibold">{f.title}</h3>
+                  <p className="pt-2 text-sm line-clamp-1">{f.desc}</p>
                 </div>
-                <h3 className="mt-4 font-semibold">{f.title}</h3>
+                
                 <motion.div
-                  initial={false}
-                  animate={{
-                    height: active === i ? "auto" : 0,
-                    opacity: active === i ? 1 : 0,
-                  }}
-                  className="overflow-hidden"
+                  onHoverStart={() => setActive(i)}
+                  onHoverEnd={() => setActive(null)}
+                  className={cn(
+                    "glass absolute inset-x-0 top-0 overflow-hidden rounded-2xl p-6 transition-all duration-300",
+                    active === i ? "z-10 h-auto min-h-full scale-105 shadow-2xl" : "z-0 h-full scale-100"
+                  )}
                 >
-                  <p className="pt-2 text-sm text-muted-foreground">{f.desc}</p>
+                  <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-blue to-purple text-white">
+                    <f.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 font-semibold">{f.title}</h3>
+                  <motion.div
+                    initial={false}
+                    animate={{
+                      height: active === i ? "auto" : 0,
+                      opacity: active === i ? 1 : 0,
+                    }}
+                    className="overflow-hidden"
+                  >
+                    <p className="pt-2 text-sm text-muted-foreground">{f.desc}</p>
+                  </motion.div>
+                  {active !== i && (
+                    <p className="pt-2 text-sm text-muted-foreground/70 line-clamp-1">
+                      {f.desc}
+                    </p>
+                  )}
                 </motion.div>
-                {active !== i && (
-                  <p className="pt-2 text-sm text-muted-foreground/70 line-clamp-1">
-                    {f.desc}
-                  </p>
-                )}
-              </motion.div>
+              </div>
             </Reveal>
           ))}
         </div>
@@ -591,7 +603,6 @@ const comparison = [
   "Real-time emergency support",
   "Verified mechanic network",
   "Digital documentation",
-  "Live fleet visibility",
   "Data-driven insights",
   "Online dhaba discovery",
   "Automated verification",
