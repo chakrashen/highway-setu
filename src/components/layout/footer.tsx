@@ -22,10 +22,17 @@ export function Footer() {
             highway transportation industry.
           </p>
           <div className="mt-6 flex gap-3">
-            {[Twitter, Linkedin, Instagram, Youtube].map((Icon, i) => (
+            {[
+              { Icon: Twitter, href: "#" },
+              { Icon: Linkedin, href: "https://www.linkedin.com/company/highway-setu/" },
+              { Icon: Instagram, href: "https://www.instagram.com/futuretravel2050?igsh=MTI0eXkwbzJjZ280ZQ==" },
+              { Icon: Youtube, href: "#" },
+            ].map(({ Icon, href }, i) => (
               <a
                 key={i}
-                href="#"
+                href={href}
+                target={href !== "#" ? "_blank" : undefined}
+                rel={href !== "#" ? "noopener noreferrer" : undefined}
                 className="grid h-10 w-10 place-items-center rounded-full bg-white/5 text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground"
                 aria-label="Social link"
               >

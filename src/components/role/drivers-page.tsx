@@ -36,7 +36,7 @@ export function DriversPage() {
                 <div className="absolute bottom-10 right-1/3 h-80 w-80 rounded-full bg-blue-glow/15 blur-[140px]" />
 
                 {/* Animated Truck crossing the background */}
-                <div className="absolute bottom-[15%] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue/10 to-transparent">
+                <div className="absolute bottom-[5%] left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue/10 to-transparent">
                   <motion.div
                     initial={{ x: "-10vw" }}
                     animate={{ x: "110vw" }}
@@ -140,8 +140,8 @@ export function DriversPage() {
             <section className="relative px-4 pb-24">
                 <div className="mx-auto max-w-5xl">
                     <Reveal>
-                        <div className="relative overflow-hidden rounded-[2rem] border border-blue/30 bg-gradient-to-br from-[#0c1838] to-[#040914] p-10 text-center md:p-16">
-                            <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-blue/30 blur-[100px]" />
+                        <div className="relative -mt-12 p-10 text-center md:-mt-20 md:p-16">
+                            <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-blue/20 blur-[100px]" />
                             <Navigation className="mx-auto h-10 w-10 text-blue" />
                             <h2 className="mt-5 font-display text-3xl font-bold md:text-4xl">
                                 Ready to hit the road safely?
