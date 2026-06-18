@@ -102,30 +102,55 @@ export function Hero() {
         </div>
       </motion.div>
 
+      {/* Vehicle Group */}
+      <motion.div
+        style={{ y: roadY }}
+        className="absolute bottom-0 left-[-50px] lg:left-[-100px] z-0 w-full pointer-events-none"
+      >
+        {/* Driver */}
+        <img
+          src="/driver-1.png"
+          alt="Truck Driver"
+          className="absolute bottom-[200px] left-[-80px] lg:left-[-120px] w-[420px] lg:w-[550px] object-contain drop-shadow-2xl"
+        />
+
+        {/* Left side truck */}
+        <img
+          src="/truck-1.png"
+          alt="Highway Truck"
+          className="absolute bottom-[170px] left-[10%] lg:left-[15%] w-[300px] lg:w-[480px] object-contain drop-shadow-2xl"
+        />
+
+        {/* Mechanic */}
+        <img
+          src="/mechanic-1.png"
+          alt="Mechanic"
+          className="absolute bottom-[130px] left-[calc(10%+240px)] lg:left-[calc(15%+400px)] w-[350px] lg:w-[500px] object-contain drop-shadow-2xl"
+        />
+
+        {/* Dhaba */}
+        <img
+          src="/dhaba-2.png"
+          alt="Dhaba Owner"
+          className="absolute bottom-[160px] left-[calc(10%+460px)] lg:left-[calc(15%+700px)] w-[300px] lg:w-[450px] object-contain drop-shadow-2xl"
+        />
+
+        {/* Second Truck */}
+        <img
+          src="/my-truck.png"
+          alt="Second Highway Truck"
+          className="absolute bottom-[170px] left-[calc(10%+650px)] lg:left-[calc(15%+950px)] w-[300px] lg:w-[480px] object-contain drop-shadow-2xl"
+        />
+      </motion.div>
+
       {/* Content */}
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 mx-auto max-w-4xl text-center"
       >
-        <motion.span
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.1 }}
-          className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm text-muted-foreground"
-        >
-          <span className="h-2 w-2 animate-pulse rounded-full bg-emerald" />
-          India's Highway Operating System
-        </motion.span>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-6 text-balance text-5xl font-extrabold leading-[1.02] md:text-7xl"
-        >
-          Connecting Every Mile of{" "}
-          <GradientText>India's Highway Ecosystem</GradientText>
-        </motion.h1>
+
+
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
