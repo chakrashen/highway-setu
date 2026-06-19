@@ -146,28 +146,22 @@ export function Hero() {
       {/* Content */}
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-10 mx-auto max-w-4xl text-center"
+        className="relative z-10 mx-auto max-w-7xl text-center"
       >
-
-
-
-
-        <motion.p
+        <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.35 }}
-          className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl"
+          transition={{ duration: 0.8, delay: 1.2 }}
+          className="text-xl md:text-2xl lg:text-3xl font-bold text-white whitespace-nowrap tracking-wide mb-8"
         >
-          Highway Setu is an intelligent digital platform connecting truck
-          drivers, fleet managers, mechanics and dhaba owners into one seamless
-          highway ecosystem.
-        </motion.p>
+          Connecting Every Mile of <span className="text-[#d89cf6]">India's</span> <span className="text-[#d89cf6]">Highway</span> <span className="text-[#a7f3d0]">Ecosystem</span>
+        </motion.h1>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="mt-9 flex flex-wrap items-center justify-center gap-4"
+          className="mt-[400px] flex flex-wrap items-center justify-center gap-4"
         >
           <Link
             to="/"
