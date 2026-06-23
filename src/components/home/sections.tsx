@@ -103,7 +103,7 @@ export function ProblemSection() {
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {problems.map((p, i) => (
             <Reveal key={p.title} delay={(i % 4) * 0.06}>
-              <TiltCard className="glass h-full rounded-2xl p-6">
+              <TiltCard className="glass h-full rounded-2xl p-6 light:!bg-yellow-50">
                 <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-orange/15 text-orange">
                   <p.icon className="h-5 w-5" />
                 </div>
@@ -188,7 +188,7 @@ export function EcosystemSection() {
                   <Link
                     to={n.slug}
                     className={cn(
-                      "glass-strong group flex flex-col items-center gap-3 rounded-3xl p-6 text-center transition-transform hover:scale-105",
+                      "glass-strong group flex flex-col items-center gap-3 rounded-3xl p-6 text-center transition-transform hover:scale-105 light:!bg-gradient-to-br light:!from-red-400 light:!to-red-600 light:!border-red-300/30",
                       a.glow,
                     )}
                   >
@@ -200,7 +200,7 @@ export function EcosystemSection() {
                     >
                       <Icon className="h-6 w-6" />
                     </div>
-                    <span className="font-semibold">{n.name}</span>
+                    <span className="font-semibold light:!text-white">{n.name}</span>
                   </Link>
                 </Reveal>
               );
@@ -244,34 +244,52 @@ export function RoleTeasers() {
                 <Link to={r.slug}>
                   <TiltCard
                     className={cn(
-                      "glass-strong group relative h-full overflow-hidden rounded-3xl p-8 transition-shadow hover:shadow-2xl",
+                      "glass-strong group relative h-full min-h-[320px] overflow-hidden rounded-3xl p-8 transition-shadow hover:shadow-2xl",
                     )}
                   >
+                    <div className="pointer-events-none absolute inset-x-0 top-0 h-[95%] z-0">
+                      <img 
+                        src={
+                          r.key === 'blue' ? "/truck%20driver%20for%20box.png" :
+                          r.key === 'purple' ? "/mechanic%20for%20box.png" :
+                          r.key === 'orange' ? "/dhaba%20for%20box.png" :
+                          "/fleet%20for%20box.png"
+                        }
+                        alt="" 
+                        className="h-full w-full object-cover object-top opacity-100 light:opacity-90"
+                        style={{
+                          maskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)',
+                          WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)'
+                        }}
+                      />
+                    </div>
                     <div
                       className={cn(
-                        "pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-to-br opacity-20 blur-2xl",
+                        "pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-gradient-to-br opacity-20 blur-2xl z-0",
                         a.gradient,
                       )}
                     />
-                    <div
-                      className={cn(
-                        "grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br text-white",
-                        a.gradient,
-                      )}
-                    >
+                    <div className="relative z-10 flex h-full flex-col">
+                      <div
+                        className={cn(
+                          "grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br text-white",
+                          a.gradient,
+                        )}
+                      >
                       <Icon className="h-6 w-6" />
                     </div>
-                    <h3 className="mt-5 text-xl font-bold">{r.name}</h3>
-                    <p className={cn("mt-1 text-sm font-medium", a.text)}>
-                      {r.headline}
-                    </p>
-                    <p className="mt-3 text-sm text-muted-foreground">
-                      {r.description}
-                    </p>
-                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold">
-                      Explore{" "}
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </span>
+                    <h3 className="mt-24 text-3xl font-extrabold">{r.name}</h3>
+                    
+                    <div className="mt-auto flex items-end justify-between pt-2">
+                      <p className={cn("text-sm font-medium pr-4", a.text)}>
+                        {r.headline}
+                      </p>
+                      <span className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold">
+                        Explore{" "}
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </div>
+                    </div>
                   </TiltCard>
                 </Link>
               </Reveal>
@@ -311,7 +329,7 @@ export function HowItWorks() {
           </div>
         </Reveal>
         <div className="relative mt-16 pl-8 md:pl-0">
-          <div className="absolute bottom-0 left-3 top-0 w-px bg-white/10 md:left-1/2" />
+          <div className="absolute bottom-0 left-3 top-0 w-px bg-white/10 light:bg-black/10 md:left-1/2" />
           <motion.div
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
@@ -519,7 +537,7 @@ export function DashboardPreview() {
           <div className="glass-strong mt-12 rounded-[2rem] p-6 md:p-8 glow-blue">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {dashMetrics.map((m) => (
-                <div key={m.label} className="rounded-2xl bg-white/5 p-5">
+                <div key={m.label} className="rounded-2xl bg-white/5 light:bg-black/5 p-5">
                   <div
                     className={cn("text-2xl font-bold md:text-3xl", m.color)}
                   >
@@ -537,7 +555,7 @@ export function DashboardPreview() {
               ))}
             </div>
             <div className="mt-6 grid gap-4 lg:grid-cols-3">
-              <div className="rounded-2xl bg-white/5 p-5 lg:col-span-2">
+              <div className="rounded-2xl bg-white/5 light:bg-black/5 p-5 lg:col-span-2">
                 <p className="mb-4 text-sm text-muted-foreground">
                   Monthly trips
                 </p>
@@ -556,7 +574,7 @@ export function DashboardPreview() {
                   )}
                 </div>
               </div>
-              <div className="rounded-2xl bg-white/5 p-5">
+              <div className="rounded-2xl bg-white/5 light:bg-black/5 p-5">
                 <p className="mb-4 text-sm text-muted-foreground">
                   Fleet health
                 </p>
@@ -624,7 +642,7 @@ export function WhySection() {
         </Reveal>
         <Reveal delay={0.1}>
           <div className="glass-strong mt-12 overflow-hidden rounded-3xl">
-            <div className="grid grid-cols-[1.5fr_1fr_1fr] border-b border-white/10 text-sm font-semibold">
+            <div className="grid grid-cols-[1.5fr_1fr_1fr] border-b border-white/10 light:border-black/10 text-sm font-semibold">
               <div className="p-4 md:p-5">Capability</div>
               <div className="p-4 text-center text-muted-foreground md:p-5">
                 Traditional
@@ -640,7 +658,7 @@ export function WhySection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="grid grid-cols-[1.5fr_1fr_1fr] border-b border-white/5 text-sm last:border-0"
+                className="grid grid-cols-[1.5fr_1fr_1fr] border-b border-white/5 light:border-black/5 text-sm last:border-0"
               >
                 <div className="p-4 md:p-5">{c}</div>
                 <div className="flex items-center justify-center p-4 md:p-5">
@@ -775,7 +793,7 @@ export function Testimonials() {
                 "h-2 rounded-full transition-all",
                 idx === i
                   ? "w-8 bg-gradient-to-r from-blue to-purple"
-                  : "w-2 bg-white/20",
+                  : "w-2 bg-white/20 light:bg-black/20",
               )}
             />
           ))}
@@ -834,7 +852,7 @@ export function CtaSection() {
               <Link
                 to="/"
                 hash="ecosystem"
-                className="rounded-full border border-white/15 bg-white/5 px-8 py-4 text-sm font-semibold backdrop-blur transition-colors hover:bg-white/10"
+                className="rounded-full border border-white/15 light:border-black/15 bg-white/5 light:bg-black/5 px-8 py-4 text-sm font-semibold backdrop-blur transition-colors hover:bg-white/10 light:hover:bg-black/10"
               >
                 Book a Demo
               </Link>

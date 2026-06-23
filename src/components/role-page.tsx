@@ -21,7 +21,7 @@ export function RolePage({ role }: { role: RoleData }) {
       <section className="relative px-4 pb-20 pt-36 md:pt-44">
         {role.slug === "/drivers" && (
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="absolute bottom-4 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent md:bottom-10">
+            <div className="absolute bottom-4 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 light:via-black/10 to-transparent md:bottom-10">
               <motion.div
                 initial={{ x: "-10vw" }}
                 animate={{ x: "110vw" }}
@@ -184,7 +184,7 @@ export function RolePage({ role }: { role: RoleData }) {
                 </Link>
                 <Link
                   to="/"
-                  className="rounded-full border border-white/15 bg-white/5 px-7 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-white/10"
+                  className="rounded-full border border-white/15 light:border-black/15 bg-white/5 light:bg-black/5 px-7 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-white/10 light:hover:bg-black/10"
                 >
                   Explore Platform
                 </Link>
@@ -211,7 +211,7 @@ function RoleMockup({ role }: { role: RoleData }) {
       </div>
       <div className="grid grid-cols-3 gap-3">
         {role.stats.map((s) => (
-          <div key={s.label} className="rounded-2xl bg-white/5 p-3">
+          <div key={s.label} className="rounded-2xl bg-white/5 light:bg-black/5 p-3">
             <div className={cn("text-lg font-bold", a.text)}>
               <AnimatedCounter
                 value={s.value}
@@ -225,7 +225,7 @@ function RoleMockup({ role }: { role: RoleData }) {
           </div>
         ))}
       </div>
-      <div className="mt-3 flex h-32 items-end gap-2 rounded-2xl bg-white/5 p-4">
+      <div className="mt-3 flex h-32 items-end gap-2 rounded-2xl bg-white/5 light:bg-black/5 p-4">
         {[40, 65, 50, 80, 60, 95, 72, 88].map((h, i) => (
           <motion.div
             key={i}
@@ -245,7 +245,7 @@ function RoleMockup({ role }: { role: RoleData }) {
         {role.features.slice(0, 3).map((f) => (
           <div
             key={f}
-            className="flex items-center gap-2 rounded-xl bg-white/5 px-3 py-2 text-sm"
+            className="flex items-center gap-2 rounded-xl bg-white/5 light:bg-black/5 px-3 py-2 text-sm"
           >
             <Check className={cn("h-4 w-4", a.text)} /> {f}
           </div>
