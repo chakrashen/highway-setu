@@ -74,14 +74,13 @@ export function DhabaPage() {
                                 >
                                     List My Dhaba <ArrowRight className="h-4 w-4" />
                                 </Link>
-                                <DemoModal trigger={<button><DemoTriggerButton /></button>} />
                             </div>
                         </Reveal>
                     </div>
 
-                    {/* Chalkboard menu mock */}
+                    {/* Image Mockup */}
                     <Reveal delay={0.2}>
-                        <div className="relative mt-12 md:mt-16">
+                        <div className="relative mt-12 min-h-[400px] w-full lg:min-h-[600px] lg:mt-0">
                             {/* Subtle floating dhaba icons pinned to the mock */}
                             <motion.div
                                 animate={{ rotate: [0, 8, 0, -8, 0] }}
@@ -104,26 +103,7 @@ export function DhabaPage() {
                 </div>
             </section>
 
-            {/* Stats — wooden plates */}
-            <section className="relative px-4 py-10">
-                <div className="mx-auto grid max-w-6xl gap-4 sm:grid-cols-3">
-                    {role.stats.map((s, i) => (
-                        <Reveal key={s.label} delay={0.08 * i}>
-                            <div className="rounded-3xl border border-orange/25 light:border-slate-200 bg-orange/5 light:bg-white p-6 text-center backdrop-blur">
-                                <div className="font-display text-3xl font-bold text-orange md:text-4xl">
-                                    <AnimatedCounter
-                                        value={s.value}
-                                        prefix={s.prefix}
-                                        suffix={s.suffix}
-                                        decimals={s.value % 1 !== 0 ? 1 : 0}
-                                    />
-                                </div>
-                                <div className="mt-1 text-xs uppercase tracking-widest text-orange-100/60 light:text-slate-500">{s.label}</div>
-                            </div>
-                        </Reveal>
-                    ))}
-                </div>
-            </section>
+
 
             {/* Features served as menu items */}
             <section className="relative px-4 py-20">
@@ -147,83 +127,33 @@ export function DhabaPage() {
                             </Reveal>
                         ))}
                     </div>
+                    <div className="mt-12 flex justify-center">
+                        <Link
+                            to="/"
+                            className="rounded-full border border-orange/30 bg-orange/10 px-8 py-3.5 text-sm font-semibold text-orange transition-colors hover:bg-orange/20"
+                        >
+                            Explore Platform
+                        </Link>
+                    </div>
                 </div>
             </section>
 
-            {/* CTA */}
-            <section className="relative px-4 pb-24">
-                <div className="mx-auto max-w-5xl">
-                    <Reveal>
-                        <div className="relative overflow-hidden rounded-[2rem] border border-orange/30 light:border-slate-200 bg-gradient-to-br from-[#241608] to-[#140c04] light:from-white light:to-slate-50 p-10 text-center md:p-16">
-                            <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-orange/30 blur-[100px]" />
-                            <Star className="mx-auto h-8 w-8 text-orange" />
-                            <h2 className="mt-4 font-display text-3xl font-bold md:text-4xl">
-                                Ready to grow your dhaba?
-                            </h2>
-                            <p className="mx-auto mt-3 max-w-xl text-orange-100/75 light:text-slate-600">
-                                Become part of India's most connected highway ecosystem.
-                            </p>
-                            <div className="mt-8 flex flex-wrap justify-center gap-4">
-                                <Link
-                                    to="/"
-                                    hash="cta"
-                                    className="rounded-full bg-gradient-to-r from-orange to-orange-glow px-7 py-3.5 text-sm font-semibold text-[#140c04] transition-transform hover:scale-105"
-                                >
-                                    Get Started
-                                </Link>
-                                <Link
-                                    to="/"
-                                    className="rounded-full border border-orange/30 bg-orange/10 px-7 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-orange/20"
-                                >
-                                    Explore Platform
-                                </Link>
-                            </div>
-                        </div>
-                    </Reveal>
-                </div>
-            </section>
+
         </div>
     );
 }
 
 function MenuBoard() {
-    const items = [
-        { n: "Dal Makhani", p: "₹180", hot: true },
-        { n: "Tandoori Roti", p: "₹25" },
-        { n: "Paneer Tikka", p: "₹220", hot: true },
-        { n: "Masala Chai", p: "₹20" },
-    ];
     return (
-        <div className="relative z-10 mx-auto max-w-md rounded-3xl border-4 border-orange/30 light:border-slate-200 bg-[#0d0803] light:bg-white p-6 shadow-[0_0_80px_-20px_var(--orange-glow)]">
-            <div className="rounded-2xl border border-orange/20 light:border-slate-200 bg-[#160d04] light:bg-slate-50 p-6">
-                <div className="mb-4 flex items-center justify-between border-b border-dashed border-orange/30 light:border-slate-200 pb-3">
-                    <span className="font-display text-lg font-bold text-orange">Highway Dhaba</span>
-                    <span className="flex items-center gap-1 text-xs text-orange-100/60 light:text-slate-500">
-                        <Star className="h-3.5 w-3.5 fill-orange text-orange" /> 4.7
-                    </span>
-                </div>
-                <div className="space-y-3">
-                    {items.map((it, i) => (
-                        <motion.div
-                            key={it.n}
-                            initial={{ opacity: 0, x: -10 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.12 }}
-                            className="flex items-center justify-between text-sm"
-                        >
-                            <span className="flex items-center gap-2 text-orange-50 light:text-slate-900">
-                                {it.n}
-                                {it.hot && <Flame className="h-3.5 w-3.5 text-orange-glow" />}
-                            </span>
-                            <span className="font-mono text-orange">{it.p}</span>
-                        </motion.div>
-                    ))}
-                </div>
-                <div className="mt-5 rounded-xl bg-orange/10 px-4 py-3 text-center text-xs text-orange-100/70 light:text-orange-900">
-                    🔥 Peak hour now · 12 live orders
-                </div>
-            </div>
+        <div 
+            className="absolute inset-0 z-10 lg:-right-[50%] lg:w-[150%] lg:-translate-x-48"
+            style={{ WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 25%)", maskImage: "linear-gradient(to right, transparent 0%, black 25%)" }}
+        >
+            <img 
+                src="/dhaba independent.png" 
+                alt="Independent Dhaba" 
+                className="h-full w-full object-cover lg:object-left" 
+            />
         </div>
     );
 }
