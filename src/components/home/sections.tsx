@@ -89,7 +89,7 @@ const problems: { icon: LucideIcon; title: string; desc: string }[] = [
 
 export function ProblemSection() {
   return (
-    <section className="relative px-4 py-24">
+    <section className="relative px-4 pt-24 pb-12">
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <p className="text-sm font-semibold uppercase tracking-widest text-orange">
@@ -126,19 +126,27 @@ export function EcosystemSection() {
     { ...ROLES[1] },
     { ...ROLES[2] },
   ];
+
+  const iconColors: Record<string, string> = {
+    blue: '#38BDF8',
+    emerald: '#22C55E',
+    purple: '#A855F7',
+    orange: '#F59E0B'
+  };
+
   return (
-    <section id="ecosystem" className="relative scroll-mt-24 px-4 py-24">
+    <section id="ecosystem" className="relative scroll-mt-24 px-4 pt-8 pb-12 bg-[#F8FAFC] dark:bg-transparent">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-blue">
               The Solution
             </p>
-            <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold md:text-5xl">
+            <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold md:text-5xl text-slate-900 dark:text-white">
               One unified ecosystem,{" "}
               <GradientText>connected end to end</GradientText>
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+            <p className="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-muted-foreground">
               Highway Setu links every participant of the highway economy
               through a single intelligent platform.
             </p>
@@ -173,34 +181,49 @@ export function EcosystemSection() {
             ))}
             <defs>
               <linearGradient id="eco-grad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stopColor="oklch(0.65 0.19 255)" />
-                <stop offset="100%" stopColor="oklch(0.62 0.23 300)" />
+                <stop offset="0%" stopColor="#2563EB" />
+                <stop offset="100%" stopColor="#7C3AED" />
               </linearGradient>
             </defs>
           </svg>
 
           <div className="relative grid grid-cols-2 gap-6 md:gap-16">
             {nodes.map((n, i) => {
-              const a = ACCENT_META[n.key];
               const Icon = n.icon;
               return (
                 <Reveal key={n.slug} delay={i * 0.12}>
                   <Link
                     to={n.slug}
                     className={cn(
-                      "glass-strong group flex flex-col items-center gap-3 rounded-3xl p-6 text-center transition-transform hover:scale-105 light:!bg-gradient-to-br light:!from-red-400 light:!to-red-600 light:!border-red-300/30",
-                      a.glow,
+                      "group relative flex flex-col rounded-3xl p-6 md:p-8 min-h-[180px] md:min-h-[220px] text-left transition-transform hover:scale-105 shadow-lg overflow-hidden",
+                      "bg-gradient-to-br from-[#0F172A] to-[#1E293B]"
                     )}
                   >
-                    <div
-                      className={cn(
-                        "grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br text-white",
-                        a.gradient,
-                      )}
-                    >
-                      <Icon className="h-6 w-6" />
+                    <div className="pointer-events-none absolute inset-x-0 top-0 h-full z-0">
+                      <img 
+                        src={
+                          n.key === 'blue' ? "/truck%20driver%20for%20box.png" :
+                          n.key === 'purple' ? "/mechanic%20for%20box.png" :
+                          n.key === 'orange' ? "/dhaba%20for%20box.png" :
+                          "/fleet%20for%20box.png"
+                        }
+                        alt="" 
+                        className="h-full w-full object-cover object-top opacity-100 light:opacity-90"
+                        style={{
+                          maskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)',
+                          WebkitMaskImage: 'linear-gradient(to bottom, black 40%, transparent 100%)'
+                        }}
+                      />
                     </div>
-                    <span className="font-semibold light:!text-white">{n.name}</span>
+                    <div className="relative z-10 flex flex-1 flex-col w-full items-start justify-between">
+                      <div
+                        className="grid h-12 w-12 place-items-center rounded-2xl text-white shadow-lg"
+                        style={{ backgroundColor: iconColors[n.key] }}
+                      >
+                        <Icon className="h-5 w-5" />
+                      </div>
+                      <span className="text-2xl md:text-3xl font-extrabold text-white mt-auto">{n.name}</span>
+                    </div>
                   </Link>
                 </Reveal>
               );
@@ -212,7 +235,8 @@ export function EcosystemSection() {
             <motion.div
               animate={{ scale: [1, 1.08, 1] }}
               transition={{ duration: 3, repeat: Infinity }}
-              className="glass-strong grid h-24 w-24 place-items-center rounded-full text-center text-xs font-bold leading-tight"
+              className="grid h-24 w-24 place-items-center rounded-full text-center text-xs font-bold leading-tight bg-yellow-400 text-slate-900"
+              style={{ boxShadow: '0 4px 20px rgba(37,99,235,0.15)' }}
             >
               Highway
               <br />
@@ -228,7 +252,7 @@ export function EcosystemSection() {
 /* ----------------------------- Role teasers ----------------------------- */
 export function RoleTeasers() {
   return (
-    <section className="relative px-4 py-24">
+    <section className="relative px-4 pt-8 pb-24">
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <h2 className="text-3xl font-bold md:text-5xl">
@@ -339,7 +363,17 @@ export function HowItWorks() {
             className="absolute bottom-0 left-3 top-0 w-px bg-gradient-to-b from-blue via-purple to-emerald md:left-1/2"
           />
           <div className="space-y-10">
-            {steps.map((s, i) => (
+            {steps.map((s, i) => {
+              const bgColors = [
+                "bg-[#FDE047] text-slate-900", // Yellow
+                "bg-[#38BDF8] text-slate-900", // Sky Blue
+                "bg-[#EA580C] text-white", // Orange
+                "bg-[#22C55E] text-slate-900", // Green
+                "bg-[#6D28D9] text-white", // Purple
+                "bg-[#EC4899] text-white" // Pink for 6th
+              ];
+              const boxClass = bgColors[i] || bgColors[5];
+              return (
               <Reveal key={s.title} delay={0.05}>
                 <div
                   className={cn(
@@ -351,16 +385,16 @@ export function HowItWorks() {
                     {i + 1}
                   </div>
                   <div className="md:w-1/2 md:px-10">
-                    <div className="glass rounded-2xl p-5">
+                    <div className={cn("rounded-2xl p-5 shadow-lg", boxClass)}>
                       <h3 className="font-semibold">{s.title}</h3>
-                      <p className="mt-1 text-sm text-muted-foreground">
+                      <p className={cn("mt-1 text-sm", boxClass.includes("text-white") ? "text-white/90" : "text-slate-800")}>
                         {s.desc}
                       </p>
                     </div>
                   </div>
                 </div>
               </Reveal>
-            ))}
+            )})}
           </div>
         </div>
       </div>
@@ -370,11 +404,6 @@ export function HowItWorks() {
 
 /* ----------------------------- Platform features ----------------------------- */
 const platformFeatures: { icon: LucideIcon; title: string; desc: string }[] = [
-  {
-    icon: UserCheck,
-    title: "AI Verification",
-    desc: "Automated identity and document verification you can trust.",
-  },
   {
     icon: Bell,
     title: "Real-Time Notifications",
@@ -391,11 +420,6 @@ const platformFeatures: { icon: LucideIcon; title: string; desc: string }[] = [
     desc: "Bank-grade security protecting every account.",
   },
   {
-    icon: Cloud,
-    title: "Cloud Storage",
-    desc: "All documents and data, safely stored and synced.",
-  },
-  {
     icon: FileCheck2,
     title: "Document Verification",
     desc: "Validate permits, licenses and records digitally.",
@@ -406,24 +430,9 @@ const platformFeatures: { icon: LucideIcon; title: string; desc: string }[] = [
     desc: "A personalized command center for every role.",
   },
   {
-    icon: BarChart3,
-    title: "Analytics",
-    desc: "Turn raw operations into actionable insight.",
-  },
-  {
-    icon: MapPin,
-    title: "GPS Integration",
-    desc: "Live location, routing and geo-aware services.",
-  },
-  {
     icon: FileText,
     title: "Reports",
     desc: "Exportable reports for finance and compliance.",
-  },
-  {
-    icon: LifeBuoy,
-    title: "Emergency Assistance",
-    desc: "One-tap SOS and rapid roadside response.",
   },
   {
     icon: Users,
@@ -435,7 +444,7 @@ const platformFeatures: { icon: LucideIcon; title: string; desc: string }[] = [
 export function PlatformFeatures() {
   const [active, setActive] = useState<number | null>(null);
   return (
-    <section className="relative px-4 py-24">
+    <section className="relative px-4 pt-4 pb-24">
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <div className="text-center">
@@ -462,8 +471,10 @@ export function PlatformFeatures() {
                   onHoverStart={() => setActive(i)}
                   onHoverEnd={() => setActive(null)}
                   className={cn(
-                    "glass absolute inset-x-0 top-0 overflow-hidden rounded-2xl p-6 transition-all duration-300",
-                    active === i ? "z-10 h-auto min-h-full scale-105 shadow-2xl" : "z-0 h-full scale-100"
+                    "absolute inset-x-0 top-0 overflow-hidden rounded-2xl p-6 transition-all duration-300 border border-[#FDE047]/50",
+                    active === i 
+                      ? "z-10 h-auto min-h-full scale-105 shadow-2xl bg-[#FDE047] dark:bg-[#FDE047]/40" 
+                      : "z-0 h-full scale-100 bg-[#FFF9C4] dark:bg-[#FFF9C4]/10"
                   )}
                 >
                   <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-blue to-purple text-white">
@@ -628,7 +639,7 @@ const comparison = [
 
 export function WhySection() {
   return (
-    <section className="relative px-4 py-24">
+    <section className="relative px-4 pt-4 pb-24">
       <div className="mx-auto max-w-4xl">
         <Reveal>
           <div className="text-center">
@@ -662,11 +673,11 @@ export function WhySection() {
               >
                 <div className="p-4 md:p-5">{c}</div>
                 <div className="flex items-center justify-center p-4 md:p-5">
-                  <X className="h-5 w-5 text-red-400/70" />
+                  <X className="h-5 w-5 text-red-600" strokeWidth={3} />
                 </div>
                 <div className="flex items-center justify-center bg-gradient-to-r from-blue/5 to-purple/5 p-4 md:p-5">
-                  <span className="grid h-6 w-6 place-items-center rounded-full bg-emerald/20 text-emerald">
-                    <Check className="h-4 w-4" />
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-emerald/30">
+                    <Check className="h-4 w-4 text-emerald-700 dark:text-emerald-400" strokeWidth={3} />
                   </span>
                 </div>
               </motion.div>
@@ -751,14 +762,47 @@ const testimonials = [
     role: "Dhaba Owner",
     c: "text-orange",
   },
+  {
+    quote:
+      "With Highway Setu, I never worry about finding a safe spot to park and eat. It shows all the verified stops.",
+    name: "Ramesh Patel",
+    role: "Long-haul Driver",
+    c: "text-blue",
+  },
+  {
+    quote:
+      "The automated billing and fast toll pass integrations have saved my transport business hours of paperwork every week.",
+    name: "Suresh Gupta",
+    role: "Transport Operator",
+    c: "text-emerald",
+  },
+  {
+    quote:
+      "I can source spare parts locally through the app's network. It's transformed how quickly I can finish repairs.",
+    name: "Rajesh Kumar",
+    role: "Spare Parts Vendor",
+    c: "text-purple",
+  },
+  {
+    quote:
+      "We get advance notice of truck convoys, so we prep food on time. Highway Setu brings us guaranteed business.",
+    name: "Priya Sharma",
+    role: "Dhaba Manager",
+    c: "text-orange",
+  },
+  {
+    quote:
+      "Managing 50+ trucks was a nightmare. Now, I have live GPS and driver status right on my phone.",
+    name: "Vikram Singh",
+    role: "Logistics Coordinator",
+    c: "text-emerald",
+  },
 ];
 
 export function Testimonials() {
-  const [i, setI] = useState(0);
-  const t = testimonials[i];
   return (
-    <section className="relative px-4 py-24">
-      <div className="mx-auto max-w-4xl text-center">
+    <section className="relative px-4 pt-4 pb-24">
+      <div className="mx-auto max-w-5xl text-center">
         <Reveal>
           <p className="text-sm font-semibold uppercase tracking-widest text-orange">
             Loved on the highway
@@ -768,36 +812,24 @@ export function Testimonials() {
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="glass-strong mx-auto mt-12 max-w-2xl rounded-3xl p-8 md:p-10"
-          >
-            <Quote className="mx-auto h-8 w-8 text-muted-foreground/50" />
-            <p className="mt-5 text-lg md:text-xl">{t.quote}</p>
-            <div className="mt-6">
-              <div className="font-semibold">{t.name}</div>
-              <div className={cn("text-sm", t.c)}>{t.role}</div>
-            </div>
-          </motion.div>
+          <div className="mt-12">
+            <Marquee pauseOnHover className="[--duration:50s]">
+              {testimonials.map((t, idx) => (
+                <div
+                  key={idx}
+                  className="glass-strong mx-4 w-[300px] md:w-[400px] shrink-0 rounded-3xl p-6 md:p-8 whitespace-normal text-left"
+                >
+                  <Quote className="h-6 w-6 text-muted-foreground/50" />
+                  <p className="mt-4 text-sm md:text-base leading-relaxed text-slate-800 dark:text-slate-200">{t.quote}</p>
+                  <div className="mt-6">
+                    <div className="font-semibold text-slate-900 dark:text-white">{t.name}</div>
+                    <div className={cn("text-sm", t.c)}>{t.role}</div>
+                  </div>
+                </div>
+              ))}
+            </Marquee>
+          </div>
         </Reveal>
-        <div className="mt-6 flex justify-center gap-2">
-          {testimonials.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setI(idx)}
-              aria-label={`Testimonial ${idx + 1}`}
-              className={cn(
-                "h-2 rounded-full transition-all",
-                idx === i
-                  ? "w-8 bg-gradient-to-r from-blue to-purple"
-                  : "w-2 bg-white/20 light:bg-black/20",
-              )}
-            />
-          ))}
-        </div>
 
         <div className="mt-16">
           <Marquee>
@@ -819,6 +851,15 @@ export function Testimonials() {
               </span>
             ))}
           </Marquee>
+        </div>
+
+        <div className="mt-12 flex justify-center">
+          <Link
+            to="/drivers"
+            className="rounded-full bg-gradient-to-r from-blue via-primary to-purple px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105"
+          >
+            Get Started
+          </Link>
         </div>
       </div>
     </section>

@@ -37,9 +37,9 @@ export function DemoTriggerButton({
   label?: string;
 }) {
   return (
-    <span className="group inline-flex cursor-pointer items-center gap-3 rounded-full border border-white/15 light:border-black/15 bg-white/5 light:bg-black/5 px-6 py-3 text-sm font-semibold backdrop-blur transition-colors hover:bg-white/10 light:hover:bg-black/10">
-      <span className="grid h-8 w-8 place-items-center rounded-full bg-white/10 light:bg-black/10 transition-transform group-hover:scale-110">
-        <Play className="h-3.5 w-3.5 fill-current" />
+    <span className="group inline-flex cursor-pointer items-center gap-3 rounded-full border border-white/10 bg-black/50 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition-colors hover:bg-black/70">
+      <span className="grid h-8 w-8 place-items-center rounded-full bg-white/10 transition-transform group-hover:scale-110">
+        <Play className="h-3.5 w-3.5 fill-current text-white" />
       </span>
       {label}
     </span>

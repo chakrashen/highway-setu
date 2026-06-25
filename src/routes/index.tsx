@@ -3,14 +3,10 @@ import { Hero } from "@/components/home/hero";
 import {
   ProblemSection,
   EcosystemSection,
-  RoleTeasers,
   HowItWorks,
   PlatformFeatures,
-  DashboardPreview,
   WhySection,
-  TechStack,
   Testimonials,
-  CtaSection,
 } from "@/components/home/sections";
 import { AnimatedBackground } from "@/components/ui/animated-background";
 
@@ -42,14 +38,10 @@ function Index() {
         <AnimatedBackground />
         <ProblemSection />
         <EcosystemSection />
-        <RoleTeasers />
         <HowItWorks />
         <PlatformFeatures />
-        <DashboardPreview />
         <WhySection />
-        <TechStack />
         <Testimonials />
-        <CtaSection />
       </div>
     </div>
   );
