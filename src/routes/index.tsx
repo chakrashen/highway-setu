@@ -9,6 +9,7 @@ import {
   Testimonials,
 } from "@/components/home/sections";
 import { AnimatedBackground } from "@/components/ui/animated-background";
+import { DhabaMap } from "@/components/home/dhaba-map";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -39,6 +40,7 @@ function Index() {
         <ProblemSection />
         <EcosystemSection />
         <HowItWorks />
+        <DhabaMap />
         <PlatformFeatures />
         <WhySection />
         <Testimonials />
