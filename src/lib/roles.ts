@@ -97,13 +97,9 @@ export const ROLES: RoleData[] = [
       "Receive Service Requests",
       "Accept Jobs",
       "Vehicle Diagnosis",
-      "Maintenance Records",
       "Spare Parts Management",
       "Customer Communication",
-      "Service Tracking",
       "Earnings Dashboard",
-      "Ratings & Reviews",
-      "Digital Workshop Profile",
     ],
     stats: [
       { label: "Workshops onboarded", value: 9200, suffix: "+" },
