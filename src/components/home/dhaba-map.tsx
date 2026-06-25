@@ -4,7 +4,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Reveal } from "@/components/ui/reveal";
 import { GradientText } from "@/components/ui/gradient-text";
-import { MapPin, Utensils, Star, Clock, Phone } from "lucide-react";
+import { MapPin, Utensils, Star, Clock, Phone, Search } from "lucide-react";
 
 /* ── Sample dhaba data along major Indian highways ── */
 const dhabas: {
@@ -94,6 +94,7 @@ const highways = ["All", ...Array.from(new Set(dhabas.map((d) => d.highway)))];
 export function DhabaMap() {
   const [filter, setFilter] = useState("All");
   const [showRegistered, setShowRegistered] = useState<"all" | "registered" | "unregistered">("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const mapRef = useRef<L.Map | null>(null);
 
   const filtered = dhabas.filter((d) => {
@@ -102,7 +103,12 @@ export function DhabaMap() {
       showRegistered === "all" ||
       (showRegistered === "registered" && d.registered) ||
       (showRegistered === "unregistered" && !d.registered);
-    return matchHighway && matchStatus;
+    const matchSearch =
+      searchQuery === "" ||
+      d.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      d.highway.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      d.specialty.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchHighway && matchStatus && matchSearch;
   });
 
   const registeredCount = dhabas.filter((d) => d.registered).length;
@@ -129,8 +135,9 @@ export function DhabaMap() {
 
 
 
-        {/* Filter controls */}
+        {/* Search and Filter controls */}
         <Reveal delay={0.15}>
+
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             {/* Status filter */}
             <div className="flex rounded-full border border-white/10 light:border-slate-200 bg-white/5 light:bg-white p-1">
@@ -170,7 +177,21 @@ export function DhabaMap() {
 
         {/* Map */}
         <Reveal delay={0.2}>
-          <div className="relative z-10 mt-8 overflow-hidden rounded-3xl border border-white/10 light:border-slate-200 shadow-2xl shadow-orange-500/10">
+          {/* Search bar positioned top-left above map */}
+          <div className="mb-4 max-w-sm mt-8">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+              <input
+                type="text"
+                placeholder="Search dhabas by name, highway or specialty..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full rounded-xl border border-white/10 light:border-slate-200 bg-white/5 light:bg-white py-2.5 pl-10 pr-4 text-sm text-white light:text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 shadow-sm"
+              />
+            </div>
+          </div>
+
+          <div className="relative z-10 overflow-hidden rounded-3xl border border-white/10 light:border-slate-200 shadow-2xl shadow-orange-500/10">
             <div className="h-[500px] md:h-[600px] w-full">
               <MapContainer
                 center={[22.5, 78.5]}
