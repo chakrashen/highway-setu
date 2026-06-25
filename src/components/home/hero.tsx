@@ -91,7 +91,7 @@ export function Hero() {
       {/* Content */}
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-10 mx-auto max-w-7xl text-center"
+        className="relative z-10 mx-auto w-full text-center"
       >
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -105,8 +105,26 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
+          className="relative mx-auto mt-4 w-[90%] max-w-6xl"
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            style={{ transform: "translateZ(0)", willChange: "transform" }}
+            className="w-full rounded-2xl object-cover shadow-2xl"
+            src="/main video.mp4"
+          />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="mt-[400px] flex flex-wrap items-center justify-center gap-4"
+          className="mt-12 flex flex-wrap items-center justify-center gap-4"
         >
           <Link
             to="/"

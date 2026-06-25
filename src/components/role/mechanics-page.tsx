@@ -21,10 +21,10 @@ const role = roleBySlug("/mechanics");
    rotating gears, and neon purple accents. */
 export function MechanicsPage() {
     return (
-        <div className="relative overflow-hidden bg-[#0a0510] text-purple-50">
+        <div className="relative overflow-hidden bg-[#0a0510] light:bg-slate-50 text-purple-50 light:text-slate-900">
             {/* Background grid & glow */}
             <div className="pointer-events-none absolute inset-0">
-                <div className="absolute inset-0 bg-gradient-to-b from-[#0e0717] via-[#0a0510] to-[#050208]" />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#0e0717] via-[#0a0510] to-[#050208] light:from-slate-100 light:via-slate-50 light:to-slate-200" />
                 <div
                     className="absolute inset-0 opacity-[0.06]"
                     style={{
@@ -52,7 +52,7 @@ export function MechanicsPage() {
                             </h1>
                         </Reveal>
                         <Reveal delay={0.15}>
-                            <p className="mt-6 max-w-xl text-lg text-purple-100/70">{role.description}</p>
+                            <p className="mt-6 max-w-xl text-lg text-purple-100/70 light:text-slate-600">{role.description}</p>
                         </Reveal>
                         <Reveal delay={0.25}>
                             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -101,9 +101,9 @@ export function MechanicsPage() {
                         { s: role.stats[2], icon: Star },
                     ].map(({ s, icon: Icon }, i) => (
                         <Reveal key={s.label} delay={0.08 * i}>
-                            <div className="rounded-2xl border border-purple/10 bg-[#0d0718] p-8 backdrop-blur shadow-lg">
-                                <Icon className="mb-4 h-5 w-5 text-purple/60" />
-                                <div className="font-display text-4xl font-bold bg-gradient-to-br from-white to-purple-200 bg-clip-text text-transparent md:text-5xl">
+                            <div className="rounded-2xl border border-purple/10 light:border-slate-200 bg-[#0d0718] light:bg-white p-8 backdrop-blur shadow-lg">
+                                <Icon className="mb-4 h-5 w-5 text-purple/60 light:text-purple" />
+                                <div className="font-display text-4xl font-bold bg-gradient-to-br from-white to-purple-200 light:from-slate-900 light:to-purple bg-clip-text text-transparent md:text-5xl">
                                     <AnimatedCounter
                                         value={s.value}
                                         prefix={s.prefix}
@@ -111,7 +111,7 @@ export function MechanicsPage() {
                                         decimals={s.value % 1 !== 0 ? 1 : 0}
                                     />
                                 </div>
-                                <div className="mt-2 text-[11px] font-semibold uppercase tracking-wider text-purple-200/50">{s.label}</div>
+                                <div className="mt-2 text-[11px] font-semibold uppercase tracking-wider text-purple-200/50 light:text-slate-500">{s.label}</div>
                             </div>
                         </Reveal>
                     ))}
@@ -123,15 +123,15 @@ export function MechanicsPage() {
                 <div className="mx-auto max-w-6xl">
                     <Reveal>
                         <h2 className="font-display text-3xl font-bold md:text-4xl">The complete tool rack</h2>
-                        <p className="mt-3 max-w-2xl text-purple-100/60">{role.tagline}</p>
+                        <p className="mt-3 max-w-2xl text-purple-100/60 light:text-slate-600">{role.tagline}</p>
                     </Reveal>
                     <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {role.features.map((f, i) => (
                             <Reveal key={f} delay={(i % 3) * 0.05}>
-                                <div className="group relative flex items-center gap-4 overflow-hidden rounded-full border border-purple/20 bg-[#120924] px-6 py-4 backdrop-blur transition-all hover:border-purple/40 hover:bg-[#1a0d33]">
+                                <div className="group relative flex items-center gap-4 overflow-hidden rounded-full border border-purple/20 light:border-slate-200 bg-[#120924] light:bg-white px-6 py-4 backdrop-blur transition-all hover:border-purple/40 light:hover:border-purple/40 hover:bg-[#1a0d33] light:hover:bg-slate-50">
                                     <div className="absolute left-0 top-0 h-full w-1.5 bg-purple shadow-[0_0_12px_rgba(168,85,247,0.8)]" />
                                     <Hammer className="h-5 w-5 shrink-0 text-purple transition-transform group-hover:-rotate-12 group-hover:scale-110" />
-                                    <span className="font-medium text-purple-50/90">{f}</span>
+                                    <span className="font-medium text-purple-50/90 light:text-slate-700">{f}</span>
                                 </div>
                             </Reveal>
                         ))}
@@ -143,13 +143,13 @@ export function MechanicsPage() {
             <section className="relative px-4 pb-24">
                 <div className="mx-auto max-w-5xl">
                     <Reveal>
-                        <div className="relative overflow-hidden rounded-[2rem] border border-purple/30 bg-gradient-to-br from-[#1c0f2e] to-[#0a0510] p-10 text-center md:p-16">
+                        <div className="relative overflow-hidden rounded-[2rem] border border-purple/30 light:border-slate-200 bg-gradient-to-br from-[#1c0f2e] to-[#0a0510] light:from-white light:to-slate-50 p-10 text-center md:p-16">
                             <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-purple/30 blur-[100px]" />
                             <ClipboardCheck className="mx-auto h-10 w-10 text-purple" />
                             <h2 className="mt-5 font-display text-3xl font-bold md:text-4xl">
                                 Ready to digitize your workshop?
                             </h2>
-                            <p className="mx-auto mt-3 max-w-xl text-purple-100/70">
+                            <p className="mx-auto mt-3 max-w-xl text-purple-100/70 light:text-slate-600">
                                 Become part of India's most connected highway ecosystem.
                             </p>
                             <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -183,8 +183,8 @@ function DiagnosticsMockup() {
         { label: "Tyres", val: 64 },
     ];
     return (
-        <div className="relative z-10 mx-auto max-w-[440px] rounded-3xl border border-purple/30 bg-[#0c0614]/90 p-7 font-mono shadow-[0_0_80px_-20px_var(--purple-glow)] backdrop-blur">
-            <div className="mb-8 flex items-center justify-between border-b border-purple/20 pb-4 text-xs uppercase tracking-widest text-purple-100/60">
+        <div className="relative z-10 mx-auto max-w-[440px] rounded-3xl border border-purple/30 light:border-slate-200 bg-[#0c0614]/90 light:bg-white/90 p-7 font-mono shadow-[0_0_80px_-20px_var(--purple-glow)] backdrop-blur">
+            <div className="mb-8 flex items-center justify-between border-b border-purple/20 light:border-slate-200 pb-4 text-xs uppercase tracking-widest text-purple-100/60 light:text-slate-500">
                 <span className="flex items-center gap-2 text-purple"><Cpu className="h-4 w-4" /> DIAGNOSTICS</span>
                 <span className="flex items-center gap-1.5 text-purple-300">
                     <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-purple" /> LIVE
@@ -194,9 +194,9 @@ function DiagnosticsMockup() {
             <div className="space-y-6">
                 {bars.map((b, i) => (
                     <div key={b.label} className="space-y-2">
-                        <div className="flex justify-between text-xs font-medium text-purple-100/80">
+                        <div className="flex justify-between text-xs font-medium text-purple-100/80 light:text-slate-600">
                             <span>{b.label}</span>
-                            <span className="text-[#c084fc]">{b.val}%</span>
+                            <span className="text-[#c084fc] light:text-purple">{b.val}%</span>
                         </div>
                         <div className="h-2.5 w-full overflow-hidden rounded-full bg-purple/10">
                             <motion.div
@@ -211,8 +211,8 @@ function DiagnosticsMockup() {
                 ))}
             </div>
 
-            <div className="mt-8 rounded-full border border-purple/20 bg-purple/5 px-5 py-3.5 text-xs text-purple-100/70">
-                <span className="text-[#c084fc] mr-1">{'>'}</span> 3 new job requests in queue - est. ₹4,200 today
+            <div className="mt-8 rounded-full border border-purple/20 light:border-slate-200 bg-purple/5 light:bg-slate-50 px-5 py-3.5 text-xs text-purple-100/70 light:text-slate-600">
+                <span className="text-[#c084fc] light:text-purple mr-1">{'>'}</span> 3 new job requests in queue - est. ₹4,200 today
             </div>
         </div>
     );

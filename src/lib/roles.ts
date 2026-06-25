@@ -69,16 +69,10 @@ export const ROLES: RoleData[] = [
       "From smart navigation to emergency support, Highway Setu rides shotgun on every journey — keeping drivers safe, informed and connected across every mile.",
     features: [
       "Smart Navigation",
-      "AI Route Guidance",
-      "Emergency SOS",
-      "Live Traffic Alerts",
-      "Accident Reporting",
       "Driver Community",
       "Digital Documents",
-      "Journey Tracking",
       "Safety Notifications",
       "Real-time Road Updates",
-      "Driving History",
       "Identity Verification",
     ],
     stats: [

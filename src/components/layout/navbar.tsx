@@ -66,7 +66,7 @@ export function Navbar() {
                 key={r.to}
                 to={r.to}
                 className="group flex items-center gap-2 rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground light:hover:bg-black/5"
-                activeProps={{ className: "text-foreground bg-white/5" }}
+                activeProps={{ className: "!text-foreground !bg-white/10 light:!bg-black/10" }}
               >
                 <r.icon className={cn("h-4 w-4", r.color)} />
                 {r.label}
@@ -108,6 +108,7 @@ export function Navbar() {
                   to={r.to}
                   onClick={() => setOpen(false)}
                   className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-muted-foreground hover:bg-white/5 hover:text-foreground light:hover:bg-black/5"
+                  activeProps={{ className: "!text-foreground !bg-white/10 light:!bg-black/10" }}
                 >
                   <r.icon className={cn("h-4 w-4", r.color)} />
                   {r.label}
