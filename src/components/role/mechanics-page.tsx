@@ -55,7 +55,7 @@ export function MechanicsPage() {
                     </div>
 
                     <Reveal delay={0.2}>
-                        <div className="relative mt-12 md:mt-16">
+                        <div className="relative mt-12 min-h-[400px] w-full lg:min-h-[600px] lg:mt-0">
                             {/* Subtle rotating gears pinned to the mock */}
                             <motion.div
                                 animate={{ rotate: 360 }}
@@ -115,24 +115,16 @@ export function MechanicsPage() {
 }
 
 function DiagnosticsMockup() {
-    const bars = [
-        { label: "Engine", val: 96 },
-        { label: "Brakes", val: 88 },
-        { label: "Battery", val: 72 },
-        { label: "Tyres", val: 64 },
-    ];
     return (
-        <div className="relative z-10 mx-auto max-w-[440px] rounded-3xl border border-purple/30 light:border-slate-200 bg-[#0c0614]/90 light:bg-white/90 p-7 font-mono shadow-[0_0_80px_-20px_var(--purple-glow)] backdrop-blur">
-            <div className="mb-8 flex items-center justify-between border-b border-purple/20 light:border-slate-200 pb-4 text-xs uppercase tracking-widest text-purple-100/60 light:text-slate-500">
-                <span className="flex items-center gap-2 text-purple"><Cpu className="h-4 w-4" /> DIAGNOSTICS</span>
-                <span className="flex items-center gap-1.5 text-purple-300">
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-purple" /> LIVE
-                </span>
-            </div>
-            
-            <div className="mt-6 w-full overflow-hidden rounded-xl border border-purple/15 light:border-slate-200">
-                <img src="/mechanic independent.png" alt="Mechanic Dashboard" className="h-auto w-full object-cover" />
-            </div>
+        <div 
+            className="absolute inset-0 z-10 lg:-right-[50%] lg:w-[150%] lg:-translate-x-48"
+            style={{ WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 25%)", maskImage: "linear-gradient(to right, transparent 0%, black 25%)" }}
+        >
+            <img 
+                src="/mechanic independent.png" 
+                alt="Mechanic Dashboard" 
+                className="h-full w-full object-cover lg:object-left" 
+            />
         </div>
     );
 }

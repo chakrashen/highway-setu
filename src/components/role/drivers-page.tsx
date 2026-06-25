@@ -68,7 +68,7 @@ export function DriversPage() {
                     </div>
 
                     <Reveal delay={0.2}>
-                        <div className="relative mt-12 md:mt-16">
+                        <div className="relative mt-12 min-h-[400px] w-full lg:min-h-[600px] lg:mt-0">
                             <NavigationMockup />
                         </div>
                     </Reveal>
@@ -111,19 +111,12 @@ export function DriversPage() {
                             <p className="mx-auto mt-3 max-w-xl text-blue-100/70 light:text-slate-600">
                                 Join thousands of truck drivers who rely on Highway Setu every day.
                             </p>
-                            <div className="mt-8 flex flex-wrap justify-center gap-4">
+                            <div className="mt-8 flex justify-center">
                                 <Link
                                     to="/"
-                                    hash="cta"
-                                    className="rounded-full bg-[#3b82f6] px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:scale-105"
+                                    className="rounded-full border border-blue/30 bg-blue/10 px-8 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-blue/20"
                                 >
-                                    Download App
-                                </Link>
-                                <Link
-                                    to="/"
-                                    className="rounded-full border border-blue/30 bg-blue/10 px-7 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-blue/20"
-                                >
-                                    View Features
+                                    View Platform
                                 </Link>
                             </div>
                         </div>
@@ -136,21 +129,15 @@ export function DriversPage() {
 
 function NavigationMockup() {
     return (
-        <div className="relative z-10 mx-auto max-w-[440px] rounded-3xl border border-blue/30 light:border-slate-200 bg-[#060c1c]/90 light:bg-white/90 p-7 font-sans shadow-[0_0_80px_-20px_var(--blue-glow)] backdrop-blur">
-            <div className="mb-6 flex items-center justify-between border-b border-blue/20 light:border-slate-200 pb-4 text-xs uppercase tracking-widest text-blue-100/60 light:text-slate-500">
-                <span className="flex items-center gap-2 text-blue"><Navigation className="h-4 w-4" /> LIVE NAVIGATION</span>
-                <span className="flex items-center gap-1.5 text-blue-300">
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue" /> EN ROUTE
-                </span>
-            </div>
-            
-            <div className="relative mb-6 w-full overflow-hidden rounded-2xl border border-blue/15 light:border-slate-200">
-                <img src="/driver independent.png" alt="Driver Dashboard" className="h-auto w-full object-cover" />
-            </div>
-
-            <div className="mt-5 rounded-full border border-red-500/30 bg-red-500/10 px-5 py-3.5 flex items-center justify-center gap-2 text-sm font-bold tracking-wide text-red-400 cursor-pointer shadow-[0_0_20px_rgba(239,68,68,0.15)] transition-colors hover:bg-red-500/20">
-                <ShieldAlert className="h-4 w-4" /> SOS EMERGENCY
-            </div>
+        <div 
+            className="absolute inset-0 z-10 lg:-right-[50%] lg:w-[150%] lg:-translate-x-48"
+            style={{ WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 25%)", maskImage: "linear-gradient(to right, transparent 0%, black 25%)" }}
+        >
+            <img 
+                src="/driver independent.png" 
+                alt="Driver Companion" 
+                className="h-full w-full object-cover lg:object-left" 
+            />
         </div>
     );
 }
