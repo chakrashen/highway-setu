@@ -8,6 +8,7 @@ import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { AnimatedBackground } from "@/components/ui/animated-background";
 import { DemoModal, DemoTriggerButton } from "@/components/ui/demo-modal";
 import { cn } from "@/lib/utils";
+import { GetStartedModal } from "@/components/auth/get-started-modal";
 
 export function RolePage({ role }: { role: RoleData }) {
   const a = ACCENT_META[role.key];
@@ -64,16 +65,16 @@ export function RolePage({ role }: { role: RoleData }) {
               </Reveal>
               <Reveal delay={0.25}>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
-                  <Link
-                    to="/"
-                    hash="cta"
-                    className={cn(
-                      "inline-flex items-center gap-2 rounded-full bg-gradient-to-r px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:scale-105",
-                      a.gradient,
-                    )}
-                  >
-                    Get Started <ArrowRight className="h-4 w-4" />
-                  </Link>
+                  <GetStartedModal>
+                    <button
+                      className={cn(
+                        "inline-flex items-center gap-2 rounded-full bg-gradient-to-r px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:scale-105",
+                        a.gradient,
+                      )}
+                    >
+                      Get Started <ArrowRight className="h-4 w-4" />
+                    </button>
+                  </GetStartedModal>
                   <DemoModal
                     trigger={
                       <button>
@@ -172,19 +173,19 @@ export function RolePage({ role }: { role: RoleData }) {
                 Become part of India's most connected highway ecosystem.
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-4">
+                <GetStartedModal>
+                  <button
+                    className={cn(
+                      "rounded-full bg-gradient-to-r px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:scale-105",
+                      a.gradient,
+                    )}
+                  >
+                    Get Started
+                  </button>
+                </GetStartedModal>
                 <Link
                   to="/"
-                  hash="cta"
-                  className={cn(
-                    "rounded-full bg-gradient-to-r px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:scale-105",
-                    a.gradient,
-                  )}
-                >
-                  Get Started
-                </Link>
-                <Link
-                  to="/"
-                  className="rounded-full border border-white/15 light:border-black/15 bg-white/5 light:bg-black/5 px-7 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-white/10 light:hover:bg-black/10"
+                  className="rounded-full border border-foreground/15 light:border-black/15 bg-foreground/5 light:bg-black/5 px-7 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-foreground/10 light:hover:bg-black/10"
                 >
                   Explore Platform
                 </Link>
@@ -211,7 +212,7 @@ function RoleMockup({ role }: { role: RoleData }) {
       </div>
       <div className="grid grid-cols-3 gap-3">
         {role.stats.map((s) => (
-          <div key={s.label} className="rounded-2xl bg-white/5 light:bg-black/5 p-3">
+          <div key={s.label} className="rounded-2xl bg-foreground/5 light:bg-black/5 p-3">
             <div className={cn("text-lg font-bold", a.text)}>
               <AnimatedCounter
                 value={s.value}
@@ -225,7 +226,7 @@ function RoleMockup({ role }: { role: RoleData }) {
           </div>
         ))}
       </div>
-      <div className="mt-3 flex h-32 items-end gap-2 rounded-2xl bg-white/5 light:bg-black/5 p-4">
+      <div className="mt-3 flex h-32 items-end gap-2 rounded-2xl bg-foreground/5 light:bg-black/5 p-4">
         {[40, 65, 50, 80, 60, 95, 72, 88].map((h, i) => (
           <motion.div
             key={i}
@@ -245,7 +246,7 @@ function RoleMockup({ role }: { role: RoleData }) {
         {role.features.slice(0, 3).map((f) => (
           <div
             key={f}
-            className="flex items-center gap-2 rounded-xl bg-white/5 light:bg-black/5 px-3 py-2 text-sm"
+            className="flex items-center gap-2 rounded-xl bg-foreground/5 light:bg-black/5 px-3 py-2 text-sm"
           >
             <Check className={cn("h-4 w-4", a.text)} /> {f}
           </div>

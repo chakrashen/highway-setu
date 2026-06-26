@@ -127,7 +127,7 @@ export function DhabaMap() {
               Discover dhabas across{" "}
               <GradientText>India's highways.</GradientText>
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base text-white/60 light:text-slate-500">
+            <p className="mx-auto mt-4 max-w-xl text-base text-foreground/60 light:text-slate-500">
               Explore all dhabas on the network — registered partners are highlighted in orange.
             </p>
           </div>
@@ -140,7 +140,7 @@ export function DhabaMap() {
 
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             {/* Status filter */}
-            <div className="flex rounded-full border border-white/10 light:border-slate-200 bg-white/5 light:bg-white p-1">
+            <div className="flex rounded-full border border-foreground/10 light:border-slate-200 bg-foreground/5 light:bg-white p-1">
               {(["all", "registered", "unregistered"] as const).map((s) => (
                 <button
                   key={s}
@@ -148,7 +148,7 @@ export function DhabaMap() {
                   className={`rounded-full px-4 py-1.5 text-xs font-medium capitalize transition-all ${
                     showRegistered === s
                       ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30"
-                      : "text-white/60 light:text-slate-500 hover:text-white light:hover:text-slate-900"
+                      : "text-foreground/60 light:text-slate-500 hover:text-foreground light:hover:text-slate-900"
                   }`}
                 >
                   {s}
@@ -166,7 +166,7 @@ export function DhabaMap() {
                 className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
                   filter === h
                     ? "bg-purple-600 text-white shadow-lg shadow-purple-600/30"
-                    : "bg-white/5 light:bg-slate-100 text-white/60 light:text-slate-500 ring-1 ring-white/10 light:ring-slate-200 hover:bg-white/10 light:hover:bg-slate-200"
+                    : "bg-foreground/5 light:bg-slate-100 text-foreground/60 light:text-slate-500 ring-1 ring-white/10 light:ring-slate-200 hover:bg-foreground/10 light:hover:bg-slate-200"
                 }`}
               >
                 {h}
@@ -186,12 +186,12 @@ export function DhabaMap() {
                 placeholder="Search dhabas by name, highway or specialty..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-xl border border-white/10 light:border-slate-200 bg-white/5 light:bg-white py-2.5 pl-10 pr-4 text-sm text-white light:text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 shadow-sm"
+                className="w-full rounded-xl border border-foreground/10 light:border-slate-200 bg-foreground/5 light:bg-white py-2.5 pl-10 pr-4 text-sm text-foreground light:text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 shadow-sm"
               />
             </div>
           </div>
 
-          <div className="relative z-10 overflow-hidden rounded-3xl border border-white/10 light:border-slate-200 shadow-2xl shadow-orange-500/10">
+          <div className="relative z-10 overflow-hidden rounded-3xl border border-foreground/10 light:border-slate-200 shadow-2xl shadow-orange-500/10">
             <div className="h-[500px] md:h-[600px] w-full">
               <MapContainer
                 center={[22.5, 78.5]}

@@ -29,7 +29,7 @@ export function Hero() {
         {Array.from({ length: 40 }).map((_, i) => (
           <span
             key={i}
-            className="absolute h-0.5 w-0.5 rounded-full bg-white/60 light:bg-black/10"
+            className="absolute h-0.5 w-0.5 rounded-full bg-foreground/60 light:bg-black/10"
             style={{
               top: `${(i * 37) % 70}%`,
               left: `${(i * 53) % 100}%`,
@@ -97,7 +97,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="text-xl md:text-2xl lg:text-3xl font-bold text-white light:text-foreground whitespace-nowrap tracking-wide mb-8"
+          className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground light:text-foreground whitespace-nowrap tracking-wide mb-8"
         >
           Connecting Every Mile of <span className="text-[#d89cf6]">India's</span> <span className="text-[#d89cf6]">Highway</span> <span className="text-[#a7f3d0]">Ecosystem</span>
         </motion.h1>

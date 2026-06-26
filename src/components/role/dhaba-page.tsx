@@ -115,7 +115,7 @@ export function DhabaPage() {
                             <p className="mx-auto mt-3 max-w-2xl text-orange-100/60 light:text-slate-600">{role.tagline}</p>
                         </div>
                     </Reveal>
-                    <div className="mt-10 rounded-3xl border border-orange/20 light:border-slate-200 bg-[#1a1006]/70 light:bg-white/70 p-6 backdrop-blur md:p-10">
+                    <div className="mt-10 rounded-3xl border border-orange/20 light:border-slate-200 bg-[#1a1006]/70 light:bg-foreground/70 p-6 backdrop-blur md:p-10">
                         {role.features.map((f, i) => (
                             <Reveal key={f} delay={(i % 4) * 0.04}>
                                 <div className="flex items-center gap-3 border-b border-dashed border-orange/20 light:border-slate-200 py-3 last:border-0">

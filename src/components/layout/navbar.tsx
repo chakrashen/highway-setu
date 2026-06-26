@@ -9,11 +9,15 @@ import {
   UtensilsCrossed,
   LayoutDashboard,
   Home,
+  MapPin,
+  Globe
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { GetStartedModal } from "@/components/auth/get-started-modal";
 
 const roles = [
+  { to: "/map", label: "Map", icon: MapPin, color: "text-blue" },
   { to: "/drivers", label: "Truck Drivers", icon: Truck, color: "text-blue" },
   { to: "/mechanics", label: "Mechanics", icon: Wrench, color: "text-purple" },
   {
@@ -65,8 +69,8 @@ export function Navbar() {
               <Link
                 key={r.to}
                 to={r.to}
-                className="group flex items-center gap-2 rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-white/5 hover:text-foreground light:hover:bg-black/5"
-                activeProps={{ className: "!text-foreground !bg-white/10 light:!bg-black/10" }}
+                className="group flex items-center gap-2 rounded-full px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-foreground/5 hover:text-foreground light:hover:bg-black/5"
+                activeProps={{ className: "!text-foreground !bg-foreground/10 light:!bg-black/10" }}
               >
                 <r.icon className={cn("h-4 w-4", r.color)} />
                 {r.label}
@@ -75,18 +79,19 @@ export function Navbar() {
           </div>
 
           <div className="hidden items-center gap-2 lg:flex">
+            <button className="flex items-center gap-1 text-sm font-medium text-foreground/60 hover:text-foreground px-2 py-1.5 rounded-lg hover:bg-foreground/5 transition-colors">
+              <Globe className="w-4 h-4" /> EN
+            </button>
             <ThemeToggle />
-            <Link
-              to="/"
-              hash="cta"
-              className="rounded-full bg-gradient-to-r from-blue to-purple px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple/20 transition-transform hover:scale-105"
-            >
-              Get Started
-            </Link>
+            <GetStartedModal>
+              <button className="rounded-full bg-gradient-to-r from-blue to-purple px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple/20 transition-transform hover:scale-105">
+                Get Started
+              </button>
+            </GetStartedModal>
           </div>
 
           <button
-            className="grid h-10 w-10 place-items-center rounded-full bg-white/5 light:bg-black/5 lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full bg-foreground/5 light:bg-black/5 lg:hidden"
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -107,21 +112,21 @@ export function Navbar() {
                   key={r.to}
                   to={r.to}
                   onClick={() => setOpen(false)}
-                  className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-muted-foreground hover:bg-white/5 hover:text-foreground light:hover:bg-black/5"
-                  activeProps={{ className: "!text-foreground !bg-white/10 light:!bg-black/10" }}
+                  className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-muted-foreground hover:bg-foreground/5 hover:text-foreground light:hover:bg-black/5"
+                  activeProps={{ className: "!text-foreground !bg-foreground/10 light:!bg-black/10" }}
                 >
                   <r.icon className={cn("h-4 w-4", r.color)} />
                   {r.label}
                 </Link>
               ))}
-              <Link
-                to="/"
-                hash="cta"
-                onClick={() => setOpen(false)}
-                className="mt-1 rounded-xl bg-gradient-to-r from-blue to-purple px-4 py-3 text-center text-sm font-semibold text-white"
-              >
-                Get Started
-              </Link>
+              <GetStartedModal>
+                <button
+                  onClick={() => setOpen(false)}
+                  className="mt-1 rounded-xl w-full bg-gradient-to-r from-blue to-purple px-4 py-3 text-center text-sm font-semibold text-white"
+                >
+                  Get Started
+                </button>
+              </GetStartedModal>
             </motion.div>
           )}
         </AnimatePresence>

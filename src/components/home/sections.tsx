@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { GetStartedModal } from "@/components/auth/get-started-modal";
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import {
@@ -142,7 +143,7 @@ export function EcosystemSection() {
             <p className="text-sm font-semibold uppercase tracking-widest text-blue">
               The Solution
             </p>
-            <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold md:text-5xl text-slate-900 dark:text-white">
+            <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold md:text-5xl text-slate-900 dark:text-foreground">
               One unified ecosystem,{" "}
               <GradientText>connected end to end</GradientText>
             </h2>
@@ -217,12 +218,12 @@ export function EcosystemSection() {
                     </div>
                     <div className="relative z-10 flex flex-1 flex-col w-full items-start justify-between">
                       <div
-                        className="grid h-12 w-12 place-items-center rounded-2xl text-white shadow-lg"
+                        className="grid h-12 w-12 place-items-center rounded-2xl text-foreground shadow-lg"
                         style={{ backgroundColor: iconColors[n.key] }}
                       >
                         <Icon className="h-5 w-5" />
                       </div>
-                      <span className="text-2xl md:text-3xl font-extrabold text-white mt-auto">{n.name}</span>
+                      <span className="text-2xl md:text-3xl font-extrabold text-foreground mt-auto">{n.name}</span>
                     </div>
                   </Link>
                 </Reveal>
@@ -353,7 +354,7 @@ export function HowItWorks() {
           </div>
         </Reveal>
         <div className="relative mt-16 pl-8 md:pl-0">
-          <div className="absolute bottom-0 left-3 top-0 w-px bg-white/10 light:bg-black/10 md:left-1/2" />
+          <div className="absolute bottom-0 left-3 top-0 w-px bg-foreground/10 light:bg-black/10 md:left-1/2" />
           <motion.div
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
@@ -367,10 +368,10 @@ export function HowItWorks() {
               const bgColors = [
                 "bg-[#FDE047] text-slate-900", // Yellow
                 "bg-[#38BDF8] text-slate-900", // Sky Blue
-                "bg-[#EA580C] text-white", // Orange
+                "bg-[#EA580C] text-foreground", // Orange
                 "bg-[#22C55E] text-slate-900", // Green
-                "bg-[#6D28D9] text-white", // Purple
-                "bg-[#EC4899] text-white" // Pink for 6th
+                "bg-[#6D28D9] text-foreground", // Purple
+                "bg-[#EC4899] text-foreground" // Pink for 6th
               ];
               const boxClass = bgColors[i] || bgColors[5];
               return (
@@ -387,7 +388,7 @@ export function HowItWorks() {
                   <div className="md:w-1/2 md:px-10">
                     <div className={cn("rounded-2xl p-5 shadow-lg", boxClass)}>
                       <h3 className="font-semibold">{s.title}</h3>
-                      <p className={cn("mt-1 text-sm", boxClass.includes("text-white") ? "text-white/90" : "text-slate-800")}>
+                      <p className={cn("mt-1 text-sm", boxClass.includes("text-foreground") ? "text-foreground/90" : "text-slate-800")}>
                         {s.desc}
                       </p>
                     </div>
@@ -548,7 +549,7 @@ export function DashboardPreview() {
           <div className="glass-strong mt-12 rounded-[2rem] p-6 md:p-8 glow-blue">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {dashMetrics.map((m) => (
-                <div key={m.label} className="rounded-2xl bg-white/5 light:bg-black/5 p-5">
+                <div key={m.label} className="rounded-2xl bg-foreground/5 light:bg-black/5 p-5">
                   <div
                     className={cn("text-2xl font-bold md:text-3xl", m.color)}
                   >
@@ -566,7 +567,7 @@ export function DashboardPreview() {
               ))}
             </div>
             <div className="mt-6 grid gap-4 lg:grid-cols-3">
-              <div className="rounded-2xl bg-white/5 light:bg-black/5 p-5 lg:col-span-2">
+              <div className="rounded-2xl bg-foreground/5 light:bg-black/5 p-5 lg:col-span-2">
                 <p className="mb-4 text-sm text-muted-foreground">
                   Monthly trips
                 </p>
@@ -585,7 +586,7 @@ export function DashboardPreview() {
                   )}
                 </div>
               </div>
-              <div className="rounded-2xl bg-white/5 light:bg-black/5 p-5">
+              <div className="rounded-2xl bg-foreground/5 light:bg-black/5 p-5">
                 <p className="mb-4 text-sm text-muted-foreground">
                   Fleet health
                 </p>
@@ -653,7 +654,7 @@ export function WhySection() {
         </Reveal>
         <Reveal delay={0.1}>
           <div className="glass-strong mt-12 overflow-hidden rounded-3xl">
-            <div className="grid grid-cols-[1.5fr_1fr_1fr] border-b border-white/10 light:border-black/10 text-sm font-semibold">
+            <div className="grid grid-cols-[1.5fr_1fr_1fr] border-b border-foreground/10 light:border-black/10 text-sm font-semibold">
               <div className="p-4 md:p-5">Capability</div>
               <div className="p-4 text-center text-muted-foreground md:p-5">
                 Traditional
@@ -669,7 +670,7 @@ export function WhySection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="grid grid-cols-[1.5fr_1fr_1fr] border-b border-white/5 light:border-black/5 text-sm last:border-0"
+                className="grid grid-cols-[1.5fr_1fr_1fr] border-b border-foreground/5 light:border-black/5 text-sm last:border-0"
               >
                 <div className="p-4 md:p-5">{c}</div>
                 <div className="flex items-center justify-center p-4 md:p-5">
@@ -822,7 +823,7 @@ export function Testimonials() {
                   <Quote className="h-6 w-6 text-muted-foreground/50" />
                   <p className="mt-4 text-sm md:text-base leading-relaxed text-slate-800 dark:text-slate-200">{t.quote}</p>
                   <div className="mt-6">
-                    <div className="font-semibold text-slate-900 dark:text-white">{t.name}</div>
+                    <div className="font-semibold text-slate-900 dark:text-foreground">{t.name}</div>
                     <div className={cn("text-sm", t.c)}>{t.role}</div>
                   </div>
                 </div>
@@ -854,12 +855,11 @@ export function Testimonials() {
         </div>
 
         <div className="mt-12 flex justify-center">
-          <Link
-            to="/drivers"
-            className="rounded-full bg-gradient-to-r from-blue via-primary to-purple px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105"
-          >
-            Get Started
-          </Link>
+          <GetStartedModal>
+            <button className="rounded-full bg-gradient-to-r from-blue via-primary to-purple px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105">
+              Get Started
+            </button>
+          </GetStartedModal>
         </div>
       </div>
     </section>
@@ -884,16 +884,15 @@ export function CtaSection() {
               ecosystem.
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-4">
-              <Link
-                to="/drivers"
-                className="rounded-full bg-gradient-to-r from-blue via-primary to-purple px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105"
-              >
-                Get Started
-              </Link>
+              <GetStartedModal>
+                <button className="rounded-full bg-gradient-to-r from-blue via-primary to-purple px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105">
+                  Get Started
+                </button>
+              </GetStartedModal>
               <Link
                 to="/"
                 hash="ecosystem"
-                className="rounded-full border border-white/15 light:border-black/15 bg-white/5 light:bg-black/5 px-8 py-4 text-sm font-semibold backdrop-blur transition-colors hover:bg-white/10 light:hover:bg-black/10"
+                className="rounded-full border border-foreground/15 light:border-black/15 bg-foreground/5 light:bg-black/5 px-8 py-4 text-sm font-semibold backdrop-blur transition-colors hover:bg-foreground/10 light:hover:bg-black/10"
               >
                 Book a Demo
               </Link>

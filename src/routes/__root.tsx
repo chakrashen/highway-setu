@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-report";
 import { Navbar } from "../components/layout/navbar";
 import { Footer } from "../components/layout/footer";
+import { GlobalSearch } from "@/components/layout/global-search";
 import { GlowCursor } from "../components/ui/glow-cursor";
 import { LoadingScreen } from "../components/layout/loading-screen";
 
@@ -140,19 +141,24 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+import { AuthProvider } from "../hooks/use-auth";
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <LoadingScreen />
-      <GlowCursor />
-      <Navbar />
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <main className="relative">
-        <Outlet />
-      </main>
-      <Footer />
+      <AuthProvider>
+        <LoadingScreen />
+        <GlowCursor />
+        <Navbar />
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <main className="relative">
+          <Outlet />
+        </main>
+        <Footer />
+        <GlobalSearch />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

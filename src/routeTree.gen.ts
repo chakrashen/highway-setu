@@ -10,14 +10,35 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MechanicsRouteImport } from './routes/mechanics'
+import { Route as MapRouteImport } from './routes/map'
 import { Route as FleetRouteImport } from './routes/fleet'
 import { Route as DriversRouteImport } from './routes/drivers'
 import { Route as DhabaRouteImport } from './routes/dhaba'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardWalletRouteImport } from './routes/dashboard/wallet'
+import { Route as DashboardSubscriptionsRouteImport } from './routes/dashboard/subscriptions'
+import { Route as DashboardMessagesRouteImport } from './routes/dashboard/messages'
+import { Route as DashboardMechanicRouteImport } from './routes/dashboard/mechanic'
+import { Route as DashboardFleetRouteImport } from './routes/dashboard/fleet'
+import { Route as DashboardDriverRouteImport } from './routes/dashboard/driver'
+import { Route as DashboardDhabaRouteImport } from './routes/dashboard/dhaba'
+import { Route as DashboardAdminRouteImport } from './routes/dashboard/admin'
+import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as AuthRegisterMechanicRouteImport } from './routes/auth/register/mechanic'
+import { Route as AuthRegisterFleetRouteImport } from './routes/auth/register/fleet'
+import { Route as AuthRegisterDriverRouteImport } from './routes/auth/register/driver'
+import { Route as AuthRegisterDhabaRouteImport } from './routes/auth/register/dhaba'
 
 const MechanicsRoute = MechanicsRouteImport.update({
   id: '/mechanics',
   path: '/mechanics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapRoute = MapRouteImport.update({
+  id: '/map',
+  path: '/map',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FleetRoute = FleetRouteImport.update({
@@ -35,47 +56,237 @@ const DhabaRoute = DhabaRouteImport.update({
   path: '/dhaba',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardWalletRoute = DashboardWalletRouteImport.update({
+  id: '/wallet',
+  path: '/wallet',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSubscriptionsRoute = DashboardSubscriptionsRouteImport.update({
+  id: '/subscriptions',
+  path: '/subscriptions',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardMessagesRoute = DashboardMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardMechanicRoute = DashboardMechanicRouteImport.update({
+  id: '/mechanic',
+  path: '/mechanic',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardFleetRoute = DashboardFleetRouteImport.update({
+  id: '/fleet',
+  path: '/fleet',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardDriverRoute = DashboardDriverRouteImport.update({
+  id: '/driver',
+  path: '/driver',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardDhabaRoute = DashboardDhabaRouteImport.update({
+  id: '/dhaba',
+  path: '/dhaba',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAdminRoute = DashboardAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthRegisterMechanicRoute = AuthRegisterMechanicRouteImport.update({
+  id: '/register/mechanic',
+  path: '/register/mechanic',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthRegisterFleetRoute = AuthRegisterFleetRouteImport.update({
+  id: '/register/fleet',
+  path: '/register/fleet',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthRegisterDriverRoute = AuthRegisterDriverRouteImport.update({
+  id: '/register/driver',
+  path: '/register/driver',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthRegisterDhabaRoute = AuthRegisterDhabaRouteImport.update({
+  id: '/register/dhaba',
+  path: '/register/dhaba',
+  getParentRoute: () => AuthRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRouteWithChildren
+  '/dashboard': typeof DashboardRouteWithChildren
   '/dhaba': typeof DhabaRoute
   '/drivers': typeof DriversRoute
   '/fleet': typeof FleetRoute
+  '/map': typeof MapRoute
   '/mechanics': typeof MechanicsRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/dhaba': typeof DashboardDhabaRoute
+  '/dashboard/driver': typeof DashboardDriverRoute
+  '/dashboard/fleet': typeof DashboardFleetRoute
+  '/dashboard/mechanic': typeof DashboardMechanicRoute
+  '/dashboard/messages': typeof DashboardMessagesRoute
+  '/dashboard/subscriptions': typeof DashboardSubscriptionsRoute
+  '/dashboard/wallet': typeof DashboardWalletRoute
+  '/auth/register/dhaba': typeof AuthRegisterDhabaRoute
+  '/auth/register/driver': typeof AuthRegisterDriverRoute
+  '/auth/register/fleet': typeof AuthRegisterFleetRoute
+  '/auth/register/mechanic': typeof AuthRegisterMechanicRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRouteWithChildren
+  '/dashboard': typeof DashboardRouteWithChildren
   '/dhaba': typeof DhabaRoute
   '/drivers': typeof DriversRoute
   '/fleet': typeof FleetRoute
+  '/map': typeof MapRoute
   '/mechanics': typeof MechanicsRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/dhaba': typeof DashboardDhabaRoute
+  '/dashboard/driver': typeof DashboardDriverRoute
+  '/dashboard/fleet': typeof DashboardFleetRoute
+  '/dashboard/mechanic': typeof DashboardMechanicRoute
+  '/dashboard/messages': typeof DashboardMessagesRoute
+  '/dashboard/subscriptions': typeof DashboardSubscriptionsRoute
+  '/dashboard/wallet': typeof DashboardWalletRoute
+  '/auth/register/dhaba': typeof AuthRegisterDhabaRoute
+  '/auth/register/driver': typeof AuthRegisterDriverRoute
+  '/auth/register/fleet': typeof AuthRegisterFleetRoute
+  '/auth/register/mechanic': typeof AuthRegisterMechanicRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRouteWithChildren
+  '/dashboard': typeof DashboardRouteWithChildren
   '/dhaba': typeof DhabaRoute
   '/drivers': typeof DriversRoute
   '/fleet': typeof FleetRoute
+  '/map': typeof MapRoute
   '/mechanics': typeof MechanicsRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/dashboard/admin': typeof DashboardAdminRoute
+  '/dashboard/dhaba': typeof DashboardDhabaRoute
+  '/dashboard/driver': typeof DashboardDriverRoute
+  '/dashboard/fleet': typeof DashboardFleetRoute
+  '/dashboard/mechanic': typeof DashboardMechanicRoute
+  '/dashboard/messages': typeof DashboardMessagesRoute
+  '/dashboard/subscriptions': typeof DashboardSubscriptionsRoute
+  '/dashboard/wallet': typeof DashboardWalletRoute
+  '/auth/register/dhaba': typeof AuthRegisterDhabaRoute
+  '/auth/register/driver': typeof AuthRegisterDriverRoute
+  '/auth/register/fleet': typeof AuthRegisterFleetRoute
+  '/auth/register/mechanic': typeof AuthRegisterMechanicRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dhaba' | '/drivers' | '/fleet' | '/mechanics'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/dhaba'
+    | '/drivers'
+    | '/fleet'
+    | '/map'
+    | '/mechanics'
+    | '/auth/login'
+    | '/dashboard/admin'
+    | '/dashboard/dhaba'
+    | '/dashboard/driver'
+    | '/dashboard/fleet'
+    | '/dashboard/mechanic'
+    | '/dashboard/messages'
+    | '/dashboard/subscriptions'
+    | '/dashboard/wallet'
+    | '/auth/register/dhaba'
+    | '/auth/register/driver'
+    | '/auth/register/fleet'
+    | '/auth/register/mechanic'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dhaba' | '/drivers' | '/fleet' | '/mechanics'
-  id: '__root__' | '/' | '/dhaba' | '/drivers' | '/fleet' | '/mechanics'
+  to:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/dhaba'
+    | '/drivers'
+    | '/fleet'
+    | '/map'
+    | '/mechanics'
+    | '/auth/login'
+    | '/dashboard/admin'
+    | '/dashboard/dhaba'
+    | '/dashboard/driver'
+    | '/dashboard/fleet'
+    | '/dashboard/mechanic'
+    | '/dashboard/messages'
+    | '/dashboard/subscriptions'
+    | '/dashboard/wallet'
+    | '/auth/register/dhaba'
+    | '/auth/register/driver'
+    | '/auth/register/fleet'
+    | '/auth/register/mechanic'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/dhaba'
+    | '/drivers'
+    | '/fleet'
+    | '/map'
+    | '/mechanics'
+    | '/auth/login'
+    | '/dashboard/admin'
+    | '/dashboard/dhaba'
+    | '/dashboard/driver'
+    | '/dashboard/fleet'
+    | '/dashboard/mechanic'
+    | '/dashboard/messages'
+    | '/dashboard/subscriptions'
+    | '/dashboard/wallet'
+    | '/auth/register/dhaba'
+    | '/auth/register/driver'
+    | '/auth/register/fleet'
+    | '/auth/register/mechanic'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRouteWithChildren
+  DashboardRoute: typeof DashboardRouteWithChildren
   DhabaRoute: typeof DhabaRoute
   DriversRoute: typeof DriversRoute
   FleetRoute: typeof FleetRoute
+  MapRoute: typeof MapRoute
   MechanicsRoute: typeof MechanicsRoute
 }
 
@@ -86,6 +297,13 @@ declare module '@tanstack/react-router' {
       path: '/mechanics'
       fullPath: '/mechanics'
       preLoaderRoute: typeof MechanicsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/map': {
+      id: '/map'
+      path: '/map'
+      fullPath: '/map'
+      preLoaderRoute: typeof MapRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fleet': {
@@ -109,6 +327,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DhabaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -116,14 +348,152 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/wallet': {
+      id: '/dashboard/wallet'
+      path: '/wallet'
+      fullPath: '/dashboard/wallet'
+      preLoaderRoute: typeof DashboardWalletRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/subscriptions': {
+      id: '/dashboard/subscriptions'
+      path: '/subscriptions'
+      fullPath: '/dashboard/subscriptions'
+      preLoaderRoute: typeof DashboardSubscriptionsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/messages': {
+      id: '/dashboard/messages'
+      path: '/messages'
+      fullPath: '/dashboard/messages'
+      preLoaderRoute: typeof DashboardMessagesRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/mechanic': {
+      id: '/dashboard/mechanic'
+      path: '/mechanic'
+      fullPath: '/dashboard/mechanic'
+      preLoaderRoute: typeof DashboardMechanicRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/fleet': {
+      id: '/dashboard/fleet'
+      path: '/fleet'
+      fullPath: '/dashboard/fleet'
+      preLoaderRoute: typeof DashboardFleetRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/driver': {
+      id: '/dashboard/driver'
+      path: '/driver'
+      fullPath: '/dashboard/driver'
+      preLoaderRoute: typeof DashboardDriverRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/dhaba': {
+      id: '/dashboard/dhaba'
+      path: '/dhaba'
+      fullPath: '/dashboard/dhaba'
+      preLoaderRoute: typeof DashboardDhabaRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/admin': {
+      id: '/dashboard/admin'
+      path: '/admin'
+      fullPath: '/dashboard/admin'
+      preLoaderRoute: typeof DashboardAdminRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/register/mechanic': {
+      id: '/auth/register/mechanic'
+      path: '/register/mechanic'
+      fullPath: '/auth/register/mechanic'
+      preLoaderRoute: typeof AuthRegisterMechanicRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/register/fleet': {
+      id: '/auth/register/fleet'
+      path: '/register/fleet'
+      fullPath: '/auth/register/fleet'
+      preLoaderRoute: typeof AuthRegisterFleetRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/register/driver': {
+      id: '/auth/register/driver'
+      path: '/register/driver'
+      fullPath: '/auth/register/driver'
+      preLoaderRoute: typeof AuthRegisterDriverRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/register/dhaba': {
+      id: '/auth/register/dhaba'
+      path: '/register/dhaba'
+      fullPath: '/auth/register/dhaba'
+      preLoaderRoute: typeof AuthRegisterDhabaRouteImport
+      parentRoute: typeof AuthRoute
+    }
   }
 }
 
+interface AuthRouteChildren {
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthRegisterDhabaRoute: typeof AuthRegisterDhabaRoute
+  AuthRegisterDriverRoute: typeof AuthRegisterDriverRoute
+  AuthRegisterFleetRoute: typeof AuthRegisterFleetRoute
+  AuthRegisterMechanicRoute: typeof AuthRegisterMechanicRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthLoginRoute: AuthLoginRoute,
+  AuthRegisterDhabaRoute: AuthRegisterDhabaRoute,
+  AuthRegisterDriverRoute: AuthRegisterDriverRoute,
+  AuthRegisterFleetRoute: AuthRegisterFleetRoute,
+  AuthRegisterMechanicRoute: AuthRegisterMechanicRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
+interface DashboardRouteChildren {
+  DashboardAdminRoute: typeof DashboardAdminRoute
+  DashboardDhabaRoute: typeof DashboardDhabaRoute
+  DashboardDriverRoute: typeof DashboardDriverRoute
+  DashboardFleetRoute: typeof DashboardFleetRoute
+  DashboardMechanicRoute: typeof DashboardMechanicRoute
+  DashboardMessagesRoute: typeof DashboardMessagesRoute
+  DashboardSubscriptionsRoute: typeof DashboardSubscriptionsRoute
+  DashboardWalletRoute: typeof DashboardWalletRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAdminRoute: DashboardAdminRoute,
+  DashboardDhabaRoute: DashboardDhabaRoute,
+  DashboardDriverRoute: DashboardDriverRoute,
+  DashboardFleetRoute: DashboardFleetRoute,
+  DashboardMechanicRoute: DashboardMechanicRoute,
+  DashboardMessagesRoute: DashboardMessagesRoute,
+  DashboardSubscriptionsRoute: DashboardSubscriptionsRoute,
+  DashboardWalletRoute: DashboardWalletRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRouteWithChildren,
+  DashboardRoute: DashboardRouteWithChildren,
   DhabaRoute: DhabaRoute,
   DriversRoute: DriversRoute,
   FleetRoute: FleetRoute,
+  MapRoute: MapRoute,
   MechanicsRoute: MechanicsRoute,
 }
 export const routeTree = rootRouteImport

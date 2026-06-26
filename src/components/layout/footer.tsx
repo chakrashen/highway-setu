@@ -10,7 +10,7 @@ import {
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-white/10 light:border-black/10 bg-black text-white">
+    <footer className="relative overflow-hidden border-t border-foreground/10 light:border-black/10 bg-black text-white">
       <div className="pointer-events-none absolute -top-32 left-1/2 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-purple/10 blur-[120px]" />
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div>
@@ -33,7 +33,7 @@ export function Footer() {
                 href={href}
                 target={href !== "#" ? "_blank" : undefined}
                 rel={href !== "#" ? "noopener noreferrer" : undefined}
-                className="grid h-10 w-10 place-items-center rounded-full bg-white/5 text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground light:bg-black/5 light:hover:bg-black/10"
+                className="grid h-10 w-10 place-items-center rounded-full bg-foreground/5 text-muted-foreground transition-colors hover:bg-foreground/10 hover:text-foreground light:bg-black/5 light:hover:bg-black/10"
                 aria-label="Social link"
               >
                 <Icon className="h-4 w-4" />
@@ -107,7 +107,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 light:border-black/10 py-6">
+      <div className="border-t border-foreground/10 light:border-black/10 py-6">
         <p className="text-center text-xs text-muted-foreground">
           © {new Date().getFullYear()} Highway Setu. All rights reserved.
         </p>

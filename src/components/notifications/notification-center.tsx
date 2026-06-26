@@ -1,0 +1,95 @@
+import { useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Bell, CheckCircle2, ShieldAlert, X, Settings, Check } from "lucide-react";
+
+interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  time: string;
+  read: boolean;
+  type: 'success' | 'alert' | 'info';
+}
+
+export function NotificationCenter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const [notifications, setNotifications] = useState<Notification[]>([
+    { id: "1", title: "Document Verified", message: "Your commercial insurance has been successfully verified.", time: "10 mins ago", read: false, type: "success" },
+    { id: "2", title: "Route Alert", message: "Heavy traffic detected on NH-48 near Lonavala. ETA delayed by 15m.", time: "1 hour ago", read: false, type: "alert" },
+    { id: "3", title: "New Booking Request", message: "You received a new table booking request for 4 people at 8 PM.", time: "2 hours ago", read: true, type: "info" },
+  ]);
+
+  const markAllRead = () => {
+    setNotifications(notifications.map(n => ({ ...n, read: true })));
+  };
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9998]"
+            onClick={onClose}
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: -20, x: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20, x: 20 }}
+            className="absolute top-16 right-4 sm:right-8 w-80 sm:w-96 glass-strong border border-foreground/10 rounded-2xl shadow-2xl z-[9999] overflow-hidden flex flex-col max-h-[80vh]"
+          >
+            <div className="p-4 border-b border-foreground/10 flex justify-between items-center bg-background/50">
+              <div className="flex items-center gap-2">
+                <Bell className="w-5 h-5 text-foreground/80" />
+                <h3 className="font-bold text-foreground">Notifications</h3>
+                <span className="bg-blue text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                  {notifications.filter(n => !n.read).length} New
+                </span>
+              </div>
+              <div className="flex gap-2">
+                <button onClick={markAllRead} className="p-1.5 hover:bg-foreground/10 rounded-lg text-foreground/60 hover:text-foreground transition-colors" title="Mark all as read">
+                  <Check className="w-4 h-4" />
+                </button>
+                <button className="p-1.5 hover:bg-foreground/10 rounded-lg text-foreground/60 hover:text-foreground transition-colors" title="Settings">
+                  <Settings className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            <div className="flex-1 overflow-y-auto hidden-scrollbar">
+              {notifications.length === 0 ? (
+                <div className="p-8 text-center text-foreground/50 text-sm">No notifications right now.</div>
+              ) : (
+                <div className="divide-y divide-white/5">
+                  {notifications.map((n) => (
+                    <div key={n.id} className={`p-4 hover:bg-foreground/5 transition-colors cursor-pointer flex gap-3 ${!n.read ? 'bg-blue/5' : ''}`}>
+                      <div className="shrink-0 mt-0.5">
+                        {n.type === 'success' && <CheckCircle2 className="w-5 h-5 text-emerald-400" />}
+                        {n.type === 'alert' && <ShieldAlert className="w-5 h-5 text-red-500" />}
+                        {n.type === 'info' && <div className="w-5 h-5 rounded-full bg-blue/20 flex items-center justify-center"><div className="w-2 h-2 rounded-full bg-blue" /></div>}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex justify-between items-start mb-1">
+                          <p className={`text-sm font-semibold truncate pr-2 ${!n.read ? 'text-foreground' : 'text-foreground/80'}`}>{n.title}</p>
+                          <span className="text-[10px] text-foreground/40 whitespace-nowrap">{n.time}</span>
+                        </div>
+                        <p className="text-xs text-foreground/60 leading-relaxed line-clamp-2">{n.message}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            
+            <div className="p-3 border-t border-foreground/10 bg-background/50">
+              <button className="w-full text-center text-xs font-semibold text-blue hover:text-blue/80 transition-colors">
+                View All Notifications
+              </button>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}

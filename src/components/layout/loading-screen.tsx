@@ -25,7 +25,7 @@ export function LoadingScreen() {
         >
           Highway<span className="text-gradient"> Setu</span>
         </motion.div>
-        <div className="h-[2px] w-44 overflow-hidden rounded-full bg-white/10 light:bg-black/10">
+        <div className="h-[2px] w-44 overflow-hidden rounded-full bg-foreground/10 light:bg-black/10">
           <motion.div
             initial={{ x: "-100%" }}
             animate={{ x: "100%" }}
