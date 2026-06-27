@@ -13,7 +13,6 @@ import {
   Globe
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { GetStartedModal } from "@/components/auth/get-started-modal";
 
 const roles = [
@@ -82,7 +81,6 @@ export function Navbar() {
             <button className="flex items-center gap-1 text-sm font-medium dark:text-foreground/60 text-foreground hover:text-foreground px-2 py-1.5 rounded-lg hover:bg-foreground/5 transition-colors">
               <Globe className="w-4 h-4" /> EN
             </button>
-            <ThemeToggle />
             <GetStartedModal>
               <button className="rounded-full bg-gradient-to-r from-blue to-purple px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple/20 transition-transform hover:scale-105">
                 Register
