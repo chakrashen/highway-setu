@@ -55,10 +55,10 @@ function RegisterFleetPage() {
         <div className="hidden md:flex items-center gap-2">
           {[1, 2, 3].map((s) => (
             <div key={s} className="flex items-center gap-2">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-colors ${step >= s ? 'bg-emerald text-white' : 'bg-foreground/10 text-foreground/40'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-colors ${step >= s ? 'bg-emerald text-white' : 'bg-foreground/10 dark:text-foreground/40 text-foreground'}`}>
                 {step > s ? <CheckCircle2 className="w-5 h-5" /> : s}
               </div>
-              {s < 3 && <div className={`w-8 h-[2px] ${step > s ? 'bg-emerald' : 'bg-foreground/10'}`} />}
+              {s < 3 && <div className={`w-8 h-[2px] ${step > s ? 'bg-emerald' : 'dark:bg-foreground/10 bg-foreground'}`} />}
             </div>
           ))}
         </div>
@@ -67,27 +67,27 @@ function RegisterFleetPage() {
       <form onSubmit={handleRegister} className="space-y-6 relative z-10">
         {step === 1 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground mb-4 border-b border-foreground/10 pb-2">Admin Details</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-4 border-b dark:border-foreground/10 border-foreground pb-2">Admin Details</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-sm font-medium text-foreground/80">Admin Name</label>
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Admin Name</label>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
-                  <input type="text" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="Rajesh Singh" />
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
+                  <input type="text" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="Rajesh Singh" />
                 </div>
               </div>
               <div className="space-y-1">
-                <label className="text-sm font-medium text-foreground/80">Company Email</label>
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Company Email</label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
-                  <input type="email" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="admin@fleet.com" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
+                  <input type="email" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="admin@fleet.com" />
                 </div>
               </div>
               <div className="space-y-1 md:col-span-2">
-                <label className="text-sm font-medium text-foreground/80">Password</label>
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Password</label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
-                  <input type="password" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="Create a strong password" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
+                  <input type="password" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="Create a strong password" />
                 </div>
               </div>
             </div>
@@ -96,22 +96,22 @@ function RegisterFleetPage() {
 
         {step === 2 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground mb-4 border-b border-foreground/10 pb-2">Company Info</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-4 border-b dark:border-foreground/10 border-foreground pb-2">Company Info</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1 md:col-span-2">
-                <label className="text-sm font-medium text-foreground/80">Company Name</label>
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Company Name</label>
                 <div className="relative">
-                  <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
-                  <input type="text" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="Singh Logistics Pvt Ltd" />
+                  <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
+                  <input type="text" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="Singh Logistics Pvt Ltd" />
                 </div>
               </div>
               <div className="space-y-1">
-                <label className="text-sm font-medium text-foreground/80">GST Number</label>
-                <input type="text" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 px-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="22AAAAA0000A1Z5" />
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">GST Number</label>
+                <input type="text" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 px-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="22AAAAA0000A1Z5" />
               </div>
               <div className="space-y-1">
-                <label className="text-sm font-medium text-foreground/80">Headquarters City</label>
-                <input type="text" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 px-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="Mumbai" />
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Headquarters City</label>
+                <input type="text" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 px-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="Mumbai" />
               </div>
             </div>
           </motion.div>
@@ -119,31 +119,31 @@ function RegisterFleetPage() {
 
         {step === 3 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground mb-4 border-b border-foreground/10 pb-2">Fleet Details</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-4 border-b dark:border-foreground/10 border-foreground pb-2">Fleet Details</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-sm font-medium text-foreground/80">Fleet Size (Vehicles)</label>
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Fleet Size (Vehicles)</label>
                 <div className="relative">
-                  <Truck className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
-                  <input type="number" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="e.g. 50" />
+                  <Truck className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
+                  <input type="number" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="e.g. 50" />
                 </div>
               </div>
               <div className="space-y-1">
-                <label className="text-sm font-medium text-foreground/80">Number of Drivers</label>
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Number of Drivers</label>
                 <div className="relative">
-                  <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
-                  <input type="number" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="e.g. 60" />
+                  <Users className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
+                  <input type="number" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="e.g. 60" />
                 </div>
               </div>
               <div className="space-y-1 md:col-span-2">
-                <label className="text-sm font-medium text-foreground/80">Primary Routes (Optional)</label>
-                <input type="text" className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 px-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="Mumbai - Delhi, Pune - Bangalore" />
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Primary Routes (Optional)</label>
+                <input type="text" className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 px-4 text-foreground focus:ring-2 focus:ring-emerald/50 outline-none" placeholder="Mumbai - Delhi, Pune - Bangalore" />
               </div>
             </div>
           </motion.div>
         )}
 
-        <div className="flex items-center justify-between pt-4 mt-6 border-t border-foreground/10">
+        <div className="flex items-center justify-between pt-4 mt-6 border-t dark:border-foreground/10 border-foreground">
           {step > 1 ? (
             <button
               type="button"

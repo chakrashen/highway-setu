@@ -44,7 +44,7 @@ function DriverDashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
-            className="glass-strong rounded-2xl p-5 border border-foreground/5"
+            className="glass-strong rounded-2xl p-5 border dark:border-foreground/5 border-foreground"
           >
             <div className="flex justify-between items-start mb-4">
               <div className={`p-2.5 rounded-xl ${stat.bg} ${stat.color}`}>
@@ -53,7 +53,7 @@ function DriverDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
-              <div className="text-sm text-foreground/60">{stat.label}</div>
+              <div className="text-sm dark:text-foreground/60 text-foreground">{stat.label}</div>
             </div>
           </motion.div>
         ))}
@@ -75,39 +75,39 @@ function DriverDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="glass-strong rounded-2xl p-6 border border-foreground/5 space-y-6"
+          className="glass-strong rounded-2xl p-6 border dark:border-foreground/5 border-foreground space-y-6"
         >
           <h2 className="text-xl font-bold text-foreground">Nearby Services</h2>
           
           <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 rounded-xl bg-foreground/5 hover:bg-foreground/10 transition-colors border border-foreground/5 cursor-pointer">
+            <div className="flex items-center justify-between p-4 rounded-xl bg-foreground/5 hover:bg-foreground/10 transition-colors border dark:border-foreground/5 border-foreground cursor-pointer">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-orange/20 text-orange rounded-lg">
                   <UtensilsCrossed className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="font-semibold text-foreground">Sher-e-Punjab Dhaba</div>
-                  <div className="text-xs text-foreground/50">12 km ahead • 4.5 Stars</div>
+                  <div className="text-xs dark:text-foreground/50 text-foreground">12 km ahead • 4.5 Stars</div>
                 </div>
               </div>
-              <PhoneCall className="w-4 h-4 text-foreground/40" />
+              <PhoneCall className="w-4 h-4 dark:text-foreground/40 text-foreground" />
             </div>
 
-            <div className="flex items-center justify-between p-4 rounded-xl bg-foreground/5 hover:bg-foreground/10 transition-colors border border-foreground/5 cursor-pointer">
+            <div className="flex items-center justify-between p-4 rounded-xl bg-foreground/5 hover:bg-foreground/10 transition-colors border dark:border-foreground/5 border-foreground cursor-pointer">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-purple/20 text-purple rounded-lg">
                   <Wrench className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="font-semibold text-foreground">Sharma Auto Works</div>
-                  <div className="text-xs text-foreground/50">15 km ahead • 24/7 Open</div>
+                  <div className="text-xs dark:text-foreground/50 text-foreground">15 km ahead • 24/7 Open</div>
                 </div>
               </div>
-              <PhoneCall className="w-4 h-4 text-foreground/40" />
+              <PhoneCall className="w-4 h-4 dark:text-foreground/40 text-foreground" />
             </div>
           </div>
 
-          <button className="w-full py-3 rounded-xl border border-foreground/10 text-sm font-medium hover:bg-foreground/5 transition-colors text-foreground">
+          <button className="w-full py-3 rounded-xl border dark:border-foreground/10 border-foreground text-sm font-medium hover:bg-foreground/5 transition-colors text-foreground">
             View All on Map
           </button>
         </motion.div>

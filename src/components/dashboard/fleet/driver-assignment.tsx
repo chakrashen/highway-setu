@@ -15,20 +15,20 @@ export function DriverAssignment() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 dark:text-foreground/40 text-foreground" />
           <input 
             type="text" 
             placeholder="Search drivers..." 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 pr-4 py-2 rounded-xl bg-foreground/5 border border-foreground/10 text-sm text-foreground focus:ring-1 focus:ring-emerald-500 outline-none w-full sm:w-64"
+            className="pl-9 pr-4 py-2 rounded-xl bg-foreground/5 border dark:border-foreground/10 border-foreground text-sm text-foreground focus:ring-1 focus:ring-emerald-500 outline-none w-full sm:w-64"
           />
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {assignments.map((a) => (
-          <div key={a.id} className="glass-strong p-5 rounded-2xl border border-foreground/5">
+          <div key={a.id} className="glass-strong p-5 rounded-2xl border dark:border-foreground/5 border-foreground">
             <div className="flex justify-between items-start mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 flex items-center justify-center font-bold text-emerald-400">
@@ -47,19 +47,19 @@ export function DriverAssignment() {
               </div>
             </div>
 
-            <div className="space-y-3 mt-4 pt-4 border-t border-foreground/5">
+            <div className="space-y-3 mt-4 pt-4 border-t dark:border-foreground/5 border-foreground">
               <div className="flex items-center gap-3 text-sm">
-                <Truck className="w-4 h-4 text-foreground/40 shrink-0" />
-                <span className={a.vehicle === 'Unassigned' ? 'text-foreground/40 italic' : 'text-foreground/80 font-medium'}>
+                <Truck className="w-4 h-4 dark:text-foreground/40 text-foreground shrink-0" />
+                <span className={a.vehicle === 'Unassigned' ? 'dark:text-foreground/40 text-foreground italic' : 'dark:text-foreground/80 text-foreground font-medium'}>
                   {a.vehicle}
                 </span>
               </div>
               <div className="flex items-center gap-3 text-sm">
-                <MapPin className="w-4 h-4 text-foreground/40 shrink-0" />
-                <span className="text-foreground/70">{a.route}</span>
+                <MapPin className="w-4 h-4 dark:text-foreground/40 text-foreground shrink-0" />
+                <span className="dark:text-foreground/70 text-foreground">{a.route}</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
-                <Navigation className="w-4 h-4 text-foreground/40 shrink-0" />
+                <Navigation className="w-4 h-4 dark:text-foreground/40 text-foreground shrink-0" />
                 <span className="text-emerald-400/80">{a.eta}</span>
               </div>
             </div>
@@ -71,7 +71,7 @@ export function DriverAssignment() {
                   Assign Trip
                 </button>
               ) : (
-                <button className="w-full py-2.5 rounded-xl bg-foreground/5 border border-foreground/10 hover:bg-foreground/10 text-foreground font-medium text-sm transition-colors">
+                <button className="w-full py-2.5 rounded-xl bg-foreground/5 border dark:border-foreground/10 border-foreground hover:bg-foreground/10 text-foreground font-medium text-sm transition-colors">
                   View Live Tracking
                 </button>
               )}

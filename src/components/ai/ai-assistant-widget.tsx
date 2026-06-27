@@ -57,9 +57,9 @@ export function AIAssistantWidget() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-6 right-6 z-[9000] w-full max-w-[360px] h-[500px] glass-strong border border-foreground/10 rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            className="fixed bottom-6 right-6 z-[9000] w-full max-w-[360px] h-[500px] glass-strong border dark:border-foreground/10 border-foreground rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
-            <div className="p-4 bg-gradient-to-r from-blue/20 to-purple/20 border-b border-foreground/10 flex justify-between items-center relative overflow-hidden">
+            <div className="p-4 bg-gradient-to-r from-blue/20 to-purple/20 border-b dark:border-foreground/10 border-foreground flex justify-between items-center relative overflow-hidden">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.1),transparent_50%)]" />
               <div className="flex items-center gap-3 relative z-10">
                 <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue to-purple flex items-center justify-center shadow-lg">
@@ -67,12 +67,12 @@ export function AIAssistantWidget() {
                 </div>
                 <div>
                   <h3 className="font-bold text-foreground text-sm">Highway AI</h3>
-                  <p className="text-[10px] text-foreground/70">Always ready to assist</p>
+                  <p className="text-[10px] dark:text-foreground/70 text-foreground">Always ready to assist</p>
                 </div>
               </div>
               <button 
                 onClick={() => setIsOpen(false)}
-                className="relative z-10 p-2 hover:bg-foreground/10 rounded-full transition-colors text-foreground/60 hover:text-foreground"
+                className="relative z-10 p-2 hover:bg-foreground/10 rounded-full transition-colors dark:text-foreground/60 text-foreground hover:text-foreground"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -89,7 +89,7 @@ export function AIAssistantWidget() {
                   <div className={`max-w-[85%] p-3 rounded-2xl text-sm ${
                     msg.role === 'user' 
                       ? 'bg-blue text-white rounded-tr-sm' 
-                      : 'bg-foreground/10 text-foreground/90 rounded-tl-sm border border-foreground/5'
+                      : 'bg-foreground/10 dark:text-foreground/90 text-foreground rounded-tl-sm border dark:border-foreground/5 border-foreground'
                   }`}>
                     {msg.text}
                   </div>
@@ -101,20 +101,20 @@ export function AIAssistantWidget() {
                 <div className="flex flex-wrap gap-2 mt-4">
                   {user?.role === 'driver' && (
                     <>
-                      <button onClick={() => setInput("Find a dhaba nearby")} className="text-xs px-3 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-foreground/80 hover:bg-foreground/10 transition-colors flex items-center gap-1"><Coffee className="w-3 h-3" /> Find Dhaba</button>
-                      <button onClick={() => setInput("How is the weather ahead?")} className="text-xs px-3 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-foreground/80 hover:bg-foreground/10 transition-colors flex items-center gap-1"><Wind className="w-3 h-3" /> Weather Check</button>
+                      <button onClick={() => setInput("Find a dhaba nearby")} className="text-xs px-3 py-1.5 rounded-full bg-foreground/5 border dark:border-foreground/10 border-foreground dark:text-foreground/80 text-foreground hover:bg-foreground/10 transition-colors flex items-center gap-1"><Coffee className="w-3 h-3" /> Find Dhaba</button>
+                      <button onClick={() => setInput("How is the weather ahead?")} className="text-xs px-3 py-1.5 rounded-full bg-foreground/5 border dark:border-foreground/10 border-foreground dark:text-foreground/80 text-foreground hover:bg-foreground/10 transition-colors flex items-center gap-1"><Wind className="w-3 h-3" /> Weather Check</button>
                     </>
                   )}
                   {user?.role === 'fleet' && (
                     <>
-                      <button onClick={() => setInput("Optimize routes for my active trucks")} className="text-xs px-3 py-1.5 rounded-full bg-foreground/5 border border-foreground/10 text-foreground/80 hover:bg-foreground/10 transition-colors flex items-center gap-1"><MapPin className="w-3 h-3" /> Optimize Routes</button>
+                      <button onClick={() => setInput("Optimize routes for my active trucks")} className="text-xs px-3 py-1.5 rounded-full bg-foreground/5 border dark:border-foreground/10 border-foreground dark:text-foreground/80 text-foreground hover:bg-foreground/10 transition-colors flex items-center gap-1"><MapPin className="w-3 h-3" /> Optimize Routes</button>
                     </>
                   )}
                 </div>
               )}
             </div>
 
-            <div className="p-3 bg-foreground/5 border-t border-foreground/10">
+            <div className="p-3 bg-foreground/5 border-t dark:border-foreground/10 border-foreground">
               <div className="relative flex items-center">
                 <input 
                   type="text" 
@@ -122,10 +122,10 @@ export function AIAssistantWidget() {
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                   placeholder="Ask anything..." 
-                  className="w-full bg-background border border-foreground/10 rounded-full py-2.5 pl-4 pr-12 text-sm text-foreground focus:outline-none focus:border-blue/50"
+                  className="w-full bg-background border dark:border-foreground/10 border-foreground rounded-full py-2.5 pl-4 pr-12 text-sm text-foreground focus:outline-none focus:border-blue/50"
                 />
                 <div className="absolute right-1 flex items-center">
-                  <button className="p-2 text-foreground/40 hover:text-foreground transition-colors">
+                  <button className="p-2 dark:text-foreground/40 text-foreground hover:text-foreground transition-colors">
                     <Mic className="w-4 h-4" />
                   </button>
                   <button 

@@ -11,8 +11,8 @@ export function PricingPlans() {
       button: "Current Plan",
       current: true,
       icon: Shield,
-      color: "text-foreground/60",
-      bg: "bg-foreground/5 border-foreground/10"
+      color: "dark:text-foreground/60 text-foreground",
+      bg: "bg-foreground/5 dark:border-foreground/10 border-foreground"
     },
     {
       name: "Premium Driver",
@@ -60,19 +60,19 @@ export function PricingPlans() {
             <h3 className="text-xl font-bold text-foreground">{plan.name}</h3>
           </div>
           
-          <p className="text-sm text-foreground/60 mb-6 h-10">{plan.description}</p>
+          <p className="text-sm dark:text-foreground/60 text-foreground mb-6 h-10">{plan.description}</p>
           
           <div className="mb-6">
             <div className="flex items-baseline gap-1">
               <span className="text-3xl font-bold text-foreground">{plan.price}</span>
-              <span className="text-sm text-foreground/40">/{plan.period}</span>
+              <span className="text-sm dark:text-foreground/40 text-foreground">/{plan.period}</span>
             </div>
           </div>
           
           <ul className="space-y-3 mb-8">
             {plan.features.map((feature, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-foreground/80">
-                <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${plan.current ? 'text-foreground/40' : plan.color}`} />
+              <li key={i} className="flex items-start gap-2 text-sm dark:text-foreground/80 text-foreground">
+                <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${plan.current ? 'dark:text-foreground/40 text-foreground' : plan.color}`} />
                 <span>{feature}</span>
               </li>
             ))}
@@ -80,8 +80,8 @@ export function PricingPlans() {
           
           <button className={`w-full py-3 rounded-xl font-semibold transition-all ${
             plan.current 
-              ? 'bg-foreground/10 text-foreground/60 cursor-default' 
-              : `bg-foreground/10 hover:bg-foreground/20 text-white border border-foreground/10 ${plan.badge ? 'bg-blue hover:bg-blue/90 border-blue text-white shadow-lg shadow-blue/20' : ''}`
+              ? 'bg-foreground/10 dark:text-foreground/60 text-foreground cursor-default' 
+              : `bg-foreground/10 hover:bg-foreground/20 text-white border dark:border-foreground/10 border-foreground ${plan.badge ? 'bg-blue hover:bg-blue/90 border-blue text-white shadow-lg shadow-blue/20' : ''}`
           }`}>
             {plan.button}
           </button>

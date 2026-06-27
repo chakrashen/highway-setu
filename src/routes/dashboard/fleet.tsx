@@ -23,28 +23,28 @@ function FleetDashboard() {
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Fleet Dashboard</h1>
           <p className="text-muted-foreground mt-1">Overview of your vehicles, drivers, and operations.</p>
         </div>
-        <div className="flex gap-2 p-1 bg-foreground/5 rounded-xl border border-foreground/10">
+        <div className="flex gap-2 p-1 bg-foreground/5 rounded-xl border dark:border-foreground/10 border-foreground">
           <button 
             onClick={() => setActiveTab('overview')}
-            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${activeTab === 'overview' ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'text-foreground/60 hover:text-white hover:bg-foreground/5'}`}
+            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${activeTab === 'overview' ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'dark:text-foreground/60 text-foreground hover:text-white hover:bg-foreground/5'}`}
           >
             Live Tracking
           </button>
           <button 
             onClick={() => setActiveTab('vehicles')}
-            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${activeTab === 'vehicles' ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'text-foreground/60 hover:text-white hover:bg-foreground/5'}`}
+            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${activeTab === 'vehicles' ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'dark:text-foreground/60 text-foreground hover:text-white hover:bg-foreground/5'}`}
           >
             Vehicles
           </button>
           <button 
             onClick={() => setActiveTab('drivers')}
-            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${activeTab === 'drivers' ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'text-foreground/60 hover:text-white hover:bg-foreground/5'}`}
+            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${activeTab === 'drivers' ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'dark:text-foreground/60 text-foreground hover:text-white hover:bg-foreground/5'}`}
           >
             Drivers
           </button>
           <button 
             onClick={() => setActiveTab('reports')}
-            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${activeTab === 'reports' ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'text-foreground/60 hover:text-white hover:bg-foreground/5'}`}
+            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${activeTab === 'reports' ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'dark:text-foreground/60 text-foreground hover:text-white hover:bg-foreground/5'}`}
           >
             Reports
           </button>
@@ -64,7 +64,7 @@ function FleetDashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
-            className="glass-strong rounded-2xl p-5 border border-foreground/5"
+            className="glass-strong rounded-2xl p-5 border dark:border-foreground/5 border-foreground"
           >
             <div className="flex justify-between items-start mb-4">
               <div className={`p-2.5 rounded-xl ${stat.bg} ${stat.color}`}>
@@ -73,7 +73,7 @@ function FleetDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
-              <div className="text-sm text-foreground/60">{stat.label}</div>
+              <div className="text-sm dark:text-foreground/60 text-foreground">{stat.label}</div>
             </div>
           </motion.div>
         ))}
@@ -87,7 +87,7 @@ function FleetDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="lg:col-span-2 glass-strong rounded-2xl p-6 border border-foreground/5"
+          className="lg:col-span-2 glass-strong rounded-2xl p-6 border dark:border-foreground/5 border-foreground"
         >
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-bold text-foreground">Live Vehicle Status</h2>
@@ -97,12 +97,12 @@ function FleetDashboard() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-foreground/10">
-                  <th className="pb-3 text-sm font-medium text-foreground/60">Vehicle</th>
-                  <th className="pb-3 text-sm font-medium text-foreground/60">Driver</th>
-                  <th className="pb-3 text-sm font-medium text-foreground/60">Status</th>
-                  <th className="pb-3 text-sm font-medium text-foreground/60">Location</th>
-                  <th className="pb-3 text-sm font-medium text-foreground/60"></th>
+                <tr className="border-b dark:border-foreground/10 border-foreground">
+                  <th className="pb-3 text-sm font-medium dark:text-foreground/60 text-foreground">Vehicle</th>
+                  <th className="pb-3 text-sm font-medium dark:text-foreground/60 text-foreground">Driver</th>
+                  <th className="pb-3 text-sm font-medium dark:text-foreground/60 text-foreground">Status</th>
+                  <th className="pb-3 text-sm font-medium dark:text-foreground/60 text-foreground">Location</th>
+                  <th className="pb-3 text-sm font-medium dark:text-foreground/60 text-foreground"></th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/5">
@@ -114,15 +114,15 @@ function FleetDashboard() {
                 ].map((vehicle, i) => (
                   <tr key={i} className="hover:bg-foreground/5 transition-colors">
                     <td className="py-4 font-medium text-foreground">{vehicle.id}</td>
-                    <td className="py-4 text-foreground/80">{vehicle.driver}</td>
+                    <td className="py-4 dark:text-foreground/80 text-foreground">{vehicle.driver}</td>
                     <td className="py-4">
                       <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${vehicle.statusColor}`}>
                         {vehicle.status}
                       </span>
                     </td>
-                    <td className="py-4 text-foreground/60 text-sm truncate max-w-[150px]">{vehicle.location}</td>
+                    <td className="py-4 dark:text-foreground/60 text-foreground text-sm truncate max-w-[150px]">{vehicle.location}</td>
                     <td className="py-4 text-right">
-                      <button className="p-2 hover:bg-foreground/10 rounded-lg transition-colors text-foreground/60 hover:text-foreground">
+                      <button className="p-2 hover:bg-foreground/10 rounded-lg transition-colors dark:text-foreground/60 text-foreground hover:text-foreground">
                         <MoreVertical className="w-4 h-4" />
                       </button>
                     </td>
@@ -138,7 +138,7 @@ function FleetDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="glass-strong rounded-2xl p-6 border border-foreground/5 space-y-6"
+          className="glass-strong rounded-2xl p-6 border dark:border-foreground/5 border-foreground space-y-6"
         >
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-bold text-foreground">Alerts & Maintenance</h2>
@@ -163,11 +163,11 @@ function FleetDashboard() {
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-foreground/5 border border-foreground/5 flex gap-3">
-              <FileText className="w-5 h-5 text-foreground/40 shrink-0" />
+            <div className="p-4 rounded-xl bg-foreground/5 border dark:border-foreground/5 border-foreground flex gap-3">
+              <FileText className="w-5 h-5 dark:text-foreground/40 text-foreground shrink-0" />
               <div>
-                <div className="font-semibold text-foreground/80 text-sm mb-1">Document Expiry</div>
-                <div className="text-xs text-foreground/50">Pollution certificate for GJ-05-GH-3456 expires in 5 days.</div>
+                <div className="font-semibold dark:text-foreground/80 text-foreground text-sm mb-1">Document Expiry</div>
+                <div className="text-xs dark:text-foreground/50 text-foreground">Pollution certificate for GJ-05-GH-3456 expires in 5 days.</div>
               </div>
             </div>
             </div>

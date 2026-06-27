@@ -13,11 +13,11 @@ export function AdvancedAnalytics() {
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div className="glass-strong rounded-3xl p-6 border border-foreground/10">
+      <div className="glass-strong rounded-3xl p-6 border dark:border-foreground/10 border-foreground">
         <div className="flex justify-between items-start mb-8">
           <div>
             <h3 className="text-xl font-bold text-foreground mb-1">Weekly Performance</h3>
-            <p className="text-sm text-foreground/50">Activity trends over the last 7 days</p>
+            <p className="text-sm dark:text-foreground/50 text-foreground">Activity trends over the last 7 days</p>
           </div>
           <div className="flex items-center gap-2 text-sm font-medium text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20">
             <TrendingUp className="w-4 h-4" />
@@ -25,12 +25,12 @@ export function AdvancedAnalytics() {
           </div>
         </div>
 
-        <div className="h-48 flex items-end justify-between gap-2 mt-4 relative pt-6 border-b border-foreground/10 pb-2">
+        <div className="h-48 flex items-end justify-between gap-2 mt-4 relative pt-6 border-b dark:border-foreground/10 border-foreground pb-2">
           {/* Y-axis grid lines */}
           <div className="absolute inset-0 flex flex-col justify-between pointer-events-none pb-2">
-            <div className="border-t border-foreground/5 w-full border-dashed" />
-            <div className="border-t border-foreground/5 w-full border-dashed" />
-            <div className="border-t border-foreground/5 w-full border-dashed" />
+            <div className="border-t dark:border-foreground/5 border-foreground w-full border-dashed" />
+            <div className="border-t dark:border-foreground/5 border-foreground w-full border-dashed" />
+            <div className="border-t dark:border-foreground/5 border-foreground w-full border-dashed" />
           </div>
           
           {data.map((d, i) => (
@@ -45,35 +45,35 @@ export function AdvancedAnalytics() {
                   </div>
                 </div>
               </div>
-              <span className="text-xs text-foreground/40 mt-3 font-medium uppercase tracking-wider">{d.label}</span>
+              <span className="text-xs dark:text-foreground/40 text-foreground mt-3 font-medium uppercase tracking-wider">{d.label}</span>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="glass-strong rounded-3xl p-6 border border-foreground/10">
+      <div className="glass-strong rounded-3xl p-6 border dark:border-foreground/10 border-foreground">
         <h3 className="text-xl font-bold text-foreground mb-6">Key Metrics</h3>
         <div className="space-y-4">
-          <div className="p-4 bg-foreground/5 rounded-2xl border border-foreground/5">
+          <div className="p-4 bg-foreground/5 rounded-2xl border dark:border-foreground/5 border-foreground">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-foreground/60">Total Revenue</span>
+              <span className="text-sm font-medium dark:text-foreground/60 text-foreground">Total Revenue</span>
               <BarChart3 className="w-4 h-4 text-blue" />
             </div>
             <div className="text-2xl font-bold text-foreground">₹4,25,000</div>
             <div className="text-xs text-emerald-400 mt-1 flex items-center gap-1"><TrendingUp className="w-3 h-3" /> 8% vs last month</div>
           </div>
-          <div className="p-4 bg-foreground/5 rounded-2xl border border-foreground/5">
+          <div className="p-4 bg-foreground/5 rounded-2xl border dark:border-foreground/5 border-foreground">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-foreground/60">Operational Costs</span>
+              <span className="text-sm font-medium dark:text-foreground/60 text-foreground">Operational Costs</span>
               <BarChart3 className="w-4 h-4 text-orange" />
             </div>
             <div className="text-2xl font-bold text-foreground">₹1,12,450</div>
             <div className="text-xs text-red-400 mt-1 flex items-center gap-1"><TrendingDown className="w-3 h-3" /> 3% vs last month</div>
           </div>
-          <div className="p-4 bg-foreground/5 rounded-2xl border border-foreground/5 flex justify-between items-center">
+          <div className="p-4 bg-foreground/5 rounded-2xl border dark:border-foreground/5 border-foreground flex justify-between items-center">
             <div>
-              <div className="text-sm font-medium text-foreground/60 mb-1">Custom Date Range</div>
-              <div className="text-xs text-foreground/40 flex items-center gap-1"><Calendar className="w-3 h-3" /> 01 Jun - 26 Jun</div>
+              <div className="text-sm font-medium dark:text-foreground/60 text-foreground mb-1">Custom Date Range</div>
+              <div className="text-xs dark:text-foreground/40 text-foreground flex items-center gap-1"><Calendar className="w-3 h-3" /> 01 Jun - 26 Jun</div>
             </div>
             <button className="text-sm text-blue hover:text-blue/80 font-medium transition-colors">Change</button>
           </div>

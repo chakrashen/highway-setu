@@ -12,18 +12,18 @@ export function ContentManager() {
   ];
 
   return (
-    <div className="glass-strong rounded-3xl p-6 border border-foreground/10">
+    <div className="glass-strong rounded-3xl p-6 border dark:border-foreground/10 border-foreground">
       <div className="flex justify-between items-center mb-6">
         <div>
           <h3 className="text-xl font-bold text-foreground">Content Management</h3>
-          <p className="text-sm text-foreground/50">Manage website content, policies, and banners.</p>
+          <p className="text-sm dark:text-foreground/50 text-foreground">Manage website content, policies, and banners.</p>
         </div>
         <button className="flex items-center gap-2 bg-blue hover:bg-blue/90 text-white px-4 py-2 rounded-xl text-sm font-medium transition-colors shadow-lg shadow-blue/20">
           <Plus className="w-4 h-4" /> New Content
         </button>
       </div>
 
-      <div className="flex gap-2 mb-6 p-1 bg-foreground/5 rounded-xl border border-foreground/10 w-fit">
+      <div className="flex gap-2 mb-6 p-1 bg-foreground/5 rounded-xl border dark:border-foreground/10 border-foreground w-fit">
         {['pages', 'banners', 'announcements'].map(tab => (
           <button 
             key={tab}
@@ -31,7 +31,7 @@ export function ContentManager() {
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all capitalize ${
               activeTab === tab 
                 ? 'bg-blue text-white shadow-lg shadow-blue/20' 
-                : 'text-foreground/60 hover:text-foreground hover:bg-foreground/5'
+                : 'dark:text-foreground/60 text-foreground hover:text-foreground hover:bg-foreground/5'
             }`}
           >
             {tab}
@@ -39,10 +39,10 @@ export function ContentManager() {
         ))}
       </div>
 
-      <div className="bg-background/50 border border-foreground/10 rounded-2xl overflow-hidden">
+      <div className="bg-background/50 border dark:border-foreground/10 border-foreground rounded-2xl overflow-hidden">
         <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-foreground/10 text-foreground/40 text-sm">
+            <tr className="border-b dark:border-foreground/10 border-foreground dark:text-foreground/40 text-foreground text-sm">
               <th className="py-4 px-6 font-medium">Title</th>
               <th className="py-4 px-6 font-medium">Status</th>
               <th className="py-4 px-6 font-medium">Last Edited</th>
@@ -55,7 +55,7 @@ export function ContentManager() {
                 <td className="py-4 px-6">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-lg bg-foreground/5 flex items-center justify-center">
-                      <Layout className="w-4 h-4 text-foreground/60" />
+                      <Layout className="w-4 h-4 dark:text-foreground/60 text-foreground" />
                     </div>
                     <span className="font-medium text-foreground">{page.title}</span>
                   </div>
@@ -70,7 +70,7 @@ export function ContentManager() {
                     {page.status}
                   </span>
                 </td>
-                <td className="py-4 px-6 text-foreground/50 text-sm">{page.lastEdited}</td>
+                <td className="py-4 px-6 dark:text-foreground/50 text-foreground text-sm">{page.lastEdited}</td>
                 <td className="py-4 px-6 text-right">
                   <button className="text-sm font-medium text-blue hover:text-blue/80 transition-colors">Edit</button>
                 </td>

@@ -127,12 +127,18 @@ export function DhabaPage() {
                             </Reveal>
                         ))}
                     </div>
-                    <div className="mt-12 flex justify-center">
+                    <div className="mt-12 flex justify-center gap-4">
                         <Link
                             to="/"
                             className="rounded-full border border-orange/30 bg-orange/10 px-8 py-3.5 text-sm font-semibold text-orange transition-colors hover:bg-orange/20"
                         >
                             Explore Platform
+                        </Link>
+                        <Link
+                            to="/auth/register/dhaba"
+                            className="rounded-full border border-orange/30 bg-orange/10 px-8 py-3.5 text-sm font-semibold text-orange transition-colors hover:bg-orange/20"
+                        >
+                            Sign Up
                         </Link>
                     </div>
                 </div>

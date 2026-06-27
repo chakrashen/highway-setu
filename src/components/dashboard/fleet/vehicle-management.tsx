@@ -15,13 +15,13 @@ export function VehicleManagement() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 dark:text-foreground/40 text-foreground" />
           <input 
             type="text" 
             placeholder="Search vehicles..." 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-9 pr-4 py-2 rounded-xl bg-foreground/5 border border-foreground/10 text-sm text-foreground focus:ring-1 focus:ring-emerald-500 outline-none w-full sm:w-64"
+            className="pl-9 pr-4 py-2 rounded-xl bg-foreground/5 border dark:border-foreground/10 border-foreground text-sm text-foreground focus:ring-1 focus:ring-emerald-500 outline-none w-full sm:w-64"
           />
         </div>
         <button className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-xl font-medium transition-colors shadow-lg shadow-emerald-500/20">
@@ -30,17 +30,17 @@ export function VehicleManagement() {
         </button>
       </div>
 
-      <div className="glass-strong rounded-2xl border border-foreground/5 overflow-hidden">
+      <div className="glass-strong rounded-2xl border dark:border-foreground/5 border-foreground overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-foreground/10 bg-foreground/5">
-                <th className="p-4 text-sm font-medium text-foreground/60">Vehicle</th>
-                <th className="p-4 text-sm font-medium text-foreground/60">Type & Make</th>
-                <th className="p-4 text-sm font-medium text-foreground/60">Status</th>
-                <th className="p-4 text-sm font-medium text-foreground/60">Documents</th>
-                <th className="p-4 text-sm font-medium text-foreground/60">Next Service</th>
-                <th className="p-4 text-sm font-medium text-foreground/60"></th>
+              <tr className="border-b dark:border-foreground/10 border-foreground bg-foreground/5">
+                <th className="p-4 text-sm font-medium dark:text-foreground/60 text-foreground">Vehicle</th>
+                <th className="p-4 text-sm font-medium dark:text-foreground/60 text-foreground">Type & Make</th>
+                <th className="p-4 text-sm font-medium dark:text-foreground/60 text-foreground">Status</th>
+                <th className="p-4 text-sm font-medium dark:text-foreground/60 text-foreground">Documents</th>
+                <th className="p-4 text-sm font-medium dark:text-foreground/60 text-foreground">Next Service</th>
+                <th className="p-4 text-sm font-medium dark:text-foreground/60 text-foreground"></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
@@ -49,14 +49,14 @@ export function VehicleManagement() {
                   <td className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-foreground/10 flex items-center justify-center">
-                        <Truck className="w-5 h-5 text-foreground/80" />
+                        <Truck className="w-5 h-5 dark:text-foreground/80 text-foreground" />
                       </div>
                       <span className="font-bold text-foreground">{v.id}</span>
                     </div>
                   </td>
                   <td className="p-4">
                     <div className="text-foreground text-sm font-medium">{v.make}</div>
-                    <div className="text-foreground/50 text-xs">{v.type}</div>
+                    <div className="dark:text-foreground/50 text-foreground text-xs">{v.type}</div>
                   </td>
                   <td className="p-4">
                     <span className={`px-2.5 py-1 rounded-full text-xs font-medium border ${
@@ -67,22 +67,22 @@ export function VehicleManagement() {
                   </td>
                   <td className="p-4 space-y-1">
                     <div className="flex items-center gap-2 text-xs">
-                      <FileText className="w-3 h-3 text-foreground/40" />
-                      <span className={v.rcStatus.includes('Expiring') ? 'text-orange' : 'text-foreground/70'}>RC: {v.rcStatus}</span>
+                      <FileText className="w-3 h-3 dark:text-foreground/40 text-foreground" />
+                      <span className={v.rcStatus.includes('Expiring') ? 'text-orange' : 'dark:text-foreground/70 text-foreground'}>RC: {v.rcStatus}</span>
                     </div>
                     <div className="flex items-center gap-2 text-xs">
-                      <FileText className="w-3 h-3 text-foreground/40" />
-                      <span className={v.insStatus.includes('Expires') ? 'text-orange' : 'text-foreground/70'}>Ins: {v.insStatus}</span>
+                      <FileText className="w-3 h-3 dark:text-foreground/40 text-foreground" />
+                      <span className={v.insStatus.includes('Expires') ? 'text-orange' : 'dark:text-foreground/70 text-foreground'}>Ins: {v.insStatus}</span>
                     </div>
                   </td>
                   <td className="p-4">
-                    <div className={`flex items-center gap-2 text-sm ${v.nextService === 'Due Now' ? 'text-red-400 font-semibold' : 'text-foreground/80'}`}>
+                    <div className={`flex items-center gap-2 text-sm ${v.nextService === 'Due Now' ? 'text-red-400 font-semibold' : 'dark:text-foreground/80 text-foreground'}`}>
                       {v.nextService === 'Due Now' && <AlertTriangle className="w-4 h-4" />}
                       {v.nextService}
                     </div>
                   </td>
                   <td className="p-4 text-right">
-                    <button className="p-2 hover:bg-foreground/10 rounded-lg transition-colors text-foreground/60 hover:text-foreground">
+                    <button className="p-2 hover:bg-foreground/10 rounded-lg transition-colors dark:text-foreground/60 text-foreground hover:text-foreground">
                       <Settings className="w-4 h-4" />
                     </button>
                   </td>

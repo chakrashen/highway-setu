@@ -51,18 +51,18 @@ export function GlobalSearch() {
             exit={{ opacity: 0, scale: 0.95, y: -20 }}
             className="fixed top-[15vh] left-1/2 -translate-x-1/2 w-full max-w-2xl z-[10000] p-4"
           >
-            <div className="glass-strong border border-foreground/20 rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh]">
-              <div className="p-4 border-b border-foreground/10 flex items-center gap-3">
-                <Search className="w-5 h-5 text-foreground/50" />
+            <div className="glass-strong border dark:border-foreground/20 border-foreground rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[70vh]">
+              <div className="p-4 border-b dark:border-foreground/10 border-foreground flex items-center gap-3">
+                <Search className="w-5 h-5 dark:text-foreground/50 text-foreground" />
                 <input 
                   type="text" 
                   autoFocus
                   placeholder="Search across Highway Setu..." 
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  className="flex-1 bg-transparent text-lg text-foreground placeholder:text-foreground/40 focus:outline-none"
+                  className="flex-1 bg-transparent text-lg text-foreground placeholder:dark:text-foreground/40 text-foreground focus:outline-none"
                 />
-                <button onClick={() => setIsOpen(false)} className="p-1 rounded-lg hover:bg-foreground/10 text-foreground/50 hover:text-foreground transition-colors">
+                <button onClick={() => setIsOpen(false)} className="p-1 rounded-lg hover:bg-foreground/10 dark:text-foreground/50 text-foreground hover:text-foreground transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
@@ -70,7 +70,7 @@ export function GlobalSearch() {
               <div className="flex-1 overflow-y-auto p-2 hidden-scrollbar">
                 {query ? (
                   <div className="space-y-1">
-                    <div className="px-3 py-2 text-xs font-semibold text-foreground/40 uppercase tracking-wider">
+                    <div className="px-3 py-2 text-xs font-semibold dark:text-foreground/40 text-foreground uppercase tracking-wider">
                       Search Results
                     </div>
                     {results.filter(r => r.name.toLowerCase().includes(query.toLowerCase())).map((result, i) => (
@@ -80,28 +80,28 @@ export function GlobalSearch() {
                         className="w-full flex items-center justify-between p-3 rounded-xl hover:bg-foreground/10 transition-colors group text-left"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <div className="w-10 h-10 rounded-full bg-foreground/5 border dark:border-foreground/10 border-foreground flex items-center justify-center group-hover:scale-110 transition-transform">
                             <result.icon className="w-4 h-4 text-blue" />
                           </div>
                           <div>
                             <div className="font-semibold text-foreground">{result.name}</div>
-                            <div className="text-xs text-foreground/50">{result.type}</div>
+                            <div className="text-xs dark:text-foreground/50 text-foreground">{result.type}</div>
                           </div>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-foreground/20 group-hover:text-foreground/60 transition-colors" />
+                        <ArrowRight className="w-4 h-4 dark:text-foreground/20 text-foreground group-hover:dark:text-foreground/60 text-foreground transition-colors" />
                       </button>
                     ))}
                   </div>
                 ) : (
-                  <div className="p-8 text-center text-foreground/40">
+                  <div className="p-8 text-center dark:text-foreground/40 text-foreground">
                     <Search className="w-12 h-12 mx-auto mb-4 opacity-20" />
                     <p>Start typing to search for dhabas, mechanics, drivers, or documents...</p>
                   </div>
                 )}
               </div>
-              <div className="p-3 border-t border-foreground/10 bg-black/20 text-xs text-foreground/40 flex items-center justify-between">
+              <div className="p-3 border-t dark:border-foreground/10 border-foreground bg-black/20 text-xs dark:text-foreground/40 text-foreground flex items-center justify-between">
                 <div>Press <kbd className="px-1.5 py-0.5 rounded bg-foreground/10 font-mono">ESC</kbd> to close</div>
-                <div>Search by <span className="font-semibold text-foreground/60">Highway Setu AI</span></div>
+                <div>Search by <span className="font-semibold dark:text-foreground/60 text-foreground">Highway Setu AI</span></div>
               </div>
             </div>
           </motion.div>

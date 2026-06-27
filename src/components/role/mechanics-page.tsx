@@ -98,12 +98,18 @@ export function MechanicsPage() {
                             </Reveal>
                         ))}
                     </div>
-                    <div className="mt-12 flex justify-center">
+                    <div className="mt-12 flex justify-center gap-4">
                         <Link
                             to="/"
                             className="rounded-full border border-purple/30 bg-purple/10 px-8 py-3.5 text-sm font-semibold text-purple transition-colors hover:bg-purple/20"
                         >
                             Explore Platform
+                        </Link>
+                        <Link
+                            to="/auth/register/mechanic"
+                            className="rounded-full border border-purple/30 bg-purple/10 px-8 py-3.5 text-sm font-semibold text-purple transition-colors hover:bg-purple/20"
+                        >
+                            Sign Up
                         </Link>
                     </div>
                 </div>

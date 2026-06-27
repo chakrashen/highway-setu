@@ -72,7 +72,7 @@ export function RolePage({ role }: { role: RoleData }) {
                         a.gradient,
                       )}
                     >
-                      Get Started <ArrowRight className="h-4 w-4" />
+                      Register <ArrowRight className="h-4 w-4" />
                     </button>
                   </GetStartedModal>
                   <DemoModal
@@ -180,12 +180,12 @@ export function RolePage({ role }: { role: RoleData }) {
                       a.gradient,
                     )}
                   >
-                    Get Started
+                    Register
                   </button>
                 </GetStartedModal>
                 <Link
                   to="/"
-                  className="rounded-full border border-foreground/15 light:border-black/15 bg-foreground/5 light:bg-black/5 px-7 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-foreground/10 light:hover:bg-black/10"
+                  className="rounded-full border dark:border-foreground/15 border-foreground light:border-black/15 bg-foreground/5 light:bg-black/5 px-7 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-foreground/10 light:hover:bg-black/10"
                 >
                   Explore Platform
                 </Link>

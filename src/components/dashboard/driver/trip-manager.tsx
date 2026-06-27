@@ -7,7 +7,7 @@ export function TripManager() {
 
   return (
     <div className="space-y-6">
-      <div className="glass-strong rounded-2xl p-6 border border-foreground/5 relative overflow-hidden">
+      <div className="glass-strong rounded-2xl p-6 border dark:border-foreground/5 border-foreground relative overflow-hidden">
         {tripState === 'active' && <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue to-cyan-500 animate-pulse" />}
         
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
@@ -18,12 +18,12 @@ export function TripManager() {
                 tripState === 'active' ? 'bg-blue/20 text-blue border border-blue/30' :
                 tripState === 'paused' ? 'bg-orange/20 text-orange border border-orange/30' :
                 tripState === 'completed' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' :
-                'bg-foreground/10 text-foreground/60 border border-foreground/20'
+                'bg-foreground/10 dark:text-foreground/60 text-foreground border dark:border-foreground/20 border-foreground'
               }`}>
                 {tripState}
               </span>
             </h2>
-            <p className="text-sm text-foreground/60 mt-1">Vehicle: MH-12-AB-1234 (Tata Signa)</p>
+            <p className="text-sm dark:text-foreground/60 text-foreground mt-1">Vehicle: MH-12-AB-1234 (Tata Signa)</p>
           </div>
           
           <div className="flex flex-wrap gap-3">
@@ -63,20 +63,20 @@ export function TripManager() {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="p-4 rounded-xl bg-foreground/5 border border-foreground/5">
-            <div className="flex items-center gap-2 text-foreground/40 mb-1 text-sm">
+          <div className="p-4 rounded-xl bg-foreground/5 border dark:border-foreground/5 border-foreground">
+            <div className="flex items-center gap-2 dark:text-foreground/40 text-foreground mb-1 text-sm">
               <Activity className="w-4 h-4" /> Distance
             </div>
-            <div className="text-xl font-bold text-foreground">142 <span className="text-sm text-foreground/60 font-normal">/ 350 km</span></div>
+            <div className="text-xl font-bold text-foreground">142 <span className="text-sm dark:text-foreground/60 text-foreground font-normal">/ 350 km</span></div>
           </div>
-          <div className="p-4 rounded-xl bg-foreground/5 border border-foreground/5">
-            <div className="flex items-center gap-2 text-foreground/40 mb-1 text-sm">
+          <div className="p-4 rounded-xl bg-foreground/5 border dark:border-foreground/5 border-foreground">
+            <div className="flex items-center gap-2 dark:text-foreground/40 text-foreground mb-1 text-sm">
               <Clock className="w-4 h-4" /> Duration
             </div>
             <div className="text-xl font-bold text-foreground">3h 45m</div>
           </div>
-          <div className="p-4 rounded-xl bg-foreground/5 border border-foreground/5">
-            <div className="flex items-center gap-2 text-foreground/40 mb-1 text-sm">
+          <div className="p-4 rounded-xl bg-foreground/5 border dark:border-foreground/5 border-foreground">
+            <div className="flex items-center gap-2 dark:text-foreground/40 text-foreground mb-1 text-sm">
               <MapPin className="w-4 h-4" /> Next Stop
             </div>
             <div className="text-lg font-bold text-foreground truncate">Pune Toll Plaza</div>
@@ -104,7 +104,7 @@ export function TripManager() {
             <div className="flex flex-col items-center">
               <div className="w-4 h-4 rounded-full bg-blue border-4 border-background z-10" />
               <span className="text-xs font-medium text-foreground mt-2">Mumbai</span>
-              <span className="text-[10px] text-foreground/40">08:00 AM</span>
+              <span className="text-[10px] dark:text-foreground/40 text-foreground">08:00 AM</span>
             </div>
             <div className="flex flex-col items-center">
               <div className="w-6 h-6 rounded-full bg-blue/20 border-2 border-blue z-10 flex items-center justify-center">
@@ -115,8 +115,8 @@ export function TripManager() {
             </div>
             <div className="flex flex-col items-center">
               <div className="w-4 h-4 rounded-full bg-foreground/20 border-4 border-background z-10" />
-              <span className="text-xs font-medium text-foreground/60 mt-2">Bengaluru</span>
-              <span className="text-[10px] text-foreground/40">Drop-off</span>
+              <span className="text-xs font-medium dark:text-foreground/60 text-foreground mt-2">Bengaluru</span>
+              <span className="text-[10px] dark:text-foreground/40 text-foreground">Drop-off</span>
             </div>
           </div>
         </div>

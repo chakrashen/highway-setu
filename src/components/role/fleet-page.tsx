@@ -89,12 +89,18 @@ export function FleetPage() {
                             </Reveal>
                         ))}
                     </div>
-                    <div className="mt-12 flex justify-center">
+                    <div className="mt-12 flex justify-center gap-4">
                         <Link
                             to="/"
                             className="rounded-md border border-emerald/30 bg-emerald/10 px-8 py-3.5 text-sm font-semibold text-emerald transition-colors hover:bg-emerald/20"
                         >
                             Explore Platform
+                        </Link>
+                        <Link
+                            to="/auth/register/fleet"
+                            className="rounded-md border border-emerald/30 bg-emerald/10 px-8 py-3.5 text-sm font-semibold text-emerald transition-colors hover:bg-emerald/20"
+                        >
+                            Sign Up
                         </Link>
                     </div>
                 </div>

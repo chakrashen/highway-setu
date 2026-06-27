@@ -8,7 +8,7 @@ import {
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Truck, UtensilsCrossed, Wrench, Building2, ChevronRight } from "lucide-react";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 const roles = [
   {
@@ -50,12 +50,14 @@ interface GetStartedModalProps {
 }
 
 export function GetStartedModal({ children }: GetStartedModalProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         {children}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px] p-0 overflow-hidden bg-background/80 backdrop-blur-2xl border-foreground/10 shadow-2xl">
+      <DialogContent className="sm:max-w-[600px] p-0 overflow-hidden bg-background/80 backdrop-blur-2xl dark:border-foreground/10 border-foreground shadow-2xl">
         <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-blue-500/10 z-0 pointer-events-none" />
         <div className="relative z-10 p-6 md:p-8">
           <DialogHeader className="mb-6">
@@ -77,7 +79,8 @@ export function GetStartedModal({ children }: GetStartedModalProps) {
               >
                 <Link
                   to={role.href}
-                  className="group relative flex flex-col p-5 h-full rounded-2xl border border-foreground/10 bg-foreground/5 hover:bg-foreground/10 transition-all duration-300 overflow-hidden"
+                  onClick={() => setIsOpen(false)}
+                  className="group relative flex flex-col p-5 h-full rounded-2xl border dark:border-foreground/10 border-foreground bg-foreground/5 hover:bg-foreground/10 transition-all duration-300 overflow-hidden"
                 >
                   <div className={`absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-300 bg-gradient-to-br ${role.color}`} />
                   
@@ -86,14 +89,14 @@ export function GetStartedModal({ children }: GetStartedModalProps) {
                       <role.icon className="w-6 h-6 text-foreground" />
                     </div>
                     <div className="w-8 h-8 rounded-full bg-foreground/5 flex items-center justify-center group-hover:bg-foreground/10 transition-colors">
-                      <ChevronRight className="w-4 h-4 text-foreground/50 group-hover:text-foreground transition-colors" />
+                      <ChevronRight className="w-4 h-4 dark:text-foreground/50 text-foreground group-hover:text-foreground transition-colors" />
                     </div>
                   </div>
                   
                   <h3 className="text-lg font-semibold text-foreground mb-1 relative z-10">
                     {role.title}
                   </h3>
-                  <p className="text-sm text-foreground/60 relative z-10">
+                  <p className="text-sm dark:text-foreground/60 text-foreground relative z-10">
                     {role.description}
                   </p>
                 </Link>
@@ -103,7 +106,7 @@ export function GetStartedModal({ children }: GetStartedModalProps) {
           
           <div className="mt-8 text-center text-sm text-muted-foreground">
             Already have an account?{" "}
-            <Link to="/auth/login" className="text-primary hover:text-primary-foreground transition-colors font-medium">
+            <Link to="/auth/login" onClick={() => setIsOpen(false)} className="text-primary hover:text-primary-foreground transition-colors font-medium">
               Sign In
             </Link>
           </div>

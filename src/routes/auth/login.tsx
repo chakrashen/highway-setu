@@ -48,7 +48,7 @@ function LoginPage() {
 
       <form onSubmit={handleLogin} className="space-y-5 relative z-10">
         <div className="space-y-1">
-          <label className="text-sm font-medium text-foreground/80 ml-1">Role</label>
+          <label className="text-sm font-medium dark:text-foreground/80 text-foreground ml-1">Role</label>
           <div className="grid grid-cols-2 gap-2 mt-2">
             {[
               { id: "driver", label: "Driver" },
@@ -64,7 +64,7 @@ function LoginPage() {
                   "py-2 px-3 text-sm rounded-xl border transition-all duration-200",
                   role === r.id 
                     ? "bg-primary/20 border-primary/50 text-foreground" 
-                    : "bg-foreground/5 border-foreground/10 text-foreground/60 hover:bg-foreground/10 hover:text-foreground"
+                    : "bg-foreground/5 dark:border-foreground/10 border-foreground dark:text-foreground/60 text-foreground hover:bg-foreground/10 hover:text-foreground"
                 )}
               >
                 {r.label}
@@ -74,30 +74,30 @@ function LoginPage() {
         </div>
 
         <div className="space-y-1">
-          <label className="text-sm font-medium text-foreground/80 ml-1">Email</label>
+          <label className="text-sm font-medium dark:text-foreground/80 text-foreground ml-1">Email</label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground placeholder:dark:text-foreground/40 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               placeholder="Enter your email"
             />
           </div>
         </div>
 
         <div className="space-y-1">
-          <label className="text-sm font-medium text-foreground/80 ml-1">Password</label>
+          <label className="text-sm font-medium dark:text-foreground/80 text-foreground ml-1">Password</label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground placeholder:text-foreground/40 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+              className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground placeholder:dark:text-foreground/40 text-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
               placeholder="Enter your password"
             />
           </div>
@@ -105,8 +105,8 @@ function LoginPage() {
 
         <div className="flex justify-between items-center text-sm">
           <label className="flex items-center gap-2 cursor-pointer group">
-            <input type="checkbox" className="rounded border-foreground/20 bg-foreground/5 text-primary focus:ring-primary/50" />
-            <span className="text-foreground/60 group-hover:text-foreground/80 transition-colors">Remember me</span>
+            <input type="checkbox" className="rounded dark:border-foreground/20 border-foreground bg-foreground/5 text-primary focus:ring-primary/50" />
+            <span className="dark:text-foreground/60 text-foreground group-hover:dark:text-foreground/80 text-foreground transition-colors">Remember me</span>
           </label>
           <a href="#" className="text-primary hover:text-primary-foreground transition-colors">Forgot password?</a>
         </div>
@@ -122,7 +122,7 @@ function LoginPage() {
         </button>
       </form>
 
-      <div className="mt-8 text-center text-sm text-foreground/60 relative z-10">
+      <div className="mt-8 text-center text-sm dark:text-foreground/60 text-foreground relative z-10">
         Don't have an account?{" "}
         <Link to="/" className="text-primary hover:text-primary-foreground font-medium transition-colors">
           Join Now

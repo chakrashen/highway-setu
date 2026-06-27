@@ -90,7 +90,7 @@ export function DashboardSidebar() {
   }[user?.role || "driver"];
 
   return (
-    <aside className="w-64 flex-shrink-0 hidden lg:flex flex-col border-r border-foreground/10 bg-background/50 backdrop-blur-xl h-[calc(100vh-4rem)] sticky top-16">
+    <aside className="w-64 flex-shrink-0 hidden lg:flex flex-col border-r dark:border-foreground/10 border-foreground bg-background/50 backdrop-blur-xl h-[calc(100vh-4rem)] sticky top-16">
       <div className="flex flex-col gap-1 p-4 flex-1">
         <div className="mb-6 px-2">
           <div className="text-xs uppercase font-semibold tracking-wider text-muted-foreground mb-1">
@@ -106,7 +106,7 @@ export function DashboardSidebar() {
             <Link
               key={link.label}
               to={link.to}
-              className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-foreground/60 hover:text-foreground hover:bg-foreground/5 transition-colors"
+              className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium dark:text-foreground/60 text-foreground hover:text-foreground hover:bg-foreground/5 transition-colors"
               activeProps={{ className: "!text-foreground !bg-foreground/10 shadow-inner" }}
             >
               <link.icon className="w-5 h-5" />
@@ -116,16 +116,16 @@ export function DashboardSidebar() {
         </nav>
       </div>
 
-      <div className="p-4 border-t border-foreground/10">
+      <div className="p-4 border-t dark:border-foreground/10 border-foreground">
         <div className="flex items-center gap-3 px-2 py-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white/10 to-white/5 border border-foreground/10 flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white/10 to-white/5 border dark:border-foreground/10 border-foreground flex items-center justify-center shrink-0">
             <span className="font-semibold text-foreground">
               {user?.email?.charAt(0).toUpperCase() || "U"}
             </span>
           </div>
           <div className="flex-1 overflow-hidden">
             <p className="text-sm font-medium text-foreground truncate">{user?.email}</p>
-            <p className="text-xs text-foreground/40 truncate capitalize">{user?.role}</p>
+            <p className="text-xs dark:text-foreground/40 text-foreground truncate capitalize">{user?.role}</p>
           </div>
         </div>
         <button

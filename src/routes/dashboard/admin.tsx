@@ -22,28 +22,28 @@ function AdminDashboard() {
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Admin Control Panel</h1>
           <p className="text-muted-foreground mt-1">Platform overview and user management.</p>
         </div>
-        <div className="flex gap-2 p-1 bg-foreground/5 rounded-xl border border-foreground/10 overflow-x-auto hidden-scrollbar max-w-full">
+        <div className="flex gap-2 p-1 bg-foreground/5 rounded-xl border dark:border-foreground/10 border-foreground overflow-x-auto hidden-scrollbar max-w-full">
           <button 
             onClick={() => setActiveTab('overview')}
-            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap ${activeTab === 'overview' ? 'bg-red-500 text-white shadow-lg shadow-red-500/20' : 'text-foreground/60 hover:text-white hover:bg-foreground/5'}`}
+            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap ${activeTab === 'overview' ? 'bg-red-500 text-white shadow-lg shadow-red-500/20' : 'dark:text-foreground/60 text-foreground hover:text-white hover:bg-foreground/5'}`}
           >
             Overview
           </button>
           <button 
             onClick={() => setActiveTab('content')}
-            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap flex items-center gap-2 ${activeTab === 'content' ? 'bg-red-500 text-white shadow-lg shadow-red-500/20' : 'text-foreground/60 hover:text-white hover:bg-foreground/5'}`}
+            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap flex items-center gap-2 ${activeTab === 'content' ? 'bg-red-500 text-white shadow-lg shadow-red-500/20' : 'dark:text-foreground/60 text-foreground hover:text-white hover:bg-foreground/5'}`}
           >
             <Layout className="w-4 h-4" /> Content
           </button>
           <button 
             onClick={() => setActiveTab('security')}
-            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap flex items-center gap-2 ${activeTab === 'security' ? 'bg-red-500 text-white shadow-lg shadow-red-500/20' : 'text-foreground/60 hover:text-white hover:bg-foreground/5'}`}
+            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap flex items-center gap-2 ${activeTab === 'security' ? 'bg-red-500 text-white shadow-lg shadow-red-500/20' : 'dark:text-foreground/60 text-foreground hover:text-white hover:bg-foreground/5'}`}
           >
             <Shield className="w-4 h-4" /> Security
           </button>
           <button 
             onClick={() => setActiveTab('support')}
-            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap flex items-center gap-2 ${activeTab === 'support' ? 'bg-red-500 text-white shadow-lg shadow-red-500/20' : 'text-foreground/60 hover:text-white hover:bg-foreground/5'}`}
+            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all whitespace-nowrap flex items-center gap-2 ${activeTab === 'support' ? 'bg-red-500 text-white shadow-lg shadow-red-500/20' : 'dark:text-foreground/60 text-foreground hover:text-white hover:bg-foreground/5'}`}
           >
             <LifeBuoy className="w-4 h-4" /> Support
           </button>
@@ -61,7 +61,7 @@ function AdminDashboard() {
             ].map((stat, idx) => (
               <div
                 key={stat.label}
-                className="glass-strong rounded-2xl p-5 border border-foreground/5"
+                className="glass-strong rounded-2xl p-5 border dark:border-foreground/5 border-foreground"
               >
                 <div className="flex justify-between items-start mb-4">
                   <div className={`p-2.5 rounded-xl ${stat.bg} ${stat.color}`}>
@@ -70,7 +70,7 @@ function AdminDashboard() {
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
-                  <div className="text-sm text-foreground/60">{stat.label}</div>
+                  <div className="text-sm dark:text-foreground/60 text-foreground">{stat.label}</div>
                 </div>
               </div>
             ))}
@@ -78,15 +78,15 @@ function AdminDashboard() {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Pending Approvals */}
-            <div className="lg:col-span-2 glass-strong rounded-2xl p-6 border border-foreground/5">
+            <div className="lg:col-span-2 glass-strong rounded-2xl p-6 border dark:border-foreground/5 border-foreground">
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-bold text-foreground">Pending KYC Approvals</h2>
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 dark:text-foreground/40 text-foreground" />
               <input 
                 type="text" 
                 placeholder="Search..." 
-                className="pl-9 pr-4 py-2 rounded-lg bg-foreground/5 border border-foreground/10 text-sm text-foreground focus:ring-1 focus:ring-white/20 outline-none w-48"
+                className="pl-9 pr-4 py-2 rounded-lg bg-foreground/5 border dark:border-foreground/10 border-foreground text-sm text-foreground focus:ring-1 focus:ring-white/20 outline-none w-48"
               />
             </div>
           </div>
@@ -98,16 +98,16 @@ function AdminDashboard() {
               { name: "Singh Logistics", role: "Fleet", date: "1 day ago", status: "Pending GST Verification" },
               { name: "Sharma Auto Works", role: "Mechanic", date: "1 day ago", status: "Pending Certification Check" },
             ].map((approval, i) => (
-              <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-foreground/5 border border-foreground/5 hover:bg-foreground/10 transition-colors">
+              <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-foreground/5 border dark:border-foreground/5 border-foreground hover:bg-foreground/10 transition-colors">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center font-bold text-foreground/80 shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-foreground/10 flex items-center justify-center font-bold dark:text-foreground/80 text-foreground shrink-0">
                     {approval.name.charAt(0)}
                   </div>
                   <div>
                     <div className="font-semibold text-foreground text-sm">{approval.name}</div>
                     <div className="flex gap-2 items-center mt-1 text-xs">
-                      <span className="px-2 py-0.5 rounded text-foreground/80 bg-foreground/10">{approval.role}</span>
-                      <span className="text-foreground/40">{approval.date}</span>
+                      <span className="px-2 py-0.5 rounded dark:text-foreground/80 text-foreground bg-foreground/10">{approval.role}</span>
+                      <span className="dark:text-foreground/40 text-foreground">{approval.date}</span>
                     </div>
                   </div>
                 </div>
@@ -122,7 +122,7 @@ function AdminDashboard() {
                     <button className="p-2 rounded-lg bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors" title="Reject">
                       <X className="w-4 h-4" />
                     </button>
-                    <button className="p-2 rounded-lg hover:bg-foreground/10 text-foreground/60 hover:text-foreground transition-colors">
+                    <button className="p-2 rounded-lg hover:bg-foreground/10 dark:text-foreground/60 text-foreground hover:text-foreground transition-colors">
                       <MoreHorizontal className="w-4 h-4" />
                     </button>
                   </div>
@@ -137,7 +137,7 @@ function AdminDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="glass-strong rounded-2xl p-6 border border-foreground/5 space-y-6"
+          className="glass-strong rounded-2xl p-6 border dark:border-foreground/5 border-foreground space-y-6"
         >
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-bold text-foreground">System Status</h2>
@@ -146,7 +146,7 @@ function AdminDashboard() {
           <div className="space-y-4">
             <div>
               <div className="flex justify-between text-sm mb-1">
-                <span className="text-foreground/80">API Health</span>
+                <span className="dark:text-foreground/80 text-foreground">API Health</span>
                 <span className="text-emerald-400 font-medium">99.9%</span>
               </div>
               <div className="w-full h-2 rounded-full bg-foreground/10 overflow-hidden">
@@ -156,7 +156,7 @@ function AdminDashboard() {
             
             <div>
               <div className="flex justify-between text-sm mb-1">
-                <span className="text-foreground/80">Database Load</span>
+                <span className="dark:text-foreground/80 text-foreground">Database Load</span>
                 <span className="text-blue font-medium">42%</span>
               </div>
               <div className="w-full h-2 rounded-full bg-foreground/10 overflow-hidden">
@@ -166,7 +166,7 @@ function AdminDashboard() {
 
             <div>
               <div className="flex justify-between text-sm mb-1">
-                <span className="text-foreground/80">Storage Usage</span>
+                <span className="dark:text-foreground/80 text-foreground">Storage Usage</span>
                 <span className="text-orange font-medium">78%</span>
               </div>
               <div className="w-full h-2 rounded-full bg-foreground/10 overflow-hidden">

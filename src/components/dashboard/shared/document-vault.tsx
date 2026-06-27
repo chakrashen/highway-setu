@@ -18,13 +18,13 @@ export function DocumentVault() {
         <h2 className="text-xl font-bold text-foreground">Digital Document Vault</h2>
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <div className="relative flex-1 sm:flex-none">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 dark:text-foreground/40 text-foreground" />
             <input 
               type="text" 
               placeholder="Search documents..." 
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-9 pr-4 py-2 rounded-xl bg-foreground/5 border border-foreground/10 text-sm text-foreground focus:ring-1 focus:ring-blue outline-none w-full sm:w-64"
+              className="pl-9 pr-4 py-2 rounded-xl bg-foreground/5 border dark:border-foreground/10 border-foreground text-sm text-foreground focus:ring-1 focus:ring-blue outline-none w-full sm:w-64"
             />
           </div>
           <button className="flex items-center gap-2 bg-blue hover:bg-blue/90 text-white px-4 py-2 rounded-xl font-medium transition-colors shadow-lg shadow-blue/20 shrink-0">
@@ -44,7 +44,7 @@ export function DocumentVault() {
             className={`glass-strong rounded-2xl p-5 border ${
               doc.status === 'Expired' ? 'border-red-500/30 bg-red-500/5' :
               doc.status === 'Expiring Soon' ? 'border-orange/30 bg-orange/5' :
-              'border-foreground/5'
+              'dark:border-foreground/5 border-foreground'
             }`}
           >
             <div className="flex justify-between items-start mb-4">
@@ -63,7 +63,7 @@ export function DocumentVault() {
             </div>
             
             <h3 className="font-bold text-foreground text-sm mb-1 truncate">{doc.name}</h3>
-            <p className="text-xs text-foreground/50 mb-4">{doc.type}</p>
+            <p className="text-xs dark:text-foreground/50 text-foreground mb-4">{doc.type}</p>
             
             <div className={`text-xs font-semibold px-2.5 py-1 rounded-lg inline-block mb-4 border ${
               doc.status === 'Expired' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
@@ -73,7 +73,7 @@ export function DocumentVault() {
               {doc.status}
             </div>
 
-            <div className="flex justify-between items-center text-xs text-foreground/60 pt-3 border-t border-foreground/5">
+            <div className="flex justify-between items-center text-xs dark:text-foreground/60 text-foreground pt-3 border-t dark:border-foreground/5 border-foreground">
               <span>Exp: {doc.expiry}</span>
               <div className="flex gap-2">
                 <button className="hover:text-foreground transition-colors" title="View"><Eye className="w-4 h-4" /></button>

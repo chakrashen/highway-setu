@@ -135,7 +135,7 @@ export function LiveMap() {
               <span className="text-sm font-semibold text-foreground">Live Tracking</span>
             </div>
             <div className="w-px h-4 bg-foreground/20" />
-            <div className="text-sm text-foreground/70">
+            <div className="text-sm dark:text-foreground/70 text-foreground">
               User: <span className="text-foreground font-medium">Rajesh K. (MH-14)</span>
             </div>
           </div>

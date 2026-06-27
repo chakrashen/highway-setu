@@ -55,10 +55,10 @@ function RegisterMechanicPage() {
         <div className="hidden md:flex items-center gap-2">
           {[1, 2, 3].map((s) => (
             <div key={s} className="flex items-center gap-2">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-colors ${step >= s ? 'bg-purple text-white' : 'bg-foreground/10 text-foreground/40'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-colors ${step >= s ? 'bg-purple text-white' : 'bg-foreground/10 dark:text-foreground/40 text-foreground'}`}>
                 {step > s ? <CheckCircle2 className="w-5 h-5" /> : s}
               </div>
-              {s < 3 && <div className={`w-8 h-[2px] ${step > s ? 'bg-purple' : 'bg-foreground/10'}`} />}
+              {s < 3 && <div className={`w-8 h-[2px] ${step > s ? 'bg-purple' : 'dark:bg-foreground/10 bg-foreground'}`} />}
             </div>
           ))}
         </div>
@@ -67,27 +67,27 @@ function RegisterMechanicPage() {
       <form onSubmit={handleRegister} className="space-y-6 relative z-10">
         {step === 1 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground mb-4 border-b border-foreground/10 pb-2">Personal Details</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-4 border-b dark:border-foreground/10 border-foreground pb-2">Personal Details</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <label className="text-sm font-medium text-foreground/80">Full Name</label>
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Full Name</label>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
-                  <input type="text" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-purple/50 outline-none" placeholder="Amit Sharma" />
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
+                  <input type="text" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-purple/50 outline-none" placeholder="Amit Sharma" />
                 </div>
               </div>
               <div className="space-y-1">
-                <label className="text-sm font-medium text-foreground/80">Email</label>
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Email</label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
-                  <input type="email" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-purple/50 outline-none" placeholder="amit@mechanics.com" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
+                  <input type="email" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-purple/50 outline-none" placeholder="amit@mechanics.com" />
                 </div>
               </div>
               <div className="space-y-1 md:col-span-2">
-                <label className="text-sm font-medium text-foreground/80">Password</label>
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Password</label>
                 <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
-                  <input type="password" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-purple/50 outline-none" placeholder="Create a strong password" />
+                  <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
+                  <input type="password" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-purple/50 outline-none" placeholder="Create a strong password" />
                 </div>
               </div>
             </div>
@@ -96,25 +96,25 @@ function RegisterMechanicPage() {
 
         {step === 2 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground mb-4 border-b border-foreground/10 pb-2">Workshop Info</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-4 border-b dark:border-foreground/10 border-foreground pb-2">Workshop Info</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-1 md:col-span-2">
-                <label className="text-sm font-medium text-foreground/80">Workshop Name (if any)</label>
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Workshop Name (if any)</label>
                 <div className="relative">
-                  <Store className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
-                  <input type="text" className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-purple/50 outline-none" placeholder="Sharma Auto Works" />
+                  <Store className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
+                  <input type="text" className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-purple/50 outline-none" placeholder="Sharma Auto Works" />
                 </div>
               </div>
               <div className="space-y-1">
-                <label className="text-sm font-medium text-foreground/80">Highway Route</label>
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Highway Route</label>
                 <div className="relative">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-foreground/40" />
-                  <input type="text" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-purple/50 outline-none" placeholder="NH-48" />
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
+                  <input type="text" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-purple/50 outline-none" placeholder="NH-48" />
                 </div>
               </div>
               <div className="space-y-1">
-                <label className="text-sm font-medium text-foreground/80">Experience (Years)</label>
-                <input type="number" required className="w-full bg-foreground/5 border border-foreground/10 rounded-xl py-3 px-4 text-foreground focus:ring-2 focus:ring-purple/50 outline-none" placeholder="e.g. 10" />
+                <label className="text-sm font-medium dark:text-foreground/80 text-foreground">Experience (Years)</label>
+                <input type="number" required className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 px-4 text-foreground focus:ring-2 focus:ring-purple/50 outline-none" placeholder="e.g. 10" />
               </div>
             </div>
           </motion.div>
@@ -122,7 +122,7 @@ function RegisterMechanicPage() {
 
         {step === 3 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-4">
-            <h3 className="text-lg font-semibold text-foreground mb-4 border-b border-foreground/10 pb-2">Services Offered</h3>
+            <h3 className="text-lg font-semibold text-foreground mb-4 border-b dark:border-foreground/10 border-foreground pb-2">Services Offered</h3>
             <div className="grid grid-cols-2 gap-3">
               {[
                 { id: "engine", label: "Engine Repair" },
@@ -132,16 +132,16 @@ function RegisterMechanicPage() {
                 { id: "ac", label: "AC Repair" },
                 { id: "247", label: "24/7 Availability" }
               ].map((service) => (
-                <label key={service.id} className="flex items-center gap-3 p-3 rounded-xl border border-foreground/10 bg-foreground/5 hover:bg-foreground/10 cursor-pointer transition-colors">
-                  <input type="checkbox" className="rounded border-foreground/20 bg-foreground/5 text-purple focus:ring-purple/50 w-5 h-5" />
-                  <span className="text-sm text-foreground/80">{service.label}</span>
+                <label key={service.id} className="flex items-center gap-3 p-3 rounded-xl border dark:border-foreground/10 border-foreground bg-foreground/5 hover:bg-foreground/10 cursor-pointer transition-colors">
+                  <input type="checkbox" className="rounded dark:border-foreground/20 border-foreground bg-foreground/5 text-purple focus:ring-purple/50 w-5 h-5" />
+                  <span className="text-sm dark:text-foreground/80 text-foreground">{service.label}</span>
                 </label>
               ))}
             </div>
           </motion.div>
         )}
 
-        <div className="flex items-center justify-between pt-4 mt-6 border-t border-foreground/10">
+        <div className="flex items-center justify-between pt-4 mt-6 border-t dark:border-foreground/10 border-foreground">
           {step > 1 ? (
             <button
               type="button"

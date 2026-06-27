@@ -18,7 +18,7 @@ function MechanicDashboard() {
           <p className="text-muted-foreground mt-1">Manage service requests and your workshop status.</p>
         </div>
         <div className="flex gap-3 items-center">
-          <span className="text-sm text-foreground/60 mr-2">Availability</span>
+          <span className="text-sm dark:text-foreground/60 text-foreground mr-2">Availability</span>
           <label className="relative inline-flex items-center cursor-pointer">
             <input type="checkbox" className="sr-only peer" defaultChecked />
             <div className="w-11 h-6 bg-foreground/10 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple"></div>
@@ -39,7 +39,7 @@ function MechanicDashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
-            className="glass-strong rounded-2xl p-5 border border-foreground/5"
+            className="glass-strong rounded-2xl p-5 border dark:border-foreground/5 border-foreground"
           >
             <div className="flex justify-between items-start mb-4">
               <div className={`p-2.5 rounded-xl ${stat.bg} ${stat.color}`}>
@@ -48,7 +48,7 @@ function MechanicDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
-              <div className="text-sm text-foreground/60">{stat.label}</div>
+              <div className="text-sm dark:text-foreground/60 text-foreground">{stat.label}</div>
             </div>
           </motion.div>
         ))}
@@ -66,7 +66,7 @@ function MechanicDashboard() {
             Incoming Requests <span className="px-2 py-0.5 rounded-full bg-red-500/20 text-red-500 text-xs">New</span>
           </h2>
           
-          <div className="glass-strong rounded-2xl p-6 border border-foreground/5 relative overflow-hidden">
+          <div className="glass-strong rounded-2xl p-6 border dark:border-foreground/5 border-foreground relative overflow-hidden">
             <div className="absolute top-0 left-0 w-1 h-full bg-red-500" />
             <div className="flex justify-between items-start mb-4">
               <div>
@@ -74,19 +74,19 @@ function MechanicDashboard() {
                   <AlertCircle className="w-5 h-5 text-red-500" />
                   Engine Breakdown
                 </h3>
-                <p className="text-sm text-foreground/60 mt-1">Truck Model: Tata Signa 4225.T</p>
+                <p className="text-sm dark:text-foreground/60 text-foreground mt-1">Truck Model: Tata Signa 4225.T</p>
               </div>
               <span className="text-sm text-red-400 font-medium">Just now</span>
             </div>
             
-            <div className="flex flex-wrap gap-4 mb-6 p-4 rounded-xl bg-foreground/5 border border-foreground/5">
+            <div className="flex flex-wrap gap-4 mb-6 p-4 rounded-xl bg-foreground/5 border dark:border-foreground/5 border-foreground">
               <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-foreground/40" />
-                <span className="text-sm text-foreground/80">12 km away (NH-48)</span>
+                <MapPin className="w-4 h-4 dark:text-foreground/40 text-foreground" />
+                <span className="text-sm dark:text-foreground/80 text-foreground">12 km away (NH-48)</span>
               </div>
               <div className="flex items-center gap-2">
-                <PhoneCall className="w-4 h-4 text-foreground/40" />
-                <span className="text-sm text-foreground/80">+91 98765 43210</span>
+                <PhoneCall className="w-4 h-4 dark:text-foreground/40 text-foreground" />
+                <span className="text-sm dark:text-foreground/80 text-foreground">+91 98765 43210</span>
               </div>
             </div>
 
@@ -95,13 +95,13 @@ function MechanicDashboard() {
                 <CheckCircle2 className="w-5 h-5" />
                 Accept Request
               </button>
-              <button className="px-6 py-3 rounded-xl border border-foreground/10 hover:bg-foreground/5 text-foreground font-medium transition-colors">
+              <button className="px-6 py-3 rounded-xl border dark:border-foreground/10 border-foreground hover:bg-foreground/5 text-foreground font-medium transition-colors">
                 Decline
               </button>
             </div>
           </div>
 
-          <div className="glass-strong rounded-2xl p-6 border border-foreground/5 relative overflow-hidden">
+          <div className="glass-strong rounded-2xl p-6 border dark:border-foreground/5 border-foreground relative overflow-hidden">
              <div className="absolute top-0 left-0 w-1 h-full bg-blue" />
             <div className="flex justify-between items-start mb-4">
               <div>
@@ -109,9 +109,9 @@ function MechanicDashboard() {
                   <Wrench className="w-5 h-5 text-blue" />
                   Tyre Puncture (2 Tyres)
                 </h3>
-                <p className="text-sm text-foreground/60 mt-1">Truck Model: Ashok Leyland 3520</p>
+                <p className="text-sm dark:text-foreground/60 text-foreground mt-1">Truck Model: Ashok Leyland 3520</p>
               </div>
-              <span className="text-sm text-foreground/40 font-medium">10 mins ago</span>
+              <span className="text-sm dark:text-foreground/40 text-foreground font-medium">10 mins ago</span>
             </div>
             
             <div className="flex gap-3">
@@ -128,7 +128,7 @@ function MechanicDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="glass-strong rounded-2xl p-6 border border-foreground/5 space-y-6"
+          className="glass-strong rounded-2xl p-6 border dark:border-foreground/5 border-foreground space-y-6"
         >
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-bold text-foreground">My Profile</h2>
@@ -143,15 +143,15 @@ function MechanicDashboard() {
             </div>
             <div>
               <h3 className="font-bold text-foreground text-lg">Sharma Auto Works</h3>
-              <p className="text-sm text-foreground/60">Verified Mechanic</p>
+              <p className="text-sm dark:text-foreground/60 text-foreground">Verified Mechanic</p>
             </div>
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-sm font-semibold text-foreground/80 border-b border-foreground/10 pb-2">Services Provided</h4>
+            <h4 className="text-sm font-semibold dark:text-foreground/80 text-foreground border-b dark:border-foreground/10 border-foreground pb-2">Services Provided</h4>
             <div className="flex flex-wrap gap-2">
               {["Engine Repair", "Tyre Replacement", "Electrical", "Towing"].map((service) => (
-                <span key={service} className="px-3 py-1 rounded-full bg-foreground/5 border border-foreground/10 text-xs text-foreground/70">
+                <span key={service} className="px-3 py-1 rounded-full bg-foreground/5 border dark:border-foreground/10 border-foreground text-xs dark:text-foreground/70 text-foreground">
                   {service}
                 </span>
               ))}

@@ -37,21 +37,21 @@ export function NotificationCenter({ isOpen, onClose }: { isOpen: boolean; onClo
             initial={{ opacity: 0, scale: 0.95, y: -20, x: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0, x: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -20, x: 20 }}
-            className="absolute top-16 right-4 sm:right-8 w-80 sm:w-96 glass-strong border border-foreground/10 rounded-2xl shadow-2xl z-[9999] overflow-hidden flex flex-col max-h-[80vh]"
+            className="absolute top-16 right-4 sm:right-8 w-80 sm:w-96 glass-strong border dark:border-foreground/10 border-foreground rounded-2xl shadow-2xl z-[9999] overflow-hidden flex flex-col max-h-[80vh]"
           >
-            <div className="p-4 border-b border-foreground/10 flex justify-between items-center bg-background/50">
+            <div className="p-4 border-b dark:border-foreground/10 border-foreground flex justify-between items-center bg-background/50">
               <div className="flex items-center gap-2">
-                <Bell className="w-5 h-5 text-foreground/80" />
+                <Bell className="w-5 h-5 dark:text-foreground/80 text-foreground" />
                 <h3 className="font-bold text-foreground">Notifications</h3>
                 <span className="bg-blue text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
                   {notifications.filter(n => !n.read).length} New
                 </span>
               </div>
               <div className="flex gap-2">
-                <button onClick={markAllRead} className="p-1.5 hover:bg-foreground/10 rounded-lg text-foreground/60 hover:text-foreground transition-colors" title="Mark all as read">
+                <button onClick={markAllRead} className="p-1.5 hover:bg-foreground/10 rounded-lg dark:text-foreground/60 text-foreground hover:text-foreground transition-colors" title="Mark all as read">
                   <Check className="w-4 h-4" />
                 </button>
-                <button className="p-1.5 hover:bg-foreground/10 rounded-lg text-foreground/60 hover:text-foreground transition-colors" title="Settings">
+                <button className="p-1.5 hover:bg-foreground/10 rounded-lg dark:text-foreground/60 text-foreground hover:text-foreground transition-colors" title="Settings">
                   <Settings className="w-4 h-4" />
                 </button>
               </div>
@@ -59,7 +59,7 @@ export function NotificationCenter({ isOpen, onClose }: { isOpen: boolean; onClo
 
             <div className="flex-1 overflow-y-auto hidden-scrollbar">
               {notifications.length === 0 ? (
-                <div className="p-8 text-center text-foreground/50 text-sm">No notifications right now.</div>
+                <div className="p-8 text-center dark:text-foreground/50 text-foreground text-sm">No notifications right now.</div>
               ) : (
                 <div className="divide-y divide-white/5">
                   {notifications.map((n) => (
@@ -71,10 +71,10 @@ export function NotificationCenter({ isOpen, onClose }: { isOpen: boolean; onClo
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-start mb-1">
-                          <p className={`text-sm font-semibold truncate pr-2 ${!n.read ? 'text-foreground' : 'text-foreground/80'}`}>{n.title}</p>
-                          <span className="text-[10px] text-foreground/40 whitespace-nowrap">{n.time}</span>
+                          <p className={`text-sm font-semibold truncate pr-2 ${!n.read ? 'text-foreground' : 'dark:text-foreground/80 text-foreground'}`}>{n.title}</p>
+                          <span className="text-[10px] dark:text-foreground/40 text-foreground whitespace-nowrap">{n.time}</span>
                         </div>
-                        <p className="text-xs text-foreground/60 leading-relaxed line-clamp-2">{n.message}</p>
+                        <p className="text-xs dark:text-foreground/60 text-foreground leading-relaxed line-clamp-2">{n.message}</p>
                       </div>
                     </div>
                   ))}
@@ -82,7 +82,7 @@ export function NotificationCenter({ isOpen, onClose }: { isOpen: boolean; onClo
               )}
             </div>
             
-            <div className="p-3 border-t border-foreground/10 bg-background/50">
+            <div className="p-3 border-t dark:border-foreground/10 border-foreground bg-background/50">
               <button className="w-full text-center text-xs font-semibold text-blue hover:text-blue/80 transition-colors">
                 View All Notifications
               </button>

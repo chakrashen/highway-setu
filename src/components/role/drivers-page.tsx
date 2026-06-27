@@ -111,12 +111,18 @@ export function DriversPage() {
                             <p className="mx-auto mt-3 max-w-xl text-blue-100/70 light:text-slate-600">
                                 Join thousands of truck drivers who rely on Highway Setu every day.
                             </p>
-                            <div className="mt-8 flex justify-center">
+                            <div className="mt-8 flex justify-center gap-4">
                                 <Link
                                     to="/"
                                     className="rounded-full border border-blue/30 bg-blue/10 px-8 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-blue/20"
                                 >
                                     View Platform
+                                </Link>
+                                <Link
+                                    to="/auth/register/driver"
+                                    className="rounded-full border border-blue/30 bg-blue/10 px-8 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-blue/20"
+                                >
+                                    Sign Up
                                 </Link>
                             </div>
                         </div>

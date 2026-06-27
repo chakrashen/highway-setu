@@ -56,7 +56,7 @@ export function SOSModal({ isOpen, onClose }: SOSModalProps) {
         
         <button 
           onClick={handleClose}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-foreground/10 text-foreground/60 hover:text-foreground transition-colors"
+          className="absolute top-4 right-4 p-2 rounded-full hover:bg-foreground/10 dark:text-foreground/60 text-foreground hover:text-foreground transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
@@ -76,7 +76,7 @@ export function SOSModal({ isOpen, onClose }: SOSModalProps) {
                   </div>
                   <h2 className="text-2xl font-bold text-foreground">SOS Emergency</h2>
                 </div>
-                <p className="text-sm text-foreground/60 mb-6">Select the type of emergency. Your live GPS location will be sent immediately.</p>
+                <p className="text-sm dark:text-foreground/60 text-foreground mb-6">Select the type of emergency. Your live GPS location will be sent immediately.</p>
 
                 <div className="grid grid-cols-1 gap-3 mb-6">
                   {emergencies.map((em) => (
@@ -89,8 +89,8 @@ export function SOSModal({ isOpen, onClose }: SOSModalProps) {
                           : `${em.bg} ${em.border} opacity-80 hover:opacity-100`
                       }`}
                     >
-                      <em.icon className={`w-6 h-6 ${selectedEmergency === em.id ? em.color : 'text-foreground/70'}`} />
-                      <span className={`font-semibold ${selectedEmergency === em.id ? 'text-foreground' : 'text-foreground/80'}`}>
+                      <em.icon className={`w-6 h-6 ${selectedEmergency === em.id ? em.color : 'dark:text-foreground/70 text-foreground'}`} />
+                      <span className={`font-semibold ${selectedEmergency === em.id ? 'text-foreground' : 'dark:text-foreground/80 text-foreground'}`}>
                         {em.label}
                       </span>
                     </button>
@@ -104,7 +104,7 @@ export function SOSModal({ isOpen, onClose }: SOSModalProps) {
                 >
                   {isDispatching ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-foreground/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-5 h-5 border-2 dark:border-foreground/30 border-foreground border-t-white rounded-full animate-spin" />
                       Dispatching Help...
                     </>
                   ) : (
@@ -126,16 +126,16 @@ export function SOSModal({ isOpen, onClose }: SOSModalProps) {
                   <CheckCircle2 className="w-10 h-10 text-emerald-500" />
                 </div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">Help is on the way!</h3>
-                <p className="text-foreground/70 mb-6">
+                <p className="dark:text-foreground/70 text-foreground mb-6">
                   Highway Patrol and Emergency Services have received your location coordinates (18.6811° N, 73.5323° E).
                 </p>
-                <div className="p-4 rounded-xl bg-foreground/5 border border-foreground/10 mb-6">
+                <div className="p-4 rounded-xl bg-foreground/5 border dark:border-foreground/10 border-foreground mb-6">
                   <p className="text-sm font-semibold text-emerald-400 mb-1">Estimated Arrival Time</p>
                   <p className="text-3xl font-bold text-foreground">08 mins</p>
                 </div>
                 <button
                   onClick={handleClose}
-                  className="w-full py-3 rounded-xl border border-foreground/20 text-foreground hover:bg-foreground/5 transition-colors font-medium"
+                  className="w-full py-3 rounded-xl border dark:border-foreground/20 border-foreground text-foreground hover:bg-foreground/5 transition-colors font-medium"
                 >
                   Close Window
                 </button>

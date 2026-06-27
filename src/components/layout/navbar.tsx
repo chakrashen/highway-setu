@@ -79,13 +79,13 @@ export function Navbar() {
           </div>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <button className="flex items-center gap-1 text-sm font-medium text-foreground/60 hover:text-foreground px-2 py-1.5 rounded-lg hover:bg-foreground/5 transition-colors">
+            <button className="flex items-center gap-1 text-sm font-medium dark:text-foreground/60 text-foreground hover:text-foreground px-2 py-1.5 rounded-lg hover:bg-foreground/5 transition-colors">
               <Globe className="w-4 h-4" /> EN
             </button>
             <ThemeToggle />
             <GetStartedModal>
               <button className="rounded-full bg-gradient-to-r from-blue to-purple px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple/20 transition-transform hover:scale-105">
-                Get Started
+                Register
               </button>
             </GetStartedModal>
           </div>
@@ -124,7 +124,7 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className="mt-1 rounded-xl w-full bg-gradient-to-r from-blue to-purple px-4 py-3 text-center text-sm font-semibold text-white"
                 >
-                  Get Started
+                  Register
                 </button>
               </GetStartedModal>
             </motion.div>

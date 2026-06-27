@@ -19,7 +19,7 @@ function DhabaDashboard() {
           <p className="text-muted-foreground mt-1">Manage your business and view customer analytics.</p>
         </div>
         <div className="flex gap-3">
-          <button className="bg-foreground/10 hover:bg-foreground/20 px-4 py-2 rounded-xl font-medium transition-colors border border-foreground/10">
+          <button className="bg-foreground/10 hover:bg-foreground/20 px-4 py-2 rounded-xl font-medium transition-colors border dark:border-foreground/10 border-foreground">
             Edit Menu
           </button>
           <button className="flex items-center gap-2 bg-orange hover:bg-orange/90 text-white px-4 py-2 rounded-xl font-medium transition-colors shadow-lg shadow-orange/20">
@@ -42,7 +42,7 @@ function DhabaDashboard() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
-            className="glass-strong rounded-2xl p-5 border border-foreground/5"
+            className="glass-strong rounded-2xl p-5 border dark:border-foreground/5 border-foreground"
           >
             <div className="flex justify-between items-start mb-4">
               <div className={`p-2.5 rounded-xl ${stat.bg} ${stat.color}`}>
@@ -51,7 +51,7 @@ function DhabaDashboard() {
             </div>
             <div>
               <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
-              <div className="text-sm text-foreground/60">{stat.label}</div>
+              <div className="text-sm dark:text-foreground/60 text-foreground">{stat.label}</div>
             </div>
           </motion.div>
         ))}
@@ -63,7 +63,7 @@ function DhabaDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="lg:col-span-2 glass-strong rounded-2xl p-6 border border-foreground/5"
+          className="lg:col-span-2 glass-strong rounded-2xl p-6 border dark:border-foreground/5 border-foreground"
         >
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-bold text-foreground">Recent Reviews</h2>
@@ -93,7 +93,7 @@ function DhabaDashboard() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="glass-strong rounded-2xl p-6 border border-foreground/5 space-y-6"
+          className="glass-strong rounded-2xl p-6 border dark:border-foreground/5 border-foreground space-y-6"
         >
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-bold text-foreground">Business Status</h2>
@@ -111,16 +111,16 @@ function DhabaDashboard() {
 
           <div className="space-y-3">
             <div className="flex justify-between items-center p-3 rounded-lg bg-foreground/5">
-              <span className="text-sm text-foreground/70">Parking Available</span>
+              <span className="text-sm dark:text-foreground/70 text-foreground">Parking Available</span>
               <span className="text-sm font-semibold text-emerald-400">~12 Slots</span>
             </div>
             <div className="flex justify-between items-center p-3 rounded-lg bg-foreground/5">
-              <span className="text-sm text-foreground/70">Current Wait Time</span>
+              <span className="text-sm dark:text-foreground/70 text-foreground">Current Wait Time</span>
               <span className="text-sm font-semibold text-orange">15 mins</span>
             </div>
           </div>
 
-          <button className="w-full py-3 rounded-xl border border-foreground/10 text-sm font-medium hover:bg-foreground/5 transition-colors text-foreground">
+          <button className="w-full py-3 rounded-xl border dark:border-foreground/10 border-foreground text-sm font-medium hover:bg-foreground/5 transition-colors text-foreground">
             Update Status
           </button>
         </motion.div>

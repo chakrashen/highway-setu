@@ -388,7 +388,7 @@ export function HowItWorks() {
                   <div className="md:w-1/2 md:px-10">
                     <div className={cn("rounded-2xl p-5 shadow-lg", boxClass)}>
                       <h3 className="font-semibold">{s.title}</h3>
-                      <p className={cn("mt-1 text-sm", boxClass.includes("text-foreground") ? "text-foreground/90" : "text-slate-800")}>
+                      <p className={cn("mt-1 text-sm", boxClass.includes("text-foreground") ? "dark:text-foreground/90 text-foreground" : "text-slate-800")}>
                         {s.desc}
                       </p>
                     </div>
@@ -654,7 +654,7 @@ export function WhySection() {
         </Reveal>
         <Reveal delay={0.1}>
           <div className="glass-strong mt-12 overflow-hidden rounded-3xl">
-            <div className="grid grid-cols-[1.5fr_1fr_1fr] border-b border-foreground/10 light:border-black/10 text-sm font-semibold">
+            <div className="grid grid-cols-[1.5fr_1fr_1fr] border-b dark:border-foreground/10 border-foreground light:border-black/10 text-sm font-semibold">
               <div className="p-4 md:p-5">Capability</div>
               <div className="p-4 text-center text-muted-foreground md:p-5">
                 Traditional
@@ -670,7 +670,7 @@ export function WhySection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="grid grid-cols-[1.5fr_1fr_1fr] border-b border-foreground/5 light:border-black/5 text-sm last:border-0"
+                className="grid grid-cols-[1.5fr_1fr_1fr] border-b dark:border-foreground/5 border-foreground light:border-black/5 text-sm last:border-0"
               >
                 <div className="p-4 md:p-5">{c}</div>
                 <div className="flex items-center justify-center p-4 md:p-5">
@@ -857,7 +857,7 @@ export function Testimonials() {
         <div className="mt-12 flex justify-center">
           <GetStartedModal>
             <button className="rounded-full bg-gradient-to-r from-blue via-primary to-purple px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105">
-              Get Started
+              Register
             </button>
           </GetStartedModal>
         </div>
@@ -886,13 +886,13 @@ export function CtaSection() {
             <div className="mt-9 flex flex-wrap justify-center gap-4">
               <GetStartedModal>
                 <button className="rounded-full bg-gradient-to-r from-blue via-primary to-purple px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105">
-                  Get Started
+                  Register
                 </button>
               </GetStartedModal>
               <Link
                 to="/"
                 hash="ecosystem"
-                className="rounded-full border border-foreground/15 light:border-black/15 bg-foreground/5 light:bg-black/5 px-8 py-4 text-sm font-semibold backdrop-blur transition-colors hover:bg-foreground/10 light:hover:bg-black/10"
+                className="rounded-full border dark:border-foreground/15 border-foreground light:border-black/15 bg-foreground/5 light:bg-black/5 px-8 py-4 text-sm font-semibold backdrop-blur transition-colors hover:bg-foreground/10 light:hover:bg-black/10"
               >
                 Book a Demo
               </Link>
