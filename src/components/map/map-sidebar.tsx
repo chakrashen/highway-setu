@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { 
   Search, Filter, Navigation, ShieldAlert, X, 
   MapPin, Clock, IndianRupee, ThermometerSun, CloudRain,
-  UtensilsCrossed, Wrench, Fuel, Car, Truck
+  UtensilsCrossed, Wrench, Fuel, Car, Truck, LocateFixed
 } from "lucide-react";
 import { POICategory } from "@/lib/mock-data/pois";
 
@@ -11,14 +11,15 @@ import { RouteInfo } from "@/lib/services/routing";
 
 interface MapSidebarProps {
   onSearch: (query: string) => void;
+  onSearchSubmit?: (query: string) => void;
   onFilterChange: (filters: POICategory[]) => void;
-  onRouteStart: (start: string, end: string) => void;
-  onSOSClick: () => void;
   routeInfo?: RouteInfo | null;
   isRouting?: boolean;
+  userLocation?: [number, number] | null;
+  onRequestLocation?: () => void;
 }
 
-export function MapSidebar({ onSearch, onFilterChange, onRouteStart, onSOSClick, routeInfo, isRouting }: MapSidebarProps) {
+export function MapSidebar({ onSearch, onSearchSubmit, onFilterChange, onRouteStart, onSOSClick, routeInfo, isRouting, userLocation, onRequestLocation }: MapSidebarProps) {
   const [activeTab, setActiveTab] = useState<'search' | 'route' | 'weather'>('search');
   const [activeFilters, setActiveFilters] = useState<POICategory[]>([]);
   const [startPoint, setStartPoint] = useState("");
@@ -32,9 +33,9 @@ export function MapSidebar({ onSearch, onFilterChange, onRouteStart, onSOSClick,
   } | null>(null);
 
   useEffect(() => {
-    // Defaulting to Maharashtra/Pune region center as planned
-    const lat = 18.7311;
-    const lon = 73.5023;
+    // Default to Pune region if no userLocation provided yet
+    const lat = userLocation ? userLocation[0] : 18.7311;
+    const lon = userLocation ? userLocation[1] : 73.5023;
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m,visibility`;
     
     fetch(url)
@@ -118,6 +119,11 @@ export function MapSidebar({ onSearch, onFilterChange, onRouteStart, onSOSClick,
                   type="text" 
                   placeholder="Search dhabas, mechanics, places..." 
                   onChange={(e) => onSearch(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      onSearchSubmit?.(e.currentTarget.value);
+                    }
+                  }}
                   className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-blue/50 outline-none"
                 />
               </div>
@@ -159,7 +165,7 @@ export function MapSidebar({ onSearch, onFilterChange, onRouteStart, onSOSClick,
               className="space-y-4"
             >
               <div className="space-y-3 relative before:absolute before:inset-y-4 before:left-4 before:w-0.5 before:bg-foreground/10">
-                <div className="relative z-10 pl-10">
+                <div className="relative z-10 pl-10 pr-10">
                   <div className="absolute left-[13px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-blue border-2 border-background" />
                   <input 
                     type="text" 
@@ -168,6 +174,16 @@ export function MapSidebar({ onSearch, onFilterChange, onRouteStart, onSOSClick,
                     placeholder="Starting point (e.g., Pune)" 
                     className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-lg py-2.5 px-3 text-foreground focus:ring-1 focus:ring-blue outline-none text-sm"
                   />
+                  <button 
+                    onClick={() => {
+                      setStartPoint("Current Location");
+                      onRequestLocation?.();
+                    }}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-blue hover:text-blue-600 transition-colors"
+                    title="Use Current Location"
+                  >
+                    <LocateFixed className="w-4 h-4" />
+                  </button>
                 </div>
                 <div className="relative z-10 pl-10">
                   <div className="absolute left-[13px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-red-500 border-2 border-background" />

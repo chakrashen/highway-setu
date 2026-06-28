@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, ShieldAlert, Ambulance, Wrench, Flame, TriangleAlert, CheckCircle2 } from "lucide-react";
+import { X, ShieldAlert, Ambulance, Wrench, Flame, TriangleAlert, CheckCircle2, PhoneCall } from "lucide-react";
 
 interface SOSModalProps {
   isOpen: boolean;
@@ -18,6 +18,7 @@ export function SOSModal({ isOpen, onClose }: SOSModalProps) {
     { id: 'breakdown', label: 'Vehicle Breakdown', icon: Wrench, color: 'text-orange', bg: 'bg-orange/10 hover:bg-orange/20', border: 'border-orange/30' },
     { id: 'fire', label: 'Fire', icon: Flame, color: 'text-orange-500', bg: 'bg-orange-500/10 hover:bg-orange-500/20', border: 'border-orange-500/30' },
     { id: 'tyre', label: 'Flat Tyre / Minor', icon: TriangleAlert, color: 'text-yellow-500', bg: 'bg-yellow-500/10 hover:bg-yellow-500/20', border: 'border-yellow-500/30' },
+    { id: 'modi', label: 'Call Modi Ji (Ultimate SOS)', icon: PhoneCall, color: 'text-purple-500', bg: 'bg-purple-500/10 hover:bg-purple-500/20', border: 'border-purple-500/30' },
   ];
 
   const handleDispatch = () => {
@@ -127,7 +128,9 @@ export function SOSModal({ isOpen, onClose }: SOSModalProps) {
                 </div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">Help is on the way!</h3>
                 <p className="dark:text-foreground/70 text-foreground mb-6">
-                  Highway Patrol and Emergency Services have received your location coordinates (18.6811° N, 73.5323° E).
+                  {selectedEmergency === 'modi' 
+                    ? "PMO has received your request. Modi Ji is personally reviewing your situation."
+                    : "Highway Patrol and Emergency Services have received your location coordinates (18.6811° N, 73.5323° E)."}
                 </p>
                 <div className="p-4 rounded-xl bg-foreground/5 border dark:border-foreground/10 border-foreground mb-6">
                   <p className="text-sm font-semibold text-emerald-400 mb-1">Estimated Arrival Time</p>

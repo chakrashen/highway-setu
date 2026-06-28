@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, ZoomControl, Polyline, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, ZoomControl, Polyline, useMap, Marker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { POIMarkers } from "./poi-markers";
 import { MapSidebar } from "./map-sidebar";
 import { SOSModal } from "./sos-modal";
 import { mockPOIs, POI, POICategory } from "@/lib/mock-data/pois";
-import { LatLngExpression } from "leaflet";
+import { LatLngExpression, divIcon } from "leaflet";
 import { geocode, getRoute, RouteInfo } from "@/lib/services/routing";
 import { toast } from "sonner";
+import { LocateFixed } from "lucide-react";
 
 // A component to automatically zoom to fit the route bounds
 function MapBoundsUpdater({ route }: { route: LatLngExpression[] | null }) {
@@ -20,12 +21,97 @@ function MapBoundsUpdater({ route }: { route: LatLngExpression[] | null }) {
   return null;
 }
 
+// Component to fly to a searched location
+function SearchFlyTo({ location }: { location: [number, number] | null }) {
+  const map = useMap();
+  useEffect(() => {
+    if (location) {
+      map.flyTo(location, 14, { animate: true, duration: 1.5 });
+    }
+  }, [location, map]);
+  return null;
+}
+
+// Button to trigger map flyTo user location
+function LocateControl({ userLocation, requestLocation }: { userLocation: [number, number] | null, requestLocation: () => void }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (userLocation) {
+      map.flyTo(userLocation, 14, { animate: true, duration: 1.5 });
+    }
+  }, [userLocation, map]);
+
+  return (
+    <button
+      onClick={() => {
+        if (userLocation) {
+          map.flyTo(userLocation, 14, { animate: true, duration: 1.5 });
+        } else {
+          requestLocation();
+        }
+      }}
+      className="absolute bottom-6 right-6 z-[1000] p-3 bg-white text-blue-600 rounded-full shadow-lg hover:bg-gray-50 transition-all border border-black/10"
+      title="Locate Me"
+    >
+      <LocateFixed className="w-5 h-5" />
+    </button>
+  );
+}
+
+const userLocationIcon = divIcon({
+  className: "custom-leaflet-icon",
+  html: `<div class="relative flex items-center justify-center w-6 h-6">
+          <div class="absolute w-full h-full bg-blue-500 rounded-full opacity-40 animate-ping"></div>
+          <div class="relative w-3 h-3 bg-blue-600 rounded-full border-2 border-white shadow-sm"></div>
+         </div>`,
+  iconSize: [24, 24],
+  iconAnchor: [12, 12],
+});
+
+const searchedLocationIcon = divIcon({
+  className: "custom-leaflet-icon",
+  html: `<div class="relative flex items-center justify-center w-6 h-6">
+          <div class="absolute w-full h-full bg-red-500 rounded-full opacity-20 animate-ping"></div>
+          <div class="relative w-4 h-4 bg-red-500 rounded-full border-2 border-white shadow-md"></div>
+         </div>`,
+  iconSize: [24, 24],
+  iconAnchor: [12, 12],
+});
+
 export function LiveMap() {
   const [activePOIs, setActivePOIs] = useState<POI[]>(mockPOIs);
   const [activeRoute, setActiveRoute] = useState<LatLngExpression[] | null>(null);
   const [routeInfo, setRouteInfo] = useState<RouteInfo | null>(null);
   const [isRouting, setIsRouting] = useState(false);
   const [isSOSOpen, setIsSOSOpen] = useState(false);
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
+  const [searchedLocation, setSearchedLocation] = useState<[number, number] | null>(null);
+
+  const requestLocation = (): Promise<[number, number]> => {
+    return new Promise((resolve, reject) => {
+      if ("geolocation" in navigator) {
+        toast.info("Requesting location access...");
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const coords: [number, number] = [position.coords.latitude, position.coords.longitude];
+            setUserLocation(coords);
+            toast.success("Location acquired!");
+            resolve(coords);
+          },
+          (error) => {
+            console.error(error);
+            toast.error("Failed to get location. Please ensure location services are enabled.");
+            reject(error);
+          },
+          { enableHighAccuracy: true }
+        );
+      } else {
+        toast.error("Geolocation is not supported by your browser.");
+        reject(new Error("Not supported"));
+      }
+    });
+  };
 
   // Default center somewhere between Mumbai and Pune
   const center: LatLngExpression = [18.7311, 73.5023];
@@ -40,6 +126,18 @@ export function LiveMap() {
       poi.name.toLowerCase().includes(q) || 
       poi.address.toLowerCase().includes(q)
     ));
+  };
+
+  const handleSearchSubmit = async (query: string) => {
+    if (!query) return;
+    toast.info("Searching for " + query + "...");
+    const coords = await geocode(query);
+    if (coords) {
+      setSearchedLocation(coords);
+      toast.success("Found " + query);
+    } else {
+      toast.error("Could not find location on map.");
+    }
   };
 
   const handleFilterChange = (filters: POICategory[]) => {
@@ -63,7 +161,23 @@ export function LiveMap() {
     
     try {
       toast.info("Finding coordinates...");
-      const startCoords = await geocode(start);
+      
+      let startCoords: [number, number] | null = null;
+      if (start === "Current Location") {
+        if (!userLocation) {
+          try {
+            startCoords = await requestLocation();
+          } catch (e) {
+            setIsRouting(false);
+            return;
+          }
+        } else {
+          startCoords = userLocation;
+        }
+      } else {
+        startCoords = await geocode(start);
+      }
+      
       const endCoords = await geocode(end);
 
       if (!startCoords || !endCoords) {
@@ -174,11 +288,14 @@ export function LiveMap() {
       {/* Sidebar Panel */}
       <MapSidebar 
         onSearch={handleSearch}
+        onSearchSubmit={handleSearchSubmit}
         onFilterChange={handleFilterChange}
         onRouteStart={handleRouteStart}
         onSOSClick={() => setIsSOSOpen(true)}
         isRouting={isRouting}
         routeInfo={routeInfo}
+        userLocation={userLocation}
+        onRequestLocation={requestLocation}
       />
 
       {/* SOS Modal */}
@@ -189,7 +306,7 @@ export function LiveMap() {
         <MapContainer 
           center={center} 
           zoom={11} 
-          scrollWheelZoom={true} 
+          scrollWheelZoom={false} 
           zoomControl={false}
           className="w-full h-full"
         >
@@ -199,8 +316,14 @@ export function LiveMap() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           />
           
-          {/* Zoom controls positioned to not clash with sidebar */}
-          <ZoomControl position="bottomright" />
+          {/* Zoom controls positioned as requested */}
+          <ZoomControl position="topleft" />
+          
+          <LocateControl userLocation={userLocation} requestLocation={requestLocation} />
+          
+          {userLocation && (
+            <Marker position={userLocation} icon={userLocationIcon} />
+          )}
 
           {/* Render markers */}
           <POIMarkers pois={activePOIs} />
@@ -218,6 +341,12 @@ export function LiveMap() {
               />
               <MapBoundsUpdater route={activeRoute} />
             </>
+          )}
+
+          <SearchFlyTo location={searchedLocation} />
+          
+          {searchedLocation && (
+            <Marker position={searchedLocation} icon={searchedLocationIcon} />
           )}
         </MapContainer>
         
