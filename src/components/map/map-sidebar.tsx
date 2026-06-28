@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
   Search, Filter, Navigation, ShieldAlert, X, 
@@ -7,18 +7,60 @@ import {
 } from "lucide-react";
 import { POICategory } from "@/lib/mock-data/pois";
 
+import { RouteInfo } from "@/lib/services/routing";
+
 interface MapSidebarProps {
   onSearch: (query: string) => void;
   onFilterChange: (filters: POICategory[]) => void;
   onRouteStart: (start: string, end: string) => void;
   onSOSClick: () => void;
+  routeInfo?: RouteInfo | null;
+  isRouting?: boolean;
 }
 
-export function MapSidebar({ onSearch, onFilterChange, onRouteStart, onSOSClick }: MapSidebarProps) {
+export function MapSidebar({ onSearch, onFilterChange, onRouteStart, onSOSClick, routeInfo, isRouting }: MapSidebarProps) {
   const [activeTab, setActiveTab] = useState<'search' | 'route' | 'weather'>('search');
   const [activeFilters, setActiveFilters] = useState<POICategory[]>([]);
   const [startPoint, setStartPoint] = useState("");
   const [endPoint, setEndPoint] = useState("");
+  
+  const [weatherData, setWeatherData] = useState<{
+    temperature: number;
+    description: string;
+    windSpeed: number;
+    visibility: number;
+  } | null>(null);
+
+  useEffect(() => {
+    // Defaulting to Maharashtra/Pune region center as planned
+    const lat = 18.7311;
+    const lon = 73.5023;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code,wind_speed_10m,visibility`;
+    
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.current) {
+          const code = data.current.weather_code;
+          // Basic WMO weather code mapping
+          let desc = "Clear";
+          if (code >= 1 && code <= 3) desc = "Partly Cloudy";
+          if (code >= 45 && code <= 48) desc = "Foggy";
+          if (code >= 51 && code <= 67) desc = "Rainy";
+          if (code >= 71 && code <= 77) desc = "Snow";
+          if (code >= 80 && code <= 82) desc = "Rain Showers";
+          if (code >= 95) desc = "Thunderstorm";
+
+          setWeatherData({
+            temperature: data.current.temperature_2m,
+            description: desc,
+            windSpeed: data.current.wind_speed_10m,
+            visibility: data.current.visibility ? data.current.visibility / 1000 : 10, // Convert m to km
+          });
+        }
+      })
+      .catch(err => console.error("Weather fetch error:", err));
+  }, []);
 
   const toggleFilter = (category: POICategory) => {
     const newFilters = activeFilters.includes(category)
@@ -140,23 +182,32 @@ export function MapSidebar({ onSearch, onFilterChange, onRouteStart, onSOSClick 
               </div>
               <button 
                 onClick={() => onRouteStart(startPoint, endPoint)}
-                className="w-full py-3 bg-blue hover:bg-blue/90 text-white rounded-xl font-medium shadow-lg shadow-blue/20 transition-all flex items-center justify-center gap-2"
+                disabled={isRouting || !startPoint || !endPoint}
+                className="w-full py-3 bg-blue hover:bg-blue/90 text-white rounded-xl font-medium shadow-lg shadow-blue/20 transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                <Navigation className="w-4 h-4" />
-                Find Best Route
+                {isRouting ? (
+                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : (
+                  <Navigation className="w-4 h-4" />
+                )}
+                {isRouting ? "Calculating..." : "Find Best Route"}
               </button>
 
-              {/* Mock Route Stats - Shows after calculate */}
-              {startPoint && endPoint && (
+              {/* Real Route Stats - Shows after calculate */}
+              {routeInfo && !isRouting && (
                 <div className="pt-4 border-t dark:border-foreground/10 border-foreground space-y-3">
                   <div className="flex items-center justify-between p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
                     <div>
-                      <div className="text-emerald-400 font-semibold text-sm">Fastest Route (NH-48)</div>
-                      <div className="text-xs text-emerald-400/70 mt-0.5">Light traffic ahead</div>
+                      <div className="text-emerald-500 font-semibold text-sm">Fastest Route</div>
+                      <div className="text-xs text-emerald-500/70 mt-0.5">Live traffic applied</div>
                     </div>
                     <div className="text-right">
-                      <div className="text-foreground font-bold">2h 15m</div>
-                      <div className="text-xs dark:text-foreground/50 text-foreground">148 km</div>
+                      <div className="text-foreground font-bold">
+                        {Math.floor(routeInfo.durationMinutes / 60)}h {Math.round(routeInfo.durationMinutes % 60)}m
+                      </div>
+                      <div className="text-xs dark:text-foreground/50 text-foreground">
+                        {Math.round(routeInfo.distanceKm)} km
+                      </div>
                     </div>
                   </div>
                   
@@ -164,12 +215,16 @@ export function MapSidebar({ onSearch, onFilterChange, onRouteStart, onSOSClick 
                     <div className="flex-1 p-3 rounded-lg bg-foreground/5 border dark:border-foreground/5 border-foreground text-center">
                       <IndianRupee className="w-4 h-4 dark:text-foreground/40 text-foreground mx-auto mb-1" />
                       <div className="text-xs dark:text-foreground/60 text-foreground">Est. Toll</div>
-                      <div className="text-sm font-semibold text-foreground">₹320</div>
+                      <div className="text-sm font-semibold text-foreground">
+                        ₹{Math.round(routeInfo.distanceKm * 1.5)}
+                      </div>
                     </div>
                     <div className="flex-1 p-3 rounded-lg bg-foreground/5 border dark:border-foreground/5 border-foreground text-center">
                       <Fuel className="w-4 h-4 dark:text-foreground/40 text-foreground mx-auto mb-1" />
                       <div className="text-xs dark:text-foreground/60 text-foreground">Fuel Cost</div>
-                      <div className="text-sm font-semibold text-foreground">~₹1200</div>
+                      <div className="text-sm font-semibold text-foreground">
+                        ~₹{Math.round((routeInfo.distanceKm / 15) * 100)}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -186,25 +241,27 @@ export function MapSidebar({ onSearch, onFilterChange, onRouteStart, onSOSClick 
               className="space-y-4"
             >
               <div className="p-4 rounded-xl bg-gradient-to-br from-orange/20 to-orange/5 border border-orange/20">
-                <div className="flex items-center gap-3 mb-4">
-                  <ThermometerSun className="w-8 h-8 text-orange" />
-                  <div>
-                    <div className="text-2xl font-bold text-foreground">32°C</div>
-                    <div className="text-sm text-orange-200">Sunny along NH-48</div>
+                {weatherData ? (
+                  <>
+                    <div className="flex items-center gap-3 mb-4">
+                      <ThermometerSun className="w-8 h-8 text-orange" />
+                      <div>
+                        <div className="text-2xl font-bold text-foreground">{weatherData.temperature}°C</div>
+                        <div className="text-sm text-orange-700 dark:text-orange-200">
+                          {weatherData.description}
+                        </div>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 text-sm text-foreground/90">
+                      <div className="p-2 rounded-lg bg-foreground/10">Vis: {weatherData.visibility.toFixed(1)} km</div>
+                      <div className="p-2 rounded-lg bg-foreground/10">Wind: {weatherData.windSpeed} km/h</div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="text-sm text-foreground/70 p-4 text-center">
+                    Fetching real-time weather...
                   </div>
-                </div>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div className="p-2 rounded-lg bg-black/20">Visibility: 10km+</div>
-                  <div className="p-2 rounded-lg bg-black/20">Wind: 12 km/h</div>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-xl bg-gradient-to-br from-blue/20 to-blue/5 border border-blue/20">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="font-semibold text-blue-200 text-sm">Forecast Ahead (Lonavala)</span>
-                  <CloudRain className="w-5 h-5 text-blue-300" />
-                </div>
-                <p className="text-xs text-blue-200/70">Light rain expected in 2 hours. Drive carefully on ghat sections.</p>
+                )}
               </div>
             </motion.div>
           )}

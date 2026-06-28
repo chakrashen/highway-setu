@@ -4,8 +4,10 @@ import "leaflet/dist/leaflet.css";
 import { POIMarkers } from "./poi-markers";
 import { MapSidebar } from "./map-sidebar";
 import { SOSModal } from "./sos-modal";
-import { mockPOIs, POI, POICategory, mockRouteCoordinates } from "@/lib/mock-data/pois";
+import { mockPOIs, POI, POICategory } from "@/lib/mock-data/pois";
 import { LatLngExpression } from "leaflet";
+import { geocode, getRoute, RouteInfo } from "@/lib/services/routing";
+import { toast } from "sonner";
 
 // A component to automatically zoom to fit the route bounds
 function MapBoundsUpdater({ route }: { route: LatLngExpression[] | null }) {
@@ -21,6 +23,8 @@ function MapBoundsUpdater({ route }: { route: LatLngExpression[] | null }) {
 export function LiveMap() {
   const [activePOIs, setActivePOIs] = useState<POI[]>(mockPOIs);
   const [activeRoute, setActiveRoute] = useState<LatLngExpression[] | null>(null);
+  const [routeInfo, setRouteInfo] = useState<RouteInfo | null>(null);
+  const [isRouting, setIsRouting] = useState(false);
   const [isSOSOpen, setIsSOSOpen] = useState(false);
 
   // Default center somewhere between Mumbai and Pune
@@ -46,11 +50,99 @@ export function LiveMap() {
     }
   };
 
-  const handleRouteStart = (start: string, end: string) => {
-    if (start && end) {
-      setActiveRoute(mockRouteCoordinates as LatLngExpression[]);
-    } else {
+  const handleRouteStart = async (start: string, end: string) => {
+    if (!start || !end) {
       setActiveRoute(null);
+      setRouteInfo(null);
+      return;
+    }
+
+    setIsRouting(true);
+    setRouteInfo(null);
+    setActiveRoute(null);
+    
+    try {
+      toast.info("Finding coordinates...");
+      const startCoords = await geocode(start);
+      const endCoords = await geocode(end);
+
+      if (!startCoords || !endCoords) {
+        toast.error("Could not find one or both of the locations. Try being more specific.");
+        setIsRouting(false);
+        return;
+      }
+
+      toast.info("Calculating optimal route...");
+      const routeResult = await getRoute(startCoords, endCoords);
+
+      if (routeResult) {
+        setRouteInfo(routeResult);
+        setActiveRoute(routeResult.coordinates as LatLngExpression[]);
+        
+        // Dynamically generate POIs along the newly found route based on distance
+        const coords = routeResult.coordinates;
+        if (coords.length > 10) {
+          // Add roughly 1 POI every 40km, capped between 5 and 40 POIs total.
+          const numPOIs = Math.min(40, Math.max(5, Math.floor(routeResult.distanceKm / 40)));
+          const step = Math.floor(coords.length / (numPOIs + 1));
+          
+          const dynamicPOIs: POI[] = [];
+          const categories: POICategory[] = ['dhaba', 'fuel', 'mechanic', 'toll', 'hospital', 'police'];
+          
+          for (let i = 1; i <= numPOIs; i++) {
+            const pt = coords[i * step];
+            if (!pt) continue;
+            
+            // Cycle through categories to get a good mix
+            const cat = categories[i % categories.length];
+            let name = "";
+            let facilities: string[] = [];
+            
+            if (cat === 'dhaba') {
+              name = `Highway Dhaba ${i}`;
+              facilities = ["Parking", "Washroom", "Food"];
+            } else if (cat === 'fuel') {
+              name = `Highway Fuel Station ${i}`;
+              facilities = ["Petrol", "Diesel", "Air", "Washroom"];
+            } else if (cat === 'mechanic') {
+              name = `Highway Auto Works ${i}`;
+              facilities = ["Repairs", "Towing"];
+            } else if (cat === 'toll') {
+              name = `Toll Plaza ${i}`;
+              facilities = ["FASTag", "Cash"];
+            } else if (cat === 'hospital') {
+              name = `Highway Care Hospital ${i}`;
+              facilities = ["Emergency", "Ambulance"];
+            } else if (cat === 'police') {
+              name = `Patrol Outpost ${i}`;
+              facilities = ["Assistance"];
+            }
+
+            dynamicPOIs.push({
+              id: `dyn_${cat}_${Date.now()}_${i}`,
+              name,
+              category: cat,
+              lat: pt[0],
+              lng: pt[1],
+              rating: Number((3.5 + Math.random() * 1.4).toFixed(1)), // random rating 3.5 - 4.9
+              address: `Highway Route (KM ${Math.floor((i / numPOIs) * routeResult.distanceKm)})`,
+              highway: "Highway Route",
+              isOpen24x7: true,
+              facilities,
+            });
+          }
+          
+          setActivePOIs([...mockPOIs, ...dynamicPOIs]);
+        }
+        
+        toast.success("Route found!");
+      } else {
+        toast.error("Could not calculate a route between these locations.");
+      }
+    } catch (error) {
+      toast.error("An error occurred while finding the route.");
+    } finally {
+      setIsRouting(false);
     }
   };
 
@@ -60,7 +152,7 @@ export function LiveMap() {
       {/* Map UI overlay styling for popups */}
       <style>{`
         .leaflet-container {
-          background: #09090b; /* Match app background */
+          background: #f8fafc; /* Match light background */
           font-family: inherit;
         }
         .leaflet-popup-content-wrapper {
@@ -85,6 +177,8 @@ export function LiveMap() {
         onFilterChange={handleFilterChange}
         onRouteStart={handleRouteStart}
         onSOSClick={() => setIsSOSOpen(true)}
+        isRouting={isRouting}
+        routeInfo={routeInfo}
       />
 
       {/* SOS Modal */}
@@ -99,9 +193,9 @@ export function LiveMap() {
           zoomControl={false}
           className="w-full h-full"
         >
-          {/* Custom Dark Theme TileLayer using CartoDB Dark Matter */}
+          {/* Custom Light Theme TileLayer using CartoDB Positron */}
           <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
           />
           
