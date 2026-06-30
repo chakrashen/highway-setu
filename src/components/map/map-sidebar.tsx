@@ -13,6 +13,8 @@ interface MapSidebarProps {
   onSearch: (query: string) => void;
   onSearchSubmit?: (query: string) => void;
   onFilterChange: (filters: POICategory[]) => void;
+  onRouteStart: (start: string, end: string) => void;
+  onSOSClick: () => void;
   routeInfo?: RouteInfo | null;
   isRouting?: boolean;
   userLocation?: [number, number] | null;

@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion } from "motion/react";
 import { useAuth } from "@/hooks/use-auth";
-import { ArrowRight, Loader2, Building2, Briefcase, CheckCircle2, User, Mail, Lock, Users } from "lucide-react";
+import { ArrowRight, Loader2, Building2, Briefcase, CheckCircle2, User, Mail, Lock, Users, Truck } from "lucide-react";
 
 export const Route = createFileRoute("/auth/register/fleet")({
   component: RegisterFleetPage,

@@ -12,5 +12,5 @@ export function useTheme() {
 
   const toggleTheme = useCallback(() => {}, []);
 
-  return { theme, toggleTheme } as const;
+  return { theme, toggleTheme };
 }

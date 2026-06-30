@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { Building2, Truck, Users, AlertTriangle, TrendingUp, IndianRupee, Map, Settings, MoreVertical } from "lucide-react";
+import { Building2, Truck, Users, AlertTriangle, TrendingUp, IndianRupee, Map, Settings, MoreVertical, FileText } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { useState } from "react";
 import { VehicleManagement } from "@/components/dashboard/fleet/vehicle-management";

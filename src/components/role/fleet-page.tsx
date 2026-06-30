@@ -52,9 +52,6 @@ export function FleetPage() {
                         <Reveal delay={0.15}>
                             <p className="mt-6 max-w-xl text-lg text-emerald-100/70 light:text-slate-600">{role.description}</p>
                         </Reveal>
-                        <Reveal delay={0.25}>
-
-                        </Reveal>
                     </div>
 
                     <Reveal delay={0.2}>
