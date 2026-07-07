@@ -115,7 +115,7 @@ export function DhabaMap() {
   const totalCount = dhabas.length;
 
   return (
-    <section className="relative px-4 py-24">
+    <section className="relative px-4 py-12">
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <div className="text-center">
@@ -127,18 +127,12 @@ export function DhabaMap() {
               Discover dhabas across{" "}
               <GradientText>India's highways.</GradientText>
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base dark:text-foreground/60 text-foreground light:text-slate-500">
-              Explore all dhabas on the network — registered partners are highlighted in orange.
-            </p>
           </div>
         </Reveal>
 
-
-
         {/* Search and Filter controls */}
         <Reveal delay={0.15}>
-
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
             {/* Status filter */}
             <div className="flex rounded-full border dark:border-foreground/10 border-foreground light:border-slate-200 bg-foreground/5 light:bg-white p-1">
               {(["all", "registered", "unregistered"] as const).map((s) => (
@@ -178,7 +172,7 @@ export function DhabaMap() {
         {/* Map */}
         <Reveal delay={0.2}>
           {/* Search bar positioned top-left above map */}
-          <div className="mb-4 max-w-sm mt-8">
+          <div className="mb-0 mx-auto max-w-sm mt-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
               <input
@@ -191,71 +185,7 @@ export function DhabaMap() {
             </div>
           </div>
 
-          <div className="relative z-10 overflow-hidden rounded-3xl border dark:border-foreground/10 border-foreground light:border-slate-200 shadow-2xl shadow-orange-500/10">
-            <div className="h-[500px] md:h-[600px] w-full">
-              <MapContainer
-                center={[22.5, 78.5]}
-                zoom={5}
-                scrollWheelZoom={false}
-                doubleClickZoom={false}
-                touchZoom={false}
-                className="h-full w-full"
-                ref={mapRef}
-                style={{ background: "#f8fafc" }}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
-                  url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-                />
-                {filtered.map((d, i) => (
-                  <Marker
-                    key={`${d.name}-${i}`}
-                    position={[d.lat, d.lng]}
-                    icon={d.registered ? registeredIcon : unregisteredIcon}
-                  >
-                    <Popup>
-                      <div className="min-w-[220px] p-1">
-                        <div className="flex items-center gap-2">
-                          <Utensils className="h-4 w-4 text-orange-500" />
-                          <span className="font-bold text-sm text-slate-900">{d.name}</span>
-                        </div>
-                        <div className="mt-2 space-y-1.5 text-xs text-slate-600">
-                          <div className="flex items-center gap-1.5">
-                            <MapPin className="h-3 w-3" /> {d.highway}
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <Star className="h-3 w-3 text-yellow-500" /> {d.rating} / 5
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <Utensils className="h-3 w-3" /> {d.specialty}
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <Clock className="h-3 w-3" /> {d.timing}
-                          </div>
-                        </div>
-                        <div className="mt-2">
-                          {d.registered ? (
-                            <span className="inline-flex items-center gap-1 rounded-full bg-orange-100 px-2.5 py-1 text-[10px] font-semibold text-orange-700">
-                              ✓ Registered Partner
-                            </span>
-                          ) : (
-                            <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-semibold text-slate-500">
-                              Not Registered
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </Popup>
-                  </Marker>
-                ))}
-              </MapContainer>
-            </div>
 
-            {/* Showing count overlay */}
-            <div className="absolute bottom-4 left-4 z-[1000] rounded-full bg-black/70 px-4 py-2 text-xs font-medium text-white backdrop-blur-sm">
-              Showing {filtered.length} of {totalCount} dhabas
-            </div>
-          </div>
         </Reveal>
       </div>
     </section>

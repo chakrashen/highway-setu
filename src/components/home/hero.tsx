@@ -19,7 +19,7 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-24"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden pt-24"
     >
       {/* Night sky */}
       <div className="absolute inset-0 -z-30 bg-[radial-gradient(ellipse_at_top,_oklch(0.2_0.06_280),_oklch(0.13_0.04_275))] light:bg-[radial-gradient(ellipse_at_top,_oklch(0.95_0.02_260),_oklch(0.98_0.005_260))]" />
@@ -101,48 +101,6 @@ export function Hero() {
         >
           Connecting Every Mile of <span className="text-[#d89cf6]">India's</span> <span className="text-[#d89cf6]">Highway</span> <span className="text-[#a7f3d0]">Ecosystem</span>
         </motion.h1>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.4 }}
-          className="relative mx-auto mt-4 w-[90%] max-w-6xl"
-        >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="auto"
-            style={{ transform: "translateZ(0)", willChange: "transform" }}
-            className="w-full rounded-2xl object-cover shadow-2xl"
-            src="/main video.mp4"
-          />
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-          className="mt-12 flex flex-wrap items-center justify-center gap-4"
-        >
-          <Link
-            to="/"
-            hash="ecosystem"
-            className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-primary to-purple px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105"
-          >
-            Explore Platform
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-          <DemoModal
-            trigger={
-              <button>
-                <DemoTriggerButton />
-              </button>
-            }
-          />
-        </motion.div>
-
 
       </motion.div>
     </section>

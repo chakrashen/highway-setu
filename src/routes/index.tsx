@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Hero } from "@/components/home/hero";
 import {
   ProblemSection,
   EcosystemSection,
@@ -9,7 +8,6 @@ import {
   Testimonials,
 } from "@/components/home/sections";
 import { AnimatedBackground } from "@/components/ui/animated-background";
-import { DhabaMap } from "@/components/home/dhaba-map";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,13 +32,11 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div className="noise relative">
-      <Hero />
       <div className="relative">
         <AnimatedBackground />
         <ProblemSection />
         <EcosystemSection />
         <HowItWorks />
-        <DhabaMap />
         <PlatformFeatures />
         <WhySection />
         <Testimonials />

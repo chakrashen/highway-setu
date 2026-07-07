@@ -38,6 +38,7 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { TiltCard } from "@/components/ui/tilt-card";
+import { DemoModal, DemoTriggerButton } from "@/components/ui/demo-modal";
 import { GradientText } from "@/components/ui/gradient-text";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { Marquee } from "@/components/ui/marquee";
@@ -90,30 +91,28 @@ const problems: { icon: LucideIcon; title: string; desc: string }[] = [
 
 export function ProblemSection() {
   return (
-    <section className="relative px-4 pt-24 pb-12">
-      <div className="mx-auto max-w-7xl">
-        <Reveal>
-          <p className="text-sm font-semibold uppercase tracking-widest text-orange">
-            The Problem
-          </p>
-          <h2 className="mt-3 max-w-3xl text-3xl font-bold md:text-5xl">
-            India's highways move the nation — yet run on{" "}
-            <span className="text-orange">disconnected systems</span>.
-          </h2>
-        </Reveal>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {problems.map((p, i) => (
-            <Reveal key={p.title} delay={(i % 4) * 0.06}>
-              <TiltCard className="glass h-full rounded-2xl p-6 light:!bg-yellow-50">
-                <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-orange/15 text-orange">
-                  <p.icon className="h-5 w-5" />
-                </div>
-                <h3 className="font-semibold">{p.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{p.desc}</p>
-              </TiltCard>
-            </Reveal>
-          ))}
-        </div>
+    <section className="relative w-full bg-[#F9EFE5]">
+      <img 
+        src="/problem-section.png" 
+        alt="Connecting Truck and their need" 
+        className="w-full block"
+      />
+      <div className="absolute inset-x-0 bottom-[8%] flex flex-wrap items-center justify-center gap-4">
+        <Link
+          to="/"
+          hash="ecosystem"
+          className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-primary to-purple px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105"
+        >
+          Explore Platform
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+        <DemoModal
+          trigger={
+            <button>
+              <DemoTriggerButton />
+            </button>
+          }
+        />
       </div>
     </section>
   );
@@ -136,7 +135,7 @@ export function EcosystemSection() {
   };
 
   return (
-    <section id="ecosystem" className="relative scroll-mt-24 px-4 pt-8 pb-12 bg-[#F8FAFC] dark:bg-transparent">
+    <section id="ecosystem" className="relative scroll-mt-24 px-4 pt-8 pb-12 bg-gradient-to-b from-[#FFA500]/50 from-[80%] to-transparent">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <div className="text-center">
@@ -449,9 +448,6 @@ export function PlatformFeatures() {
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <div className="text-center">
-            <p className="text-sm font-semibold uppercase tracking-widest text-purple">
-              Platform
-            </p>
             <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-bold md:text-5xl">
               One platform. <GradientText>Every capability.</GradientText>
             </h2>
@@ -629,13 +625,9 @@ export function DashboardPreview() {
 
 /* ----------------------------- Why Highway Setu ----------------------------- */
 const comparison = [
-  "Centralized communication",
   "Real-time emergency support",
-  "Verified mechanic network",
   "Digital documentation",
-  "Data-driven insights",
   "Online dhaba discovery",
-  "Automated verification",
 ];
 
 export function WhySection() {

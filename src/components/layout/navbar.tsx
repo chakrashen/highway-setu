@@ -54,8 +54,7 @@ export function Navbar() {
       <div className="mx-auto max-w-7xl px-4">
         <nav
           className={cn(
-            "flex items-center justify-between rounded-2xl px-4 py-3 transition-all duration-300",
-            scrolled ? "glass-strong" : "border border-transparent",
+            "flex items-center justify-between rounded-2xl px-4 py-3 transition-all duration-300 glass-strong",
           )}
         >
           <Link to="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
