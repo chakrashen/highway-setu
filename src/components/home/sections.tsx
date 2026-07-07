@@ -340,7 +340,12 @@ const steps = [
 
 export function HowItWorks() {
   return (
-    <section className="relative px-4 py-24">
+    <section 
+      className="relative px-4 py-24"
+      style={{
+        background: 'radial-gradient(75% 65% at 50% 0%, transparent 99.9%, rgba(255, 255, 0, 0.5) 100%)'
+      }}
+    >
       <div className="mx-auto max-w-4xl">
         <Reveal>
           <div className="text-center">
@@ -794,7 +799,7 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="relative px-4 pt-4 pb-24">
+    <section className="relative px-4 pt-4 pb-24 bg-gradient-to-b from-transparent to-[#38BDF8]/20 to-[30%]">
       <div className="mx-auto max-w-5xl text-center">
         <Reveal>
           <p className="text-sm font-semibold uppercase tracking-widest text-orange">
