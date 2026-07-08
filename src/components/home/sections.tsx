@@ -222,7 +222,7 @@ export function EcosystemSection() {
                       >
                         <Icon className="h-5 w-5" />
                       </div>
-                      <span className="text-2xl md:text-3xl font-extrabold text-foreground mt-auto">{n.name}</span>
+                      <span className="text-2xl md:text-3xl font-extrabold text-white mt-auto">{n.name}</span>
                     </div>
                   </Link>
                 </Reveal>
