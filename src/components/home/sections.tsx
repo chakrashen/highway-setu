@@ -447,63 +447,13 @@ const platformFeatures: { icon: LucideIcon; title: string; desc: string }[] = [
 ];
 
 export function PlatformFeatures() {
-  const [active, setActive] = useState<number | null>(null);
   return (
-    <section className="relative px-4 pt-4 pb-24">
-      <div className="mx-auto max-w-7xl">
-        <Reveal>
-          <div className="text-center">
-            <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-bold md:text-5xl">
-              One platform. <GradientText>Every capability.</GradientText>
-            </h2>
-          </div>
-        </Reveal>
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {platformFeatures.map((f, i) => (
-            <Reveal key={f.title} delay={(i % 4) * 0.05}>
-              <div className="relative h-full w-full">
-                {/* Invisible placeholder maintains the grid layout size */}
-                <div className="pointer-events-none invisible p-6">
-                  <div className="h-11 w-11" />
-                  <h3 className="mt-4 font-semibold">{f.title}</h3>
-                  <p className="pt-2 text-sm line-clamp-1">{f.desc}</p>
-                </div>
-                
-                <motion.div
-                  onHoverStart={() => setActive(i)}
-                  onHoverEnd={() => setActive(null)}
-                  className={cn(
-                    "absolute inset-x-0 top-0 overflow-hidden rounded-2xl p-6 transition-all duration-300 border border-[#FDE047]/50",
-                    active === i 
-                      ? "z-10 h-auto min-h-full scale-105 shadow-2xl bg-[#FDE047] dark:bg-[#FDE047]/40" 
-                      : "z-0 h-full scale-100 bg-[#FFF9C4] dark:bg-[#FFF9C4]/10"
-                  )}
-                >
-                  <div className="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-blue to-purple text-white">
-                    <f.icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="mt-4 font-semibold">{f.title}</h3>
-                  <motion.div
-                    initial={false}
-                    animate={{
-                      height: active === i ? "auto" : 0,
-                      opacity: active === i ? 1 : 0,
-                    }}
-                    className="overflow-hidden"
-                  >
-                    <p className="pt-2 text-sm text-muted-foreground">{f.desc}</p>
-                  </motion.div>
-                  {active !== i && (
-                    <p className="pt-2 text-sm text-muted-foreground/70 line-clamp-1">
-                      {f.desc}
-                    </p>
-                  )}
-                </motion.div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
+    <section className="relative w-full bg-[#e37b78]">
+      <img 
+        src="/Screenshot 2026-07-08 153624.png" 
+        alt="Platform Features" 
+        className="w-full h-auto block"
+      />
     </section>
   );
 }
@@ -637,8 +587,9 @@ const comparison = [
 
 export function WhySection() {
   return (
-    <section className="relative px-4 pt-4 pb-24">
-      <div className="mx-auto max-w-4xl">
+    <section className="relative px-4 pt-16 pb-24">
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#e37b78] to-transparent pointer-events-none" />
+      <div className="relative z-10 mx-auto max-w-4xl">
         <Reveal>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-emerald">
