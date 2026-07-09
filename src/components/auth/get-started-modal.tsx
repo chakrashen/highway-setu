@@ -62,7 +62,7 @@ export function GetStartedModal({ children }: GetStartedModalProps) {
         <div className="relative z-10 p-6 md:p-8">
           <DialogHeader className="mb-6">
             <DialogTitle className="text-2xl md:text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
-              Join Highway Setu
+              Join Highways24
             </DialogTitle>
             <p className="text-center text-muted-foreground mt-2">
               Select your role to get started with the platform

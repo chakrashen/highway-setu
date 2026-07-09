@@ -23,7 +23,7 @@ export function LoadingScreen() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-2xl font-bold tracking-tight"
         >
-          Highway<span className="text-gradient"> Setu</span>
+          Highways<span className="text-gradient">24</span>
         </motion.div>
         <div className="h-[2px] w-44 overflow-hidden rounded-full dark:bg-foreground/10 bg-foreground light:bg-black/10">
           <motion.div

@@ -6,7 +6,7 @@ import { useAuth } from "@/hooks/use-auth";
 export function AIAssistantWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: "assistant", text: "Hi there! I'm your Highway Setu AI Assistant. How can I help you on your journey today?" }
+    { role: "assistant", text: "Hi there! I'm your Highways24 AI Assistant. How can I help you on your journey today?" }
   ]);
   const [input, setInput] = useState("");
   const { user } = useAuth();

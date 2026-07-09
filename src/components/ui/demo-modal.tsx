@@ -13,7 +13,7 @@ export function DemoModal({ trigger }: { trigger: React.ReactNode }) {
     <Dialog>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="glass-strong max-w-4xl dark:border-foreground/10 border-foreground light:border-black/10 p-2 sm:p-3">
-        <DialogTitle className="sr-only">Highway Setu product demo</DialogTitle>
+        <DialogTitle className="sr-only">Highways24 product demo</DialogTitle>
         <div className="relative overflow-hidden rounded-2xl bg-black">
           <video
             className="aspect-video w-full"

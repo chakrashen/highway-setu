@@ -20,7 +20,7 @@ export async function geocode(place: string): Promise<[number, number] | null> {
       headers: {
         "Accept-Language": "en-US,en;q=0.9",
         // Nominatim requests a user agent
-        "User-Agent": "HighwaySetu/1.0"
+        "User-Agent": "Highways24/1.0"
       }
     });
 

@@ -86,14 +86,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       meta: [
         { charSet: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { title: "Highway Setu — Connecting Every Mile of India's Highways" },
+        { title: "Highways24 — Connecting Every Mile of India's Highways" },
         {
           name: "description",
           content:
-            "Highway Setu is an intelligent digital platform connecting truck drivers, fleet managers, mechanics, and dhaba owners into one seamless highway ecosystem.",
+            "Highways24 is an intelligent digital platform connecting truck drivers, fleet managers, mechanics, and dhaba owners into one seamless highway ecosystem.",
         },
-        { name: "author", content: "Highway Setu" },
-        { property: "og:title", content: "Highway Setu" },
+        { name: "author", content: "Highways24" },
+        { property: "og:title", content: "Highways24" },
         {
           property: "og:description",
           content:
@@ -101,7 +101,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:site", content: "@HighwaySetu" },
+        { name: "twitter:site", content: "@Highways24" },
       ],
       links: [
         { rel: "preconnect", href: "https://fonts.googleapis.com" },

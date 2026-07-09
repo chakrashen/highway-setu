@@ -12,13 +12,13 @@ import { AnimatedBackground } from "@/components/ui/animated-background";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Highway Setu — Connecting Every Mile of India's Highways" },
+      { title: "Highways24 — Connecting Every Mile of India's Highways" },
       {
         name: "description",
         content:
-          "Highway Setu connects truck drivers, fleet managers, mechanics and dhaba owners into one intelligent highway ecosystem.",
+          "Highways24 connects truck drivers, fleet managers, mechanics and dhaba owners into one intelligent highway ecosystem.",
       },
-      { property: "og:title", content: "Highway Setu" },
+      { property: "og:title", content: "Highways24" },
       {
         property: "og:description",
         content:

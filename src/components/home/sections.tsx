@@ -147,7 +147,7 @@ export function EcosystemSection() {
               <GradientText>connected end to end</GradientText>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-muted-foreground">
-              Highway Setu links every participant of the highway economy
+              Highways24 links every participant of the highway economy
               through a single intelligent platform.
             </p>
           </div>
@@ -238,9 +238,9 @@ export function EcosystemSection() {
               className="grid h-24 w-24 place-items-center rounded-full text-center text-xs font-bold leading-tight bg-yellow-400 text-slate-900"
               style={{ boxShadow: '0 4px 20px rgba(37,99,235,0.15)' }}
             >
-              Highway
+              Highways
               <br />
-              Setu
+              24
             </motion.div>
           </div>
         </div>
@@ -578,7 +578,7 @@ export function DashboardPreview() {
   );
 }
 
-/* ----------------------------- Why Highway Setu ----------------------------- */
+/* ----------------------------- Why Highways24 ----------------------------- */
 const comparison = [
   "Real-time emergency support",
   "Digital documentation",
@@ -593,7 +593,7 @@ export function WhySection() {
         <Reveal>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-emerald">
-              Why Highway Setu
+              Why Highways24
             </p>
             <h2 className="mt-3 text-3xl font-bold md:text-5xl">
               The smarter way to run highways
@@ -608,7 +608,7 @@ export function WhySection() {
                 Traditional
               </div>
               <div className="bg-gradient-to-r from-blue/10 to-purple/10 p-4 text-center md:p-5">
-                Highway Setu
+                Highways24
               </div>
             </div>
             {comparison.map((c, i) => (
@@ -685,7 +685,7 @@ export function TechStack() {
 const testimonials = [
   {
     quote:
-      "Highway Setu's SOS feature got me help within minutes when I broke down at midnight. It's a lifesaver.",
+      "Highways24's SOS feature got me help within minutes when I broke down at midnight. It's a lifesaver.",
     name: "Balwinder Singh",
     role: "Truck Driver",
     c: "text-blue",
@@ -713,7 +713,7 @@ const testimonials = [
   },
   {
     quote:
-      "With Highway Setu, I never worry about finding a safe spot to park and eat. It shows all the verified stops.",
+      "With Highways24, I never worry about finding a safe spot to park and eat. It shows all the verified stops.",
     name: "Ramesh Patel",
     role: "Long-haul Driver",
     c: "text-blue",
@@ -734,7 +734,7 @@ const testimonials = [
   },
   {
     quote:
-      "We get advance notice of truck convoys, so we prep food on time. Highway Setu brings us guaranteed business.",
+      "We get advance notice of truck convoys, so we prep food on time. Highways24 brings us guaranteed business.",
     name: "Priya Sharma",
     role: "Dhaba Manager",
     c: "text-orange",

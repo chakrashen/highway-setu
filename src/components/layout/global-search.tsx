@@ -57,7 +57,7 @@ export function GlobalSearch() {
                 <input 
                   type="text" 
                   autoFocus
-                  placeholder="Search across Highway Setu..." 
+                  placeholder="Search across Highways24..." 
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   className="flex-1 bg-transparent text-lg text-foreground placeholder:dark:text-foreground/40 text-foreground focus:outline-none"
@@ -101,7 +101,7 @@ export function GlobalSearch() {
               </div>
               <div className="p-3 border-t dark:border-foreground/10 border-foreground bg-black/20 text-xs dark:text-foreground/40 text-foreground flex items-center justify-between">
                 <div>Press <kbd className="px-1.5 py-0.5 rounded bg-foreground/10 font-mono">ESC</kbd> to close</div>
-                <div>Search by <span className="font-semibold dark:text-foreground/60 text-foreground">Highway Setu AI</span></div>
+                <div>Search by <span className="font-semibold dark:text-foreground/60 text-foreground">Highways24 AI</span></div>
               </div>
             </div>
           </motion.div>

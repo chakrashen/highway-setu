@@ -15,7 +15,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div>
           <div className="text-xl font-bold tracking-tight">
-            Highway<span className="text-gradient"> Setu</span>
+            Highways<span className="text-gradient">24</span>
           </div>
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">
             The intelligent digital ecosystem connecting every mile of India's
@@ -24,7 +24,7 @@ export function Footer() {
           <div className="mt-6 flex gap-3">
             {[
               { Icon: Twitter, href: "#" },
-              { Icon: Linkedin, href: "https://www.linkedin.com/company/highway-setu/" },
+              { Icon: Linkedin, href: "https://www.linkedin.com/company/highways24/" },
               { Icon: Instagram, href: "https://www.instagram.com/futuretravel2050?igsh=MTI0eXkwbzJjZ280ZQ==" },
               { Icon: Youtube, href: "https://www.youtube.com/channel/UConnQnaclz6VJQhZHxQ1pUQ" },
             ].map(({ Icon, href }, i) => (
@@ -98,7 +98,7 @@ export function Footer() {
           <h4 className="text-sm font-semibold">Contact</h4>
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
             <li className="flex items-center gap-2">
-              <Mail className="h-4 w-4 shrink-0" /> hello@highwaysetu.in
+              <Mail className="h-4 w-4 shrink-0" /> hello@highways24.in
             </li>
             <li className="flex items-center gap-2">
               <MapPin className="h-4 w-4 shrink-0" /> Bengaluru, India
@@ -109,7 +109,7 @@ export function Footer() {
 
       <div className="border-t dark:border-foreground/10 border-foreground light:border-black/10 py-6">
         <p className="text-center text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Highway Setu. All rights reserved.
+          © {new Date().getFullYear()} Highways24. All rights reserved.
         </p>
       </div>
     </footer>

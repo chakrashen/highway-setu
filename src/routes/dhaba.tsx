@@ -4,13 +4,13 @@ import { DhabaPage } from "@/components/role/dhaba-page";
 export const Route = createFileRoute("/dhaba")({
   head: () => ({
     meta: [
-      { title: "For Dhaba Owners — Highway Setu" },
+      { title: "For Dhaba Owners — Highways24" },
       {
         name: "description",
         content:
-          "Smart menus, online orders, reviews and revenue analytics. Highway Setu empowers highway dhabas to grow digitally.",
+          "Smart menus, online orders, reviews and revenue analytics. Highways24 empowers highway dhabas to grow digitally.",
       },
-      { property: "og:title", content: "Highway Setu for Dhaba Owners" },
+      { property: "og:title", content: "Highways24 for Dhaba Owners" },
       {
         property: "og:description",
         content: "Empowering highway businesses with digital tools.",

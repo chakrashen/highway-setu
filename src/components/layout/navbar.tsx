@@ -59,7 +59,7 @@ export function Navbar() {
         >
           <Link to="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
             <Home className="h-5 w-5" />
-            <span>Highway<span className="text-gradient"> Setu</span></span>
+            <span>Highways<span className="text-gradient">24</span></span>
           </Link>
 
           <div className="hidden items-center gap-1 lg:flex">

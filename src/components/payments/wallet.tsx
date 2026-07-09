@@ -25,7 +25,7 @@ export function Wallet() {
             <div className="w-10 h-10 rounded-full bg-blue/20 flex items-center justify-center">
               <WalletIcon className="w-5 h-5 text-blue" />
             </div>
-            <h3 className="dark:text-foreground/80 text-foreground font-medium">Setu Wallet</h3>
+            <h3 className="dark:text-foreground/80 text-foreground font-medium">Highways24 Wallet</h3>
           </div>
           
           <div className="relative z-10">

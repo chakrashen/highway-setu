@@ -49,7 +49,7 @@ function RegisterMechanicPage() {
             </div>
             Mechanic Registration
           </h1>
-          <p className="text-muted-foreground">Offer your services on Highway Setu</p>
+          <p className="text-muted-foreground">Offer your services on Highways24</p>
         </div>
         
         <div className="hidden md:flex items-center gap-2">

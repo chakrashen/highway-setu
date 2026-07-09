@@ -75,7 +75,7 @@ export function LoyaltyProgram() {
             <Share2 className="w-6 h-6" />
           </div>
           <h3 className="text-lg font-bold text-foreground mb-2">Refer & Earn</h3>
-          <p className="text-sm dark:text-foreground/60 text-foreground mb-6">Invite your friends to Highway Setu and earn 500 points when they complete their first trip.</p>
+          <p className="text-sm dark:text-foreground/60 text-foreground mb-6">Invite your friends to Highways24 and earn 500 points when they complete their first trip.</p>
           <div className="flex gap-2">
             <div className="flex-1 bg-background border dark:border-foreground/10 border-foreground rounded-xl px-4 py-2 flex items-center justify-center font-mono text-foreground tracking-widest text-sm">
               RAJESH500

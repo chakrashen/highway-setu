@@ -109,7 +109,7 @@ export function DriversPage() {
                                 Ready to hit the road safely?
                             </h2>
                             <p className="mx-auto mt-3 max-w-xl text-blue-100/70 light:text-slate-600">
-                                Join thousands of truck drivers who rely on Highway Setu every day.
+                                Join thousands of truck drivers who rely on Highways24 every day.
                             </p>
                             <div className="mt-8 flex justify-center gap-4">
                                 <Link

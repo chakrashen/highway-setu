@@ -66,7 +66,7 @@ export const ROLES: RoleData[] = [
     headline: "Your Intelligent Highway Companion",
     tagline: "Built for the people who keep India moving.",
     description:
-      "From smart navigation to emergency support, Highway Setu rides shotgun on every journey — keeping drivers safe, informed and connected across every mile.",
+      "From smart navigation to emergency support, Highways24 rides shotgun on every journey — keeping drivers safe, informed and connected across every mile.",
     features: [
       "Smart Navigation",
       "Driver Community",

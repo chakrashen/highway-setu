@@ -49,7 +49,7 @@ function RegisterDhabaPage() {
             </div>
             Dhaba Registration
           </h1>
-          <p className="text-muted-foreground">List your business on Highway Setu</p>
+          <p className="text-muted-foreground">List your business on Highways24</p>
         </div>
         
         <div className="hidden md:flex items-center gap-2">
