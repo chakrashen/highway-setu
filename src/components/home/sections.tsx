@@ -98,16 +98,23 @@ export function ProblemSection() {
         <line x1="-10" y1="55" x2="65" y2="130" stroke="black" strokeWidth="20" />
         <line x1="-10" y1="100" x2="90" y2="200" stroke="black" strokeWidth="20" />
       </svg>
+      {/* Desktop Image */}
       <img 
         src="/problem-section.png" 
         alt="Connecting Truck and their need" 
-        className="w-full block"
+        className="hidden md:block w-full"
+      />
+      {/* Mobile Image */}
+      <img 
+        src="/problem-section-mobile.png" 
+        alt="Connecting Truck and their need" 
+        className="block md:hidden w-full"
       />
       <div className="absolute inset-x-0 bottom-[8%] flex flex-wrap items-center justify-center gap-4">
         <Link
           to="/"
           hash="ecosystem"
-          className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-primary to-purple px-3 py-1.5 text-[11px] font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105 md:px-7 md:py-3.5 md:text-sm"
+          className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-primary to-purple px-4 py-3 text-[11px] font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105 md:px-7 md:py-3.5 md:text-sm"
         >
           Explore Platform
           <ArrowRight className="h-3 w-3 md:h-4 md:w-4 transition-transform group-hover:translate-x-1" />
@@ -455,10 +462,17 @@ const platformFeatures: { icon: LucideIcon; title: string; desc: string }[] = [
 export function PlatformFeatures() {
   return (
     <section className="relative w-full bg-[#e37b78]">
+      {/* Desktop Image */}
       <img 
         src="/Screenshot 2026-07-08 153624.png" 
         alt="Platform Features" 
-        className="w-full h-auto block"
+        className="hidden md:block w-full h-auto"
+      />
+      {/* Mobile Image */}
+      <img 
+        src="/screenshot-mobile.png" 
+        alt="Platform Features" 
+        className="block md:hidden w-full h-auto"
       />
     </section>
   );
