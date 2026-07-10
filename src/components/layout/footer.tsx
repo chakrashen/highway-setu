@@ -12,8 +12,8 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden border-t dark:border-foreground/10 border-foreground light:border-black/10 bg-black text-white">
       <div className="pointer-events-none absolute -top-32 left-1/2 h-64 w-[40rem] -translate-x-1/2 rounded-full bg-purple/10 blur-[120px]" />
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
-        <div>
+      <div className="mx-auto grid max-w-7xl grid-cols-[1fr_1fr_1.3fr] gap-4 px-4 pt-12 pb-6 md:py-16 md:grid-cols-[1.5fr_1fr_1fr_1fr] md:gap-12">
+        <div className="col-span-full md:col-span-1">
           <div className="text-xl font-bold tracking-tight">
             Highways<span className="text-gradient">24</span>
           </div>
@@ -43,8 +43,8 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold">Platform</h4>
-          <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+          <h4 className="text-xs md:text-sm font-semibold">Platform</h4>
+          <ul className="mt-4 space-y-3 text-[10px] sm:text-xs md:text-sm text-muted-foreground break-words">
             <li>
               <Link to="/drivers" className="hover:text-foreground">
                 Truck Drivers
@@ -69,8 +69,8 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold">Company</h4>
-          <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+          <h4 className="text-xs md:text-sm font-semibold">Company</h4>
+          <ul className="mt-4 space-y-3 text-[10px] sm:text-xs md:text-sm text-muted-foreground break-words">
             <li>
               <a href="#" className="hover:text-foreground">
                 About
@@ -95,13 +95,13 @@ export function Footer() {
         </div>
 
         <div>
-          <h4 className="text-sm font-semibold">Contact</h4>
-          <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-            <li className="flex items-center gap-2">
-              <Mail className="h-4 w-4 shrink-0" /> hello@highways24.in
+          <h4 className="text-xs md:text-sm font-semibold">Contact</h4>
+          <ul className="mt-4 space-y-3 text-[10px] sm:text-xs md:text-sm text-muted-foreground break-all sm:break-normal">
+            <li className="flex items-center gap-1.5 md:gap-2">
+              <Mail className="h-3 w-3 md:h-4 md:w-4 shrink-0" /> hello@highways24.in
             </li>
-            <li className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 shrink-0" /> Bengaluru, India
+            <li className="flex items-center gap-1.5 md:gap-2 break-words">
+              <MapPin className="h-3 w-3 md:h-4 md:w-4 shrink-0" /> Bengaluru, India
             </li>
           </ul>
         </div>

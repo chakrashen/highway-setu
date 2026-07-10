@@ -107,10 +107,10 @@ export function ProblemSection() {
         <Link
           to="/"
           hash="ecosystem"
-          className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-primary to-purple px-2 py-1 text-[11px] font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105"
+          className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-primary to-purple px-3 py-1.5 text-[11px] font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105 md:px-7 md:py-3.5 md:text-sm"
         >
           Explore Platform
-          <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+          <ArrowRight className="h-3 w-3 md:h-4 md:w-4 transition-transform group-hover:translate-x-1" />
         </Link>
         <DemoModal
           trigger={
@@ -162,7 +162,7 @@ export function EcosystemSection() {
         <div className="relative mx-auto mt-16 max-w-4xl">
           {/* connection lines */}
           <svg
-            className="absolute inset-0 h-full w-full"
+            className="absolute inset-0 h-full w-full hidden md:block"
             viewBox="0 0 400 400"
             fill="none"
             preserveAspectRatio="none"
