@@ -92,6 +92,12 @@ const problems: { icon: LucideIcon; title: string; desc: string }[] = [
 export function ProblemSection() {
   return (
     <section className="relative w-full bg-[#F9EFE5] pt-20 md:pt-0">
+      {/* Mobile background stripes as requested */}
+      <svg className="absolute top-0 left-0 w-16 h-20 pointer-events-none md:hidden z-0" viewBox="0 0 100 125">
+        <line x1="-10" y1="10" x2="40" y2="60" stroke="black" strokeWidth="20" />
+        <line x1="-10" y1="55" x2="65" y2="130" stroke="black" strokeWidth="20" />
+        <line x1="-10" y1="100" x2="90" y2="200" stroke="black" strokeWidth="20" />
+      </svg>
       <img 
         src="/problem-section.png" 
         alt="Connecting Truck and their need" 
@@ -101,10 +107,10 @@ export function ProblemSection() {
         <Link
           to="/"
           hash="ecosystem"
-          className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-primary to-purple px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105"
+          className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-primary to-purple px-2 py-1 text-[11px] font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105"
         >
           Explore Platform
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
         </Link>
         <DemoModal
           trigger={
