@@ -91,7 +91,7 @@ const problems: { icon: LucideIcon; title: string; desc: string }[] = [
 
 export function ProblemSection() {
   return (
-    <section className="relative w-full bg-[#F9EFE5]">
+    <section className="relative w-full bg-[#F9EFE5] pt-20 md:pt-0">
       <img 
         src="/problem-section.png" 
         alt="Connecting Truck and their need" 

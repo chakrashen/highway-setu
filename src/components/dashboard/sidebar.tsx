@@ -18,10 +18,11 @@ import {
   Car,
   MessageSquare,
   Wallet,
-  Crown
+  Crown,
+  X
 } from "lucide-react";
 
-export function DashboardSidebar() {
+export function DashboardSidebar({ isOpen, onClose }: { isOpen?: boolean; onClose?: () => void }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   
@@ -90,8 +91,29 @@ export function DashboardSidebar() {
   }[user?.role || "driver"];
 
   return (
-    <aside className="w-64 flex-shrink-0 hidden lg:flex flex-col border-r dark:border-foreground/10 border-foreground bg-background/50 backdrop-blur-xl h-[calc(100vh-4rem)] sticky top-16">
-      <div className="flex flex-col gap-1 p-4 flex-1">
+    <>
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm lg:hidden"
+          onClick={onClose}
+        />
+      )}
+
+      <aside 
+        className={cn(
+          "fixed inset-y-0 left-0 z-50 w-64 flex-col border-r dark:border-foreground/10 border-foreground bg-background/95 backdrop-blur-xl transition-transform lg:static lg:translate-x-0 lg:h-[calc(100vh-4rem)] lg:top-16 lg:bg-background/50 lg:flex",
+          isOpen ? "translate-x-0 flex" : "-translate-x-full hidden lg:flex"
+        )}
+      >
+        {/* Mobile close button */}
+        <div className="lg:hidden absolute right-4 top-4">
+          <button onClick={onClose} className="p-2 text-foreground/60 hover:text-foreground">
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+
+        <div className="flex flex-col gap-1 p-4 flex-1 mt-12 lg:mt-0">
         <div className="mb-6 px-2">
           <div className="text-xs uppercase font-semibold tracking-wider text-muted-foreground mb-1">
             Dashboard
@@ -137,5 +159,6 @@ export function DashboardSidebar() {
         </button>
       </div>
     </aside>
+    </>
   );
 }

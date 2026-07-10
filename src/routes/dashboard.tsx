@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Outlet, createFileRoute, redirect } from "@tanstack/react-router";
 import { DashboardSidebar } from "@/components/dashboard/sidebar";
 import { DashboardHeader } from "@/components/dashboard/header";
@@ -10,6 +11,7 @@ export const Route = createFileRoute("/dashboard")({
 
 function DashboardLayout() {
   const { user, isLoading } = useAuth();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   if (isLoading) {
     return (
@@ -34,10 +36,10 @@ function DashboardLayout() {
       </div>
 
       <div className="flex-1 flex z-10">
-        <DashboardSidebar />
+        <DashboardSidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
         
         <div className="flex-1 flex flex-col min-w-0">
-          <DashboardHeader />
+          <DashboardHeader onMenuClick={() => setIsSidebarOpen(true)} />
           
           <main className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
             <Outlet />

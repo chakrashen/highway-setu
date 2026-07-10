@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Phone, Video, MoreVertical, Send, Paperclip, Mic, Image as ImageIcon, MapPin } from "lucide-react";
+import { Search, Phone, Video, MoreVertical, Send, Paperclip, Mic, Image as ImageIcon, MapPin, ArrowLeft } from "lucide-react";
 
 export function MessagingSystem() {
   const [activeChat, setActiveChat] = useState<number | null>(1);
@@ -15,7 +15,7 @@ export function MessagingSystem() {
   return (
     <div className="flex h-[600px] glass-strong border dark:border-foreground/10 border-foreground rounded-2xl overflow-hidden">
       {/* Sidebar */}
-      <div className="w-1/3 min-w-[280px] border-r dark:border-foreground/10 border-foreground flex flex-col bg-background/30">
+      <div className={`w-full md:w-1/3 min-w-[280px] border-r dark:border-foreground/10 border-foreground flex-col bg-background/30 ${activeChat ? 'hidden md:flex' : 'flex'}`}>
         <div className="p-4 border-b dark:border-foreground/10 border-foreground">
           <h2 className="text-lg font-bold text-foreground mb-4">Messages</h2>
           <div className="relative">
@@ -66,12 +66,18 @@ export function MessagingSystem() {
       </div>
 
       {/* Chat Area */}
-      <div className="flex-1 flex flex-col bg-background/50">
+      <div className={`flex-1 flex-col bg-background/50 ${activeChat ? 'flex' : 'hidden md:flex'}`}>
         {activeChat ? (
           <>
             {/* Chat Header */}
             <div className="p-4 border-b dark:border-foreground/10 border-foreground flex justify-between items-center bg-foreground/5">
               <div className="flex items-center gap-3">
+                <button 
+                  onClick={() => setActiveChat(null)} 
+                  className="md:hidden p-2 -ml-2 rounded-full dark:text-foreground/60 text-foreground hover:bg-foreground/10 transition-colors"
+                >
+                  <ArrowLeft className="w-5 h-5" />
+                </button>
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange/20 to-orange/5 flex items-center justify-center font-bold text-orange border border-orange/20">
                   S
                 </div>
