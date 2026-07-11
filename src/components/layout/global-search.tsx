@@ -23,8 +23,6 @@ export function GlobalSearch() {
   }, []);
 
   const results = [
-    { type: "Dhaba", name: "Sher-e-Punjab", icon: MapPin, route: "/map" },
-    { type: "Mechanic", name: "Sharma Auto Works", icon: Wrench, route: "/map" },
     { type: "Driver", name: "Rajesh Kumar", icon: User, route: "/dashboard/fleet" },
     { type: "Document", name: "RC Book (MH-12-AB-1234)", icon: FileText, route: "/dashboard/driver" },
   ];

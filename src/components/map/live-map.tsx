@@ -8,7 +8,7 @@ import { mockPOIs, POI, POICategory } from "@/lib/mock-data/pois";
 import { LatLngExpression, divIcon } from "leaflet";
 import { geocode, getRoute, RouteInfo } from "@/lib/services/routing";
 import { toast } from "sonner";
-import { LocateFixed } from "lucide-react";
+import { LocateFixed, Search } from "lucide-react";
 
 // A component to automatically zoom to fit the route bounds
 function MapBoundsUpdater({ route }: { route: LatLngExpression[] | null }) {
@@ -87,6 +87,10 @@ export function LiveMap() {
   const [isSOSOpen, setIsSOSOpen] = useState(false);
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [searchedLocation, setSearchedLocation] = useState<[number, number] | null>(null);
+  
+  const [activeTab, setActiveTab] = useState<'search' | 'route'>('search');
+  const [startPoint, setStartPoint] = useState("");
+  const [endPoint, setEndPoint] = useState("");
 
   const requestLocation = (): Promise<[number, number]> => {
     return new Promise((resolve, reject) => {
@@ -296,13 +300,82 @@ export function LiveMap() {
         routeInfo={routeInfo}
         userLocation={userLocation}
         onRequestLocation={requestLocation}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        startPoint={startPoint}
+        setStartPoint={setStartPoint}
+        endPoint={endPoint}
+        setEndPoint={setEndPoint}
       />
 
       {/* SOS Modal */}
       <SOSModal isOpen={isSOSOpen} onClose={() => setIsSOSOpen(false)} />
 
       {/* Leaflet Map */}
-      <div className="flex-1 relative z-0 h-full">
+      <div className="flex-1 relative z-0 min-h-0 md:min-h-[auto] md:h-full">
+        {/* Mobile Overlays (Search or Route Planner) */}
+        <div className="absolute top-4 left-16 right-4 z-[1000] md:hidden">
+          {activeTab === 'search' ? (
+            <div className="relative shadow-lg rounded-xl overflow-hidden bg-background/95 backdrop-blur">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
+              <input 
+                type="text" 
+                placeholder="Search dhabas, mechanics..." 
+                onChange={(e) => handleSearch(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSearchSubmit(e.currentTarget.value);
+                  }
+                }}
+                className="w-full bg-transparent border dark:border-foreground/10 border-foreground rounded-xl py-3 pl-10 pr-4 text-foreground focus:ring-2 focus:ring-blue/50 outline-none"
+              />
+            </div>
+          ) : (
+            <div className="shadow-lg rounded-xl overflow-hidden bg-background/95 backdrop-blur border dark:border-foreground/10 border-foreground p-3 space-y-2">
+              <div className="space-y-2 relative before:absolute before:inset-y-4 before:left-3 before:w-0.5 before:bg-foreground/10">
+                <div className="relative z-10 pl-8 pr-8">
+                  <div className="absolute left-[9px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-blue border-2 border-background" />
+                  <input 
+                    type="text" 
+                    value={startPoint}
+                    onChange={(e) => setStartPoint(e.target.value)}
+                    placeholder="Starting point" 
+                    className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-lg py-2 px-3 text-foreground focus:ring-1 focus:ring-blue outline-none text-sm"
+                  />
+                  <button 
+                    onClick={() => {
+                      setStartPoint("Current Location");
+                      requestLocation();
+                    }}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-blue hover:text-blue-600 transition-colors"
+                  >
+                    <LocateFixed className="w-4 h-4" />
+                  </button>
+                </div>
+                <div className="relative z-10 pl-8">
+                  <div className="absolute left-[9px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-red-500 border-2 border-background" />
+                  <input 
+                    type="text" 
+                    value={endPoint}
+                    onChange={(e) => setEndPoint(e.target.value)}
+                    placeholder="Destination" 
+                    className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-lg py-2 px-3 text-foreground focus:ring-1 focus:ring-red-500 outline-none text-sm"
+                  />
+                </div>
+              </div>
+              <button 
+                onClick={() => handleRouteStart(startPoint, endPoint)}
+                disabled={isRouting || !startPoint || !endPoint}
+                className="w-full py-2 bg-blue hover:bg-blue/90 text-white rounded-lg font-medium shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed text-sm"
+              >
+                {isRouting ? (
+                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                ) : null}
+                {isRouting ? "Calculating..." : "Find Route"}
+              </button>
+            </div>
+          )}
+        </div>
         <MapContainer 
           center={center} 
           zoom={11} 

@@ -16,7 +16,6 @@ import { cn } from "@/lib/utils";
 import { GetStartedModal } from "@/components/auth/get-started-modal";
 
 const roles = [
-  { to: "/map", label: "Map", icon: MapPin, color: "text-blue" },
   { to: "/drivers", label: "Truck Drivers", icon: Truck, color: "text-blue" },
   { to: "/mechanics", label: "Mechanics", icon: Wrench, color: "text-purple" },
   {
