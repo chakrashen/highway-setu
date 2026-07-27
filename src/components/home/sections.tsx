@@ -11,17 +11,14 @@ import {
   Store,
   FileStack,
   TrendingDown,
-  UserCheck,
   Bell,
   Lock,
   KeyRound,
   Cloud,
   FileCheck2,
   LayoutDashboard,
-  BarChart3,
   MapPin,
   FileText,
-  LifeBuoy,
   Users,
   Check,
   X,
@@ -47,50 +44,8 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/hooks/use-language";
 
 /* ----------------------------- Problem ----------------------------- */
-const problems: { icon: LucideIcon; title: string; desc: string }[] = [
-  {
-    icon: MessageSquareOff,
-    title: "Fragmented communication",
-    desc: "Drivers, fleets and services operate in silos with no shared channel.",
-  },
-  {
-    icon: ShieldAlert,
-    title: "Driver safety issues",
-    desc: "No reliable SOS or emergency support on long highway routes.",
-  },
-  {
-    icon: Wrench,
-    title: "Vehicle breakdowns",
-    desc: "Finding help mid-route is slow, costly and unpredictable.",
-  },
-  {
-    icon: Network,
-    title: "No centralized fleet management",
-    desc: "Operations scattered across calls, spreadsheets and paper.",
-  },
-  {
-    icon: Search,
-    title: "Trusted mechanics are hard to find",
-    desc: "No verified network of workshops along the route.",
-  },
-  {
-    icon: Store,
-    title: "Dhabas lack digital support",
-    desc: "Highway businesses miss out on online discovery and orders.",
-  },
-  {
-    icon: FileStack,
-    title: "Paper-based documentation",
-    desc: "Permits and records get lost, expire or go unverified.",
-  },
-  {
-    icon: TrendingDown,
-    title: "Operational inefficiencies",
-    desc: "Idle time, fuel waste and blind spots erode margins.",
-  },
-];
-
 export function ProblemSection() {
+  const { language, t } = useLanguage();
   return (
     <section className="relative w-full bg-[#F9EFE5] pt-20 md:pt-0">
       {/* Mobile background stripes as requested */}
@@ -101,7 +56,7 @@ export function ProblemSection() {
       </svg>
       {/* Desktop Image */}
       <img 
-        src="/problem-section.png" 
+        src={language === "hi" ? "/problem-section_hindi.png" : "/problem-section.png"} 
         alt="Connecting Truck and their need" 
         className="hidden md:block w-full"
       />
@@ -117,7 +72,7 @@ export function ProblemSection() {
           hash="ecosystem"
           className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue via-primary to-purple px-4 py-3 text-[11px] font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105 md:px-7 md:py-3.5 md:text-sm"
         >
-          Explore Platform
+          {language === "hi" ? "प्लेटफ़ॉर्म देखें" : "Explore Platform"}
           <ArrowRight className="h-3 w-3 md:h-4 md:w-4 transition-transform group-hover:translate-x-1" />
         </Link>
         <DemoModal
@@ -134,7 +89,7 @@ export function ProblemSection() {
 
 /* ----------------------------- Solution / Ecosystem ----------------------------- */
 export function EcosystemSection() {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const rolesList = getRoles(language);
   const nodes = [
     { ...rolesList[0] },
@@ -203,12 +158,12 @@ export function EcosystemSection() {
           </svg>
 
           <div className="relative grid grid-cols-2 gap-6 md:gap-16">
-            {nodes.map((n, i) => {
-              const Icon = n.icon;
+            {nodes.map((node, i) => {
+              const Icon = node.icon;
               return (
-                <Reveal key={n.slug} delay={i * 0.12}>
+                <Reveal key={node.slug} delay={i * 0.12}>
                   <Link
-                    to={n.slug}
+                    to={node.slug}
                     className={cn(
                       "group relative flex flex-col rounded-3xl p-6 md:p-8 min-h-[180px] md:min-h-[220px] text-left transition-transform hover:scale-105 shadow-lg overflow-hidden",
                       "bg-gradient-to-br from-[#0F172A] to-[#1E293B]"
@@ -217,9 +172,9 @@ export function EcosystemSection() {
                     <div className="pointer-events-none absolute inset-x-0 top-0 h-full z-0">
                       <img 
                         src={
-                          n.key === 'blue' ? "/truck%20driver%20for%20box.png" :
-                          n.key === 'purple' ? "/mechanic%20for%20box.png" :
-                          n.key === 'orange' ? "/dhaba%20for%20box.png" :
+                          node.key === 'blue' ? "/truck%20driver%20for%20box.png" :
+                          node.key === 'purple' ? "/mechanic%20for%20box.png" :
+                          node.key === 'orange' ? "/dhaba%20for%20box.png" :
                           "/fleet%20for%20box.png"
                         }
                         alt="" 
@@ -233,11 +188,11 @@ export function EcosystemSection() {
                     <div className="relative z-10 flex flex-1 flex-col w-full items-start justify-between">
                       <div
                         className="grid h-12 w-12 place-items-center rounded-2xl text-foreground shadow-lg"
-                        style={{ backgroundColor: iconColors[n.key] }}
+                        style={{ backgroundColor: iconColors[node.key] }}
                       >
                         <Icon className="h-5 w-5" />
                       </div>
-                      <span className="text-2xl md:text-3xl font-extrabold text-white mt-auto">{n.name}</span>
+                      <span className="text-2xl md:text-3xl font-extrabold text-white mt-auto">{node.name}</span>
                     </div>
                   </Link>
                 </Reveal>
@@ -245,10 +200,10 @@ export function EcosystemSection() {
             })}
           </div>
 
-          {/* center hub */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:block">
+          {/* Central hub */}
+          <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 md:block">
             <motion.div
-              animate={{ scale: [1, 1.08, 1] }}
+              animate={{ scale: [1, 1.06, 1] }}
               transition={{ duration: 3, repeat: Infinity }}
               className="grid h-24 w-24 place-items-center rounded-full text-center text-xs font-bold leading-tight bg-yellow-400 text-slate-900"
               style={{ boxShadow: '0 4px 20px rgba(37,99,235,0.15)' }}
@@ -266,7 +221,7 @@ export function EcosystemSection() {
 
 /* ----------------------------- Role teasers ----------------------------- */
 export function RoleTeasers() {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const rolesList = getRoles(language);
 
   return (
@@ -346,19 +301,36 @@ export function RoleTeasers() {
 }
 
 /* ----------------------------- How it works ----------------------------- */
-const steps = [
-  {
-    title: "Choose Role",
-    desc: "Driver, mechanic, dhaba owner or fleet manager.",
-  },
-  { title: "Register", desc: "Sign up in minutes with your details." },
-  { title: "Verification", desc: "AI-assisted identity and document checks." },
-  { title: "Access Dashboard", desc: "Your personalized command center." },
-  { title: "Manage Operations", desc: "Run day-to-day work in one place." },
-  { title: "Grow Business", desc: "Use insights to earn and scale more." },
-];
-
 export function HowItWorks() {
+  const { language } = useLanguage();
+
+  const steps = [
+    {
+      title: language === "hi" ? "भूमिका चुनें" : "Choose Role",
+      desc: language === "hi" ? "चालक, मैकेनिक, ढाबा मालिक या फ्लीट मैनेजर।" : "Driver, mechanic, dhaba owner or fleet manager.",
+    },
+    { 
+      title: language === "hi" ? "पंजीकरण करें" : "Register", 
+      desc: language === "hi" ? "अपनी जानकारी दर्ज कर मिनटों में साइन अप करें।" : "Sign up in minutes with your details." 
+    },
+    { 
+      title: language === "hi" ? "सत्यापन" : "Verification", 
+      desc: language === "hi" ? "एआई-सहायता प्राप्त पहचान और दस्तावेज़ जांच।" : "AI-assisted identity and document checks." 
+    },
+    { 
+      title: language === "hi" ? "डैशबोर्ड तक पहुंच" : "Access Dashboard", 
+      desc: language === "hi" ? "आपका व्यक्तिगत कमांड सेंटर।" : "Your personalized command center." 
+    },
+    { 
+      title: language === "hi" ? "परिचालन प्रबंधित करें" : "Manage Operations", 
+      desc: language === "hi" ? "दैनिक कार्यों को एक ही स्थान पर संचालित करें।" : "Run day-to-day work in one place." 
+    },
+    { 
+      title: language === "hi" ? "व्यवसाय बढ़ाएं" : "Grow Business", 
+      desc: language === "hi" ? "डेटा विश्लेषण से अधिक कमाएं और व्यवसाय का विस्तार करें।" : "Use insights to earn and scale more." 
+    },
+  ];
+
   return (
     <section 
       className="relative px-4 py-24"
@@ -370,10 +342,10 @@ export function HowItWorks() {
         <Reveal>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-emerald">
-              How it works
+              {language === "hi" ? "कार्यप्रणाली" : "How it works"}
             </p>
             <h2 className="mt-3 text-3xl font-bold md:text-5xl">
-              From sign-up to scale
+              {language === "hi" ? "पंजीकरण से व्यवसाय विस्तार तक" : "From sign-up to scale"}
             </h2>
           </div>
         </Reveal>
@@ -428,50 +400,13 @@ export function HowItWorks() {
 }
 
 /* ----------------------------- Platform features ----------------------------- */
-const platformFeatures: { icon: LucideIcon; title: string; desc: string }[] = [
-  {
-    icon: Bell,
-    title: "Real-Time Notifications",
-    desc: "Instant alerts for jobs, trips, safety and operations.",
-  },
-  {
-    icon: KeyRound,
-    title: "Role Based Access",
-    desc: "Every user sees exactly what they need, nothing more.",
-  },
-  {
-    icon: Lock,
-    title: "Secure Authentication",
-    desc: "Bank-grade security protecting every account.",
-  },
-  {
-    icon: FileCheck2,
-    title: "Document Verification",
-    desc: "Validate permits, licenses and records digitally.",
-  },
-  {
-    icon: LayoutDashboard,
-    title: "Smart Dashboard",
-    desc: "A personalized command center for every role.",
-  },
-  {
-    icon: FileText,
-    title: "Reports",
-    desc: "Exportable reports for finance and compliance.",
-  },
-  {
-    icon: Users,
-    title: "Community Support",
-    desc: "A connected network across the highway economy.",
-  },
-];
-
 export function PlatformFeatures() {
+  const { language } = useLanguage();
   return (
     <section className="relative w-full bg-[#e37b78]">
       {/* Desktop Image */}
       <img 
-        src="/Screenshot 2026-07-08 153624.png" 
+        src={language === "hi" ? "/Screenshot 2026-07-08 153624_hindi.png" : "/Screenshot 2026-07-08 153624.png"} 
         alt="Platform Features" 
         className="hidden md:block w-full h-auto"
       />
@@ -486,40 +421,42 @@ export function PlatformFeatures() {
 }
 
 /* ----------------------------- Interactive dashboard ----------------------------- */
-const dashMetrics = [
-  {
-    label: "Revenue",
-    value: 4.8,
-    prefix: "₹",
-    suffix: "Cr",
-    color: "text-emerald",
-  },
-  { label: "Drivers", value: 1280, suffix: "", color: "text-blue" },
-  { label: "Vehicles", value: 940, suffix: "", color: "text-purple" },
-  { label: "Trips", value: 32400, suffix: "", color: "text-orange" },
-  { label: "Maintenance", value: 86, suffix: "%", color: "text-blue" },
-  { label: "Fuel saved", value: 18, suffix: "%", color: "text-emerald" },
-  { label: "Notifications", value: 512, suffix: "", color: "text-purple" },
-  {
-    label: "Expenses",
-    value: 1.2,
-    prefix: "₹",
-    suffix: "Cr",
-    color: "text-orange",
-  },
-];
-
 export function DashboardPreview() {
+  const { language } = useLanguage();
+
+  const dashMetrics = [
+    {
+      label: language === "hi" ? "राजस्व" : "Revenue",
+      value: 4.8,
+      prefix: "₹",
+      suffix: "करोड़",
+      color: "text-emerald",
+    },
+    { label: language === "hi" ? "चालक" : "Drivers", value: 1280, suffix: "", color: "text-blue" },
+    { label: language === "hi" ? "वाहन" : "Vehicles", value: 940, suffix: "", color: "text-purple" },
+    { label: language === "hi" ? "यात्राएं" : "Trips", value: 32400, suffix: "", color: "text-orange" },
+    { label: language === "hi" ? "रखरखाव" : "Maintenance", value: 86, suffix: "%", color: "text-blue" },
+    { label: language === "hi" ? "ईंधन बचत" : "Fuel saved", value: 18, suffix: "%", color: "text-emerald" },
+    { label: language === "hi" ? "सूचनाएं" : "Notifications", value: 512, suffix: "", color: "text-purple" },
+    {
+      label: language === "hi" ? "खर्च" : "Expenses",
+      value: 1.2,
+      prefix: "₹",
+      suffix: "करोड़",
+      color: "text-orange",
+    },
+  ];
+
   return (
     <section className="relative px-4 py-24">
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-blue">
-              Live preview
+              {language === "hi" ? "लाइव पूर्वावलोकन" : "Live preview"}
             </p>
             <h2 className="mt-3 text-3xl font-bold md:text-5xl">
-              Your operations, visualized
+              {language === "hi" ? "आपके संपूर्ण परिचालन" : "Your operations, visualized"}
             </h2>
           </div>
         </Reveal>
@@ -547,7 +484,7 @@ export function DashboardPreview() {
             <div className="mt-6 grid gap-4 lg:grid-cols-3">
               <div className="rounded-2xl bg-foreground/5 light:bg-black/5 p-5 lg:col-span-2">
                 <p className="mb-4 text-sm text-muted-foreground">
-                  Monthly trips
+                  {language === "hi" ? "मासिक यात्राएं" : "Monthly trips"}
                 </p>
                 <div className="flex h-40 items-end gap-2">
                   {[45, 60, 52, 75, 68, 88, 72, 95, 80, 90, 84, 99].map(
@@ -566,7 +503,7 @@ export function DashboardPreview() {
               </div>
               <div className="rounded-2xl bg-foreground/5 light:bg-black/5 p-5">
                 <p className="mb-4 text-sm text-muted-foreground">
-                  Fleet health
+                  {language === "hi" ? "फ्लीट स्वास्थ्य" : "Fleet health"}
                 </p>
                 <div className="flex h-40 items-center justify-center">
                   <svg viewBox="0 0 120 120" className="h-36 w-36 -rotate-90">
@@ -606,13 +543,15 @@ export function DashboardPreview() {
 }
 
 /* ----------------------------- Why Highways24 ----------------------------- */
-const comparison = [
-  "Real-time emergency support",
-  "Digital documentation",
-  "Online dhaba discovery",
-];
-
 export function WhySection() {
+  const { language } = useLanguage();
+
+  const comparison = [
+    language === "hi" ? "वास्तविक समय आपातकालीन सहायता" : "Real-time emergency support",
+    language === "hi" ? "डिजिटल दस्तावेजीकरण" : "Digital documentation",
+    language === "hi" ? "ऑनलाइन ढाबा खोज" : "Online dhaba discovery",
+  ];
+
   return (
     <section className="relative px-4 pt-16 pb-24">
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#e37b78] to-transparent pointer-events-none" />
@@ -620,19 +559,19 @@ export function WhySection() {
         <Reveal>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-emerald">
-              Why Highways24
+              {language === "hi" ? "हाईवे24 क्यों" : "Why Highways24"}
             </p>
             <h2 className="mt-3 text-3xl font-bold md:text-5xl">
-              The smarter way to run highways
+              {language === "hi" ? "राजमार्गों को चलाने का स्मार्ट तरीका" : "The smarter way to run highways"}
             </h2>
           </div>
         </Reveal>
         <Reveal delay={0.1}>
           <div className="glass-strong mt-12 overflow-hidden rounded-3xl">
             <div className="grid grid-cols-[1.5fr_1fr_1fr] border-b dark:border-foreground/10 border-foreground light:border-black/10 text-sm font-semibold">
-              <div className="p-4 md:p-5">Capability</div>
+              <div className="p-4 md:p-5">{language === "hi" ? "क्षमता" : "Capability"}</div>
               <div className="p-4 text-center text-muted-foreground md:p-5">
-                Traditional
+                {language === "hi" ? "पारंपरिक" : "Traditional"}
               </div>
               <div className="bg-gradient-to-r from-blue/10 to-purple/10 p-4 text-center md:p-5">
                 Highways24
@@ -666,27 +605,29 @@ export function WhySection() {
 }
 
 /* ----------------------------- Tech stack ----------------------------- */
-const techCards: { icon: LucideIcon; title: string; tag: string }[] = [
-  { icon: Cpu, title: "Frontend", tag: "React · Motion" },
-  { icon: Server, title: "Backend", tag: "Edge functions" },
-  { icon: Cloud, title: "Cloud", tag: "Globally distributed" },
-  { icon: Database, title: "Database", tag: "Postgres" },
-  { icon: Shield, title: "Security", tag: "End-to-end" },
-  { icon: MapIcon, title: "Maps", tag: "GPS & routing" },
-  { icon: Activity, title: "Analytics", tag: "Real-time" },
-];
-
 export function TechStack() {
+  const { language } = useLanguage();
+
+  const techCards: { icon: LucideIcon; title: string; tag: string }[] = [
+    { icon: Cpu, title: language === "hi" ? "फ़्रंटएंड" : "Frontend", tag: "React · Motion" },
+    { icon: Server, title: language === "hi" ? "बैकएंड" : "Backend", tag: "Edge functions" },
+    { icon: Cloud, title: language === "hi" ? "क्लाउड" : "Cloud", tag: language === "hi" ? "वैश्विक नेटवर्क" : "Globally distributed" },
+    { icon: Database, title: language === "hi" ? "डेटाबेस" : "Database", tag: "Postgres" },
+    { icon: Shield, title: language === "hi" ? "सुरक्षा" : "Security", tag: language === "hi" ? "एंड-टू-एंड" : "End-to-end" },
+    { icon: MapIcon, title: language === "hi" ? "मानचित्र" : "Maps", tag: "GPS & routing" },
+    { icon: Activity, title: language === "hi" ? "विश्लेषण" : "Analytics", tag: language === "hi" ? "वास्तविक समय" : "Real-time" },
+  ];
+
   return (
     <section className="relative px-4 py-24">
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-purple">
-              Engineered to scale
+              {language === "hi" ? "उच्च प्रदर्शन तकनीक" : "Engineered to scale"}
             </p>
             <h2 className="mt-3 text-3xl font-bold md:text-5xl">
-              Powered by a modern stack
+              {language === "hi" ? "आधुनिक तकनीक द्वारा संचालित" : "Powered by a modern stack"}
             </h2>
           </div>
         </Reveal>
@@ -709,97 +650,88 @@ export function TechStack() {
 }
 
 /* ----------------------------- Testimonials ----------------------------- */
-const testimonials = [
-  {
-    quote:
-      "Highways24's SOS feature got me help within minutes when I broke down at midnight. It's a lifesaver.",
-    name: "Balwinder Singh",
-    role: "Truck Driver",
-    c: "text-blue",
-  },
-  {
-    quote:
-      "We cut vehicle downtime by a quarter and finally have real visibility across the whole fleet.",
-    name: "Anita Rao",
-    role: "Fleet Owner",
-    c: "text-emerald",
-  },
-  {
-    quote:
-      "Job requests come straight to my dashboard. My workshop is busier and better organized than ever.",
-    name: "Imran Khan",
-    role: "Mechanic",
-    c: "text-purple",
-  },
-  {
-    quote:
-      "Online orders and analytics doubled my evening rush. My dhaba is finally on the map — literally.",
-    name: "Lakshmi Devi",
-    role: "Dhaba Owner",
-    c: "text-orange",
-  },
-  {
-    quote:
-      "With Highways24, I never worry about finding a safe spot to park and eat. It shows all the verified stops.",
-    name: "Ramesh Patel",
-    role: "Long-haul Driver",
-    c: "text-blue",
-  },
-  {
-    quote:
-      "The automated billing and fast toll pass integrations have saved my transport business hours of paperwork every week.",
-    name: "Suresh Gupta",
-    role: "Transport Operator",
-    c: "text-emerald",
-  },
-  {
-    quote:
-      "I can source spare parts locally through the app's network. It's transformed how quickly I can finish repairs.",
-    name: "Rajesh Kumar",
-    role: "Spare Parts Vendor",
-    c: "text-purple",
-  },
-  {
-    quote:
-      "We get advance notice of truck convoys, so we prep food on time. Highways24 brings us guaranteed business.",
-    name: "Priya Sharma",
-    role: "Dhaba Manager",
-    c: "text-orange",
-  },
-  {
-    quote:
-      "Managing 50+ trucks was a nightmare. Now, I have live GPS and driver status right on my phone.",
-    name: "Vikram Singh",
-    role: "Logistics Coordinator",
-    c: "text-emerald",
-  },
-];
-
 export function Testimonials() {
+  const { language, t } = useLanguage();
+
+  const testimonials = [
+    {
+      quote: language === "hi" 
+        ? "जब मध्यरात्रि में मेरा ट्रक खराब हुआ, तो हाईवे24 के एसओएस फीचर से 4 मिनट में सहायता आ गई। यह वास्तव में जीवनरक्षक है।"
+        : "Highways24's SOS feature got me help within minutes when I broke down at midnight. It's a lifesaver.",
+      name: "बलविंदर सिंह",
+      role: language === "hi" ? "ट्रक चालक" : "Truck Driver",
+      c: "text-blue",
+    },
+    {
+      quote: language === "hi"
+        ? "हमने वाहनों के खराब रहने के समय को 25% कम किया और अब पूरे फ्लीट पर स्पष्ट दृश्यता है।"
+        : "We cut vehicle downtime by a quarter and finally have real visibility across the whole fleet.",
+      name: "अनिता राव",
+      role: language === "hi" ? "फ्लीट मालिक" : "Fleet Owner",
+      c: "text-emerald",
+    },
+    {
+      quote: language === "hi"
+        ? "काम के अनुरोध सीधे मेरे डैशबोर्ड पर आते हैं। मेरी कार्यशाला अब व्यवस्थित है और आय बढ़ी है।"
+        : "Job requests come straight to my dashboard. My workshop is busier and better organized than ever.",
+      name: "इमरान खान",
+      role: language === "hi" ? "मैकेनिक" : "Mechanic",
+      c: "text-purple",
+    },
+    {
+      quote: language === "hi"
+        ? "ऑनलाइन ऑर्डर और विश्लेषण से शाम की बिक्री दोगुनी हो गई। मेरा ढाबा अब डिजिटल मानचित्र पर है।"
+        : "Online orders and analytics doubled my evening rush. My dhaba is finally on the map — literally.",
+      name: "लक्ष्मी देवी",
+      role: language === "hi" ? "ढाबा मालिक" : "Dhaba Owner",
+      c: "text-orange",
+    },
+    {
+      quote: language === "hi"
+        ? "हाईवे24 के साथ, मुझे कभी भी रुकने और खाने के लिए सुरक्षित स्थान की चिंता नहीं होती। यह सभी सत्यापित स्थानों को दिखाता है।"
+        : "With Highways24, I never worry about finding a safe spot to park and eat. It shows all the verified stops.",
+      name: "रमेश पटेल",
+      role: language === "hi" ? "लंबी दूरी का चालक" : "Long-haul Driver",
+      c: "text-blue",
+    },
+    {
+      quote: language === "hi"
+        ? "स्वचालित बिलिंग और त्वरित टोल पास एकीकरण से कागजी कार्रवाई का समय काफी बच गया है।"
+        : "The automated billing and fast toll pass integrations have saved my transport business hours of paperwork every week.",
+      name: "सुरेश गुप्ता",
+      role: language === "hi" ? "ट्रांसपोर्ट ऑपरेटर" : "Transport Operator",
+      c: "text-emerald",
+    },
+  ];
+
+  const marqueeWords = language === "hi" 
+    ? ["चालक", "फ्लीट", "मैकेनिक", "ढाबे", "लॉजिस्टिक्स", "ट्रांसपोर्टर", "कार्यशालाएं", "राजमार्ग"]
+    : ["Drivers", "Fleets", "Mechanics", "Dhabas", "Logistics", "Transporters", "Workshops", "Highways"];
+
   return (
     <section className="relative px-4 pt-4 pb-24 bg-gradient-to-b from-transparent to-[#38BDF8]/20 to-[30%]">
       <div className="mx-auto max-w-5xl text-center">
         <Reveal>
           <p className="text-sm font-semibold uppercase tracking-widest text-orange">
-            Loved on the highway
+            {language === "hi" ? "राजमार्ग पर पसंदीदा" : "Loved on the highway"}
           </p>
           <h2 className="mt-3 text-3xl font-bold md:text-5xl">
-            Trusted across the ecosystem
+            {language === "hi" ? "पूरे नेटवर्क में विश्वसनीय" : "Trusted across the ecosystem"}
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
           <div className="mt-12">
             <Marquee pauseOnHover className="[--duration:50s]">
-              {testimonials.map((t, idx) => (
+              {testimonials.map((tItem, idx) => (
                 <div
                   key={idx}
                   className="glass-strong mx-4 w-[300px] md:w-[400px] shrink-0 rounded-3xl p-6 md:p-8 whitespace-normal text-left"
                 >
                   <Quote className="h-6 w-6 text-muted-foreground/50" />
-                  <p className="mt-4 text-sm md:text-base leading-relaxed text-slate-800 dark:text-slate-200">{t.quote}</p>
+                  <p className="mt-4 text-sm md:text-base leading-relaxed text-slate-800 dark:text-slate-200">{tItem.quote}</p>
                   <div className="mt-6">
-                    <div className="font-semibold text-slate-900 dark:text-foreground">{t.name}</div>
-                    <div className={cn("text-sm", t.c)}>{t.role}</div>
+                    <div className="font-semibold text-slate-900 dark:text-foreground">{tItem.name}</div>
+                    <div className={cn("text-sm", tItem.c)}>{tItem.role}</div>
                   </div>
                 </div>
               ))}
@@ -809,16 +741,7 @@ export function Testimonials() {
 
         <div className="mt-16">
           <Marquee>
-            {[
-              "Drivers",
-              "Fleets",
-              "Mechanics",
-              "Dhabas",
-              "Logistics",
-              "Transporters",
-              "Workshops",
-              "Highways",
-            ].map((w) => (
+            {marqueeWords.map((w) => (
               <span
                 key={w}
                 className="glass rounded-full px-6 py-2 text-sm text-muted-foreground"
@@ -832,7 +755,7 @@ export function Testimonials() {
         <div className="mt-12 flex justify-center">
           <GetStartedModal>
             <button className="rounded-full bg-gradient-to-r from-blue via-primary to-purple px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105">
-              Register
+              {t("nav.register", "Register")}
             </button>
           </GetStartedModal>
         </div>
