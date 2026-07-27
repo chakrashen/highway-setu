@@ -1,16 +1,18 @@
 import { useState, useEffect, useCallback } from "react";
 
-type Theme = "dark" | "light";
+export type Theme = "dark" | "light";
 
 export function useTheme() {
-  const theme: Theme = "light";
+  const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
     const root = document.documentElement;
     root.classList.add("light");
   }, []);
 
-  const toggleTheme = useCallback(() => {}, []);
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  }, []);
 
   return { theme, toggleTheme };
 }

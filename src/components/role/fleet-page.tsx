@@ -1,23 +1,16 @@
 import { Link } from "@tanstack/react-router";
-import { motion } from "motion/react";
 import {
     LayoutDashboard,
-    ArrowRight,
-    Activity,
-    Truck,
-    Satellite,
     BarChart3,
 } from "lucide-react";
 import { roleBySlug } from "@/lib/roles";
 import { Reveal } from "@/components/ui/reveal";
-import { AnimatedCounter } from "@/components/ui/animated-counter";
-import { DemoModal, DemoTriggerButton } from "@/components/ui/demo-modal";
+import { useLanguage } from "@/hooks/use-language";
 
-const role = roleBySlug("/fleet");
-
-/* Fleet manager experience: a mission-control command center with a
-   radar sweep, live vehicle grid and data-dense monitoring panels. */
 export function FleetPage() {
+    const { language, t } = useLanguage();
+    const role = roleBySlug("/fleet", language);
+
     return (
         <div className="relative overflow-hidden bg-[#04100b] light:bg-slate-50 text-emerald-50 light:text-slate-900">
             {/* Command-center grid */}
@@ -62,13 +55,13 @@ export function FleetPage() {
                 </div>
             </section>
 
-
-
             {/* Live vehicle module grid */}
             <section className="relative px-4 py-20">
                 <div className="mx-auto max-w-6xl">
                     <Reveal>
-                        <h2 className="font-display text-3xl font-bold md:text-4xl">All systems on one screen</h2>
+                        <h2 className="font-display text-3xl font-bold md:text-4xl">
+                            {language === "hi" ? "एक स्क्रीन पर सभी प्रणालियां" : "All systems on one screen"}
+                        </h2>
                         <p className="mt-3 max-w-2xl text-emerald-100/60 light:text-slate-600">{role.tagline}</p>
                     </Reveal>
                     <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -91,19 +84,17 @@ export function FleetPage() {
                             to="/"
                             className="rounded-md border border-emerald/30 bg-emerald/10 px-8 py-3.5 text-sm font-semibold text-emerald transition-colors hover:bg-emerald/20"
                         >
-                            Explore Platform
+                            {language === "hi" ? "प्लेटफ़ॉर्म देखें" : "Explore Platform"}
                         </Link>
                         <Link
                             to="/auth/register/fleet"
                             className="rounded-md border border-emerald/30 bg-emerald/10 px-8 py-3.5 text-sm font-semibold text-emerald transition-colors hover:bg-emerald/20"
                         >
-                            Sign Up
+                            {t("nav.register", "Sign Up")}
                         </Link>
                     </div>
                 </div>
             </section>
-
-
         </div>
     );
 }

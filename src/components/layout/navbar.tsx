@@ -9,24 +9,26 @@ import {
   UtensilsCrossed,
   LayoutDashboard,
   Home,
-  MapPin,
   Globe
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { GetStartedModal } from "@/components/auth/get-started-modal";
+import { useLanguage } from "@/hooks/use-language";
 
-const roles = [
-  { to: "/drivers", label: "Truck Drivers", icon: Truck, color: "text-blue" },
-  { to: "/mechanics", label: "Mechanics", icon: Wrench, color: "text-purple" },
+const navRoles = [
+  { to: "/drivers", key: "nav.truckDrivers", fallback: "Truck Drivers", icon: Truck, color: "text-blue" },
+  { to: "/mechanics", key: "nav.mechanics", fallback: "Mechanics", icon: Wrench, color: "text-purple" },
   {
     to: "/dhaba",
-    label: "Dhaba Owners",
+    key: "nav.dhabaOwners",
+    fallback: "Dhaba Owners",
     icon: UtensilsCrossed,
     color: "text-orange",
   },
   {
     to: "/fleet",
-    label: "Fleet Managers",
+    key: "nav.fleetManagers",
+    fallback: "Fleet Managers",
     icon: LayoutDashboard,
     color: "text-emerald",
   },
@@ -35,6 +37,7 @@ const roles = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { language, toggleLanguage, t } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -58,11 +61,11 @@ export function Navbar() {
         >
           <Link to="/" className="flex items-center gap-2 text-lg font-bold tracking-tight">
             <Home className="h-5 w-5" />
-            <span>Highways<span className="text-gradient">24</span></span>
+            <span>{t("nav.brand", "Highways24")}</span>
           </Link>
 
           <div className="hidden items-center gap-1 lg:flex">
-            {roles.map((r) => (
+            {navRoles.map((r) => (
               <Link
                 key={r.to}
                 to={r.to}
@@ -70,29 +73,43 @@ export function Navbar() {
                 activeProps={{ className: "!text-foreground !bg-foreground/10 light:!bg-black/10" }}
               >
                 <r.icon className={cn("h-4 w-4", r.color)} />
-                {r.label}
+                {t(r.key, r.fallback)}
               </Link>
             ))}
           </div>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <button className="flex items-center gap-1 text-sm font-medium dark:text-foreground/60 text-foreground hover:text-foreground px-2 py-1.5 rounded-lg hover:bg-foreground/5 transition-colors">
-              <Globe className="w-4 h-4" /> EN
+            <button
+              onClick={toggleLanguage}
+              title="Switch Language / भाषा बदलें"
+              className="flex items-center gap-1.5 text-sm font-semibold dark:text-foreground/80 text-foreground hover:bg-foreground/10 border border-foreground/15 px-3 py-1.5 rounded-full transition-all"
+            >
+              <Globe className="w-4 h-4 text-blue" />
+              <span>{language === "en" ? "EN | English" : "HI | हिंदी"}</span>
             </button>
             <GetStartedModal>
               <button className="rounded-full bg-gradient-to-r from-blue to-purple px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple/20 transition-transform hover:scale-105">
-                Register
+                {t("nav.register", "Register")}
               </button>
             </GetStartedModal>
           </div>
 
-          <button
-            className="grid h-10 w-10 place-items-center rounded-full bg-foreground/5 light:bg-black/5 lg:hidden"
-            onClick={() => setOpen((v) => !v)}
-            aria-label="Toggle menu"
-          >
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
+          <div className="flex items-center gap-2 lg:hidden">
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-1 text-xs font-semibold px-2.5 py-1.5 rounded-full border border-foreground/20 glass"
+            >
+              <Globe className="w-3.5 h-3.5 text-blue" />
+              {language === "en" ? "EN" : "HI"}
+            </button>
+            <button
+              className="grid h-10 w-10 place-items-center rounded-full bg-foreground/5 light:bg-black/5"
+              onClick={() => setOpen((v) => !v)}
+              aria-label="Toggle menu"
+            >
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </nav>
 
         <AnimatePresence>
@@ -103,7 +120,7 @@ export function Navbar() {
               exit={{ opacity: 0, y: -10 }}
               className="glass-strong mt-2 flex flex-col gap-1 rounded-2xl p-3 lg:hidden"
             >
-              {roles.map((r) => (
+              {navRoles.map((r) => (
                 <Link
                   key={r.to}
                   to={r.to}
@@ -112,17 +129,30 @@ export function Navbar() {
                   activeProps={{ className: "!text-foreground !bg-foreground/10 light:!bg-black/10" }}
                 >
                   <r.icon className={cn("h-4 w-4", r.color)} />
-                  {r.label}
+                  {t(r.key, r.fallback)}
                 </Link>
               ))}
-              <GetStartedModal>
+
+              <div className="pt-2 border-t border-border/40 flex flex-col gap-2">
                 <button
-                  onClick={() => setOpen(false)}
-                  className="mt-1 rounded-xl w-full bg-gradient-to-r from-blue to-purple px-4 py-3 text-center text-sm font-semibold text-white"
+                  onClick={toggleLanguage}
+                  className="flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium text-foreground bg-foreground/5"
                 >
-                  Register
+                  <span className="flex items-center gap-2">
+                    <Globe className="h-4 w-4 text-blue" />
+                    Language / भाषा
+                  </span>
+                  <span className="font-bold text-blue">{language === "en" ? "English (EN)" : "हिंदी (HI)"}</span>
                 </button>
-              </GetStartedModal>
+                <GetStartedModal>
+                  <button
+                    onClick={() => setOpen(false)}
+                    className="rounded-xl w-full bg-gradient-to-r from-blue to-purple px-4 py-3 text-center text-sm font-semibold text-white"
+                  >
+                    {t("nav.register", "Register")}
+                  </button>
+                </GetStartedModal>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

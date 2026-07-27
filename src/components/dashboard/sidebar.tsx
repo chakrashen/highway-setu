@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth";
+import { useLanguage } from "@/hooks/use-language";
 import { 
   Home, 
   Truck, 
@@ -25,6 +26,7 @@ import {
 export function DashboardSidebar({ isOpen, onClose }: { isOpen?: boolean; onClose?: () => void }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const { language, t } = useLanguage();
   
   const handleLogout = async () => {
     await logout();
@@ -35,46 +37,46 @@ export function DashboardSidebar({ isOpen, onClose }: { isOpen?: boolean; onClos
     if (!user) return [];
     
     const commonLinks = [
-      { to: `/dashboard/${user.role}`, label: "Overview", icon: Home },
-      { to: "/dashboard/messages", label: "Messages", icon: MessageSquare },
-      { to: "/dashboard/wallet", label: "Wallet & Payments", icon: Wallet },
-      { to: "/dashboard/subscriptions", label: "Premium Plans", icon: Crown },
-      { to: `/dashboard/${user.role}/settings`, label: "Settings", icon: Settings },
+      { to: `/dashboard/${user.role}`, label: t("dashboard.overview", "Overview"), icon: Home },
+      { to: "/dashboard/messages", label: language === "hi" ? "संदेश" : "Messages", icon: MessageSquare },
+      { to: "/dashboard/wallet", label: t("dashboard.wallet", "Wallet & Payments"), icon: Wallet },
+      { to: "/dashboard/subscriptions", label: language === "hi" ? "प्रीमियम प्लान" : "Premium Plans", icon: Crown },
+      { to: `/dashboard/${user.role}/settings`, label: language === "hi" ? "सेटिंग्स" : "Settings", icon: Settings },
     ];
 
     switch (user.role) {
       case "driver":
         return [
           ...commonLinks,
-          { to: "/dashboard/driver/trips", label: "My Trips", icon: Truck },
-          { to: "/dashboard/driver/documents", label: "Documents", icon: FileText },
-          { to: "/dashboard/driver/emergency", label: "Emergency", icon: ShieldAlert },
+          { to: "/dashboard/driver/trips", label: t("dashboard.trips", "My Trips"), icon: Truck },
+          { to: "/dashboard/driver/documents", label: t("dashboard.documents", "Documents"), icon: FileText },
+          { to: "/dashboard/driver/emergency", label: language === "hi" ? "आपात स्थिति" : "Emergency", icon: ShieldAlert },
         ];
       case "dhaba":
         return [
           ...commonLinks,
-          { to: "/dashboard/dhaba/menu", label: "Menu Management", icon: UtensilsCrossed },
-          { to: "/dashboard/dhaba/reviews", label: "Reviews", icon: Star },
+          { to: "/dashboard/dhaba/menu", label: language === "hi" ? "मेनू प्रबंधन" : "Menu Management", icon: UtensilsCrossed },
+          { to: "/dashboard/dhaba/reviews", label: language === "hi" ? "समीक्षाएं" : "Reviews", icon: Star },
         ];
       case "mechanic":
         return [
           ...commonLinks,
-          { to: "/dashboard/mechanic/requests", label: "Service Requests", icon: Wrench },
-          { to: "/dashboard/mechanic/availability", label: "Availability", icon: MapPin },
+          { to: "/dashboard/mechanic/requests", label: language === "hi" ? "सेवा अनुरोध" : "Service Requests", icon: Wrench },
+          { to: "/dashboard/mechanic/availability", label: language === "hi" ? "उपलब्धता" : "Availability", icon: MapPin },
         ];
       case "fleet":
         return [
           ...commonLinks,
-          { to: "/dashboard/fleet/vehicles", label: "Vehicles", icon: Car },
-          { to: "/dashboard/fleet/drivers", label: "Drivers", icon: Users },
-          { to: "/dashboard/fleet/reports", label: "Reports", icon: FileText },
+          { to: "/dashboard/fleet/vehicles", label: t("dashboard.vehicles", "Vehicles"), icon: Car },
+          { to: "/dashboard/fleet/drivers", label: t("dashboard.drivers", "Drivers"), icon: Users },
+          { to: "/dashboard/fleet/reports", label: t("dashboard.analytics", "Reports"), icon: FileText },
         ];
       case "admin":
         return [
           ...commonLinks,
-          { to: "/dashboard/admin/users", label: "All Users", icon: Users },
-          { to: "/dashboard/admin/approvals", label: "Approvals", icon: FileText },
-          { to: "/dashboard/admin/system", label: "System", icon: Settings },
+          { to: "/dashboard/admin/users", label: language === "hi" ? "सभी उपयोगकर्ता" : "All Users", icon: Users },
+          { to: "/dashboard/admin/approvals", label: language === "hi" ? "स्वीकृतियां" : "Approvals", icon: FileText },
+          { to: "/dashboard/admin/system", label: language === "hi" ? "सिस्टम" : "System", icon: Settings },
         ];
       default:
         return commonLinks;
@@ -116,7 +118,7 @@ export function DashboardSidebar({ isOpen, onClose }: { isOpen?: boolean; onClos
         <div className="flex flex-col gap-1 p-4 flex-1 mt-12 lg:mt-0">
         <div className="mb-6 px-2">
           <div className="text-xs uppercase font-semibold tracking-wider text-muted-foreground mb-1">
-            Dashboard
+            {t("dashboard.title", "Dashboard")}
           </div>
           <div className={cn("text-lg font-bold capitalize flex items-center gap-2", roleColor)}>
             {user?.role} Portal
@@ -155,7 +157,7 @@ export function DashboardSidebar({ isOpen, onClose }: { isOpen?: boolean; onClos
           className="w-full mt-2 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-red-400/80 hover:text-red-400 hover:bg-red-500/10 transition-colors"
         >
           <LogOut className="w-5 h-5" />
-          Log out
+          {t("dashboard.logout", "Log out")}
         </button>
       </div>
     </aside>

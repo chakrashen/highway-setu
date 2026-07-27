@@ -1,11 +1,13 @@
-import { Bell, Search, Menu, Command } from "lucide-react";
+import { Bell, Search, Menu } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { useState } from "react";
 import { NotificationCenter } from "@/components/notifications/notification-center";
+import { useLanguage } from "@/hooks/use-language";
 
 export function DashboardHeader({ onMenuClick }: { onMenuClick?: () => void }) {
   const { user } = useAuth();
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const { language, t } = useLanguage();
   
   return (
     <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b dark:border-foreground/10 border-foreground bg-background/50 backdrop-blur-xl px-4 sm:gap-x-6 sm:px-6 lg:px-8">
@@ -31,7 +33,7 @@ export function DashboardHeader({ onMenuClick }: { onMenuClick?: () => void }) {
           <input
             id="search-field"
             className="block h-full w-full border-0 py-0 pl-10 pr-0 text-foreground bg-transparent placeholder:dark:text-foreground/40 text-foreground focus:ring-0 sm:text-sm outline-none"
-            placeholder="Search across your dashboard..."
+            placeholder={language === "hi" ? "अपने डैशबोर्ड में खोजें..." : "Search across your dashboard..."}
             type="search"
             name="search"
           />

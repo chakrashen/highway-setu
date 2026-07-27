@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Check, ArrowRight, Sparkles, Truck } from "lucide-react";
-import { ACCENT_META, type RoleData } from "@/lib/roles";
+import { ACCENT_META, roleBySlug, type RoleData } from "@/lib/roles";
 import { Reveal } from "@/components/ui/reveal";
 import { TiltCard } from "@/components/ui/tilt-card";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
@@ -9,10 +9,13 @@ import { AnimatedBackground } from "@/components/ui/animated-background";
 import { DemoModal, DemoTriggerButton } from "@/components/ui/demo-modal";
 import { cn } from "@/lib/utils";
 import { GetStartedModal } from "@/components/auth/get-started-modal";
+import { useLanguage } from "@/hooks/use-language";
 
 export function RolePage({ role }: { role: RoleData }) {
-  const a = ACCENT_META[role.key];
-  const Icon = role.icon;
+  const { language, t } = useLanguage();
+  const currentRole = roleBySlug(role.slug, language);
+  const a = ACCENT_META[currentRole.key];
+  const Icon = currentRole.icon;
 
   return (
     <div className="noise relative">
@@ -20,7 +23,7 @@ export function RolePage({ role }: { role: RoleData }) {
 
       {/* Hero */}
       <section className="relative px-4 pb-20 pt-36 md:pt-44">
-        {role.slug === "/drivers" && (
+        {currentRole.slug === "/drivers" && (
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
             <div className="absolute bottom-4 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/10 light:via-black/10 to-transparent md:bottom-10">
               <motion.div
@@ -48,19 +51,19 @@ export function RolePage({ role }: { role: RoleData }) {
                 a.ring,
               )}
             >
-              <Icon className="h-4 w-4" /> {role.name}
+              <Icon className="h-4 w-4" /> {currentRole.name}
             </span>
           </Reveal>
           <div className="mt-8 grid items-center gap-12 lg:grid-cols-2">
             <div>
               <Reveal delay={0.05}>
                 <h1 className="text-balance text-4xl font-extrabold leading-[1.05] md:text-6xl">
-                  {role.headline}
+                  {currentRole.headline}
                 </h1>
               </Reveal>
               <Reveal delay={0.15}>
                 <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-                  {role.description}
+                  {currentRole.description}
                 </p>
               </Reveal>
               <Reveal delay={0.25}>
@@ -72,7 +75,7 @@ export function RolePage({ role }: { role: RoleData }) {
                         a.gradient,
                       )}
                     >
-                      Register <ArrowRight className="h-4 w-4" />
+                      {t("nav.register", "Register")} <ArrowRight className="h-4 w-4" />
                     </button>
                   </GetStartedModal>
                   <DemoModal
@@ -88,13 +91,13 @@ export function RolePage({ role }: { role: RoleData }) {
 
             {/* Animated illustration / dashboard mockup */}
             <Reveal delay={0.2}>
-              <RoleMockup role={role} />
+              <RoleMockup role={currentRole} />
             </Reveal>
           </div>
 
           {/* Stats */}
           <div className="mt-16 grid gap-4 sm:grid-cols-3">
-            {role.stats.map((s, i) => (
+            {currentRole.stats.map((s, i) => (
               <Reveal key={s.label} delay={0.1 * i}>
                 <div className="glass rounded-3xl p-6">
                   <div className={cn("text-3xl font-bold md:text-4xl", a.text)}>
@@ -120,14 +123,14 @@ export function RolePage({ role }: { role: RoleData }) {
         <div className="mx-auto max-w-7xl">
           <Reveal>
             <h2 className="text-3xl font-bold md:text-4xl">
-              Everything a {role.name.toLowerCase()} needs
+              {t("role.features", "Key Platform Features")} — {currentRole.name}
             </h2>
             <p className="mt-3 max-w-2xl text-muted-foreground">
-              {role.tagline}
+              {currentRole.tagline}
             </p>
           </Reveal>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {role.features.map((f, i) => (
+            {currentRole.features.map((f, i) => (
               <Reveal key={f} delay={(i % 3) * 0.06}>
                 <TiltCard className="glass group h-full rounded-2xl p-5 transition-shadow hover:shadow-2xl">
                   <div
@@ -140,7 +143,7 @@ export function RolePage({ role }: { role: RoleData }) {
                   </div>
                   <h3 className="font-semibold">{f}</h3>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Native, real-time and built for the highway.
+                    {language === "hi" ? "त्वरित, विश्वसनीय और हाईवे के लिए निर्मित।" : "Native, real-time and built for the highway."}
                   </p>
                 </TiltCard>
               </Reveal>
@@ -167,10 +170,10 @@ export function RolePage({ role }: { role: RoleData }) {
               />
               <Sparkles className={cn("mx-auto h-8 w-8", a.text)} />
               <h2 className="mt-4 text-3xl font-bold md:text-4xl">
-                Ready to join as a {role.name.toLowerCase()}?
+                {t("role.getStartedAs", "Get Started as")} {currentRole.name}
               </h2>
               <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-                Become part of India's most connected highway ecosystem.
+                {language === "hi" ? "भारत के सबसे जुड़े हुए हाईवे नेटवर्क का हिस्सा बनें।" : "Become part of India's most connected highway ecosystem."}
               </p>
               <div className="mt-8 flex flex-wrap justify-center gap-4">
                 <GetStartedModal>
@@ -180,14 +183,14 @@ export function RolePage({ role }: { role: RoleData }) {
                       a.gradient,
                     )}
                   >
-                    Register
+                    {t("nav.register", "Register")}
                   </button>
                 </GetStartedModal>
                 <Link
                   to="/"
                   className="rounded-full border dark:border-foreground/15 border-foreground light:border-black/15 bg-foreground/5 light:bg-black/5 px-7 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-foreground/10 light:hover:bg-black/10"
                 >
-                  Explore Platform
+                  {language === "hi" ? "प्लेटफ़ॉर्म देखें" : "Explore Platform"}
                 </Link>
               </div>
             </div>

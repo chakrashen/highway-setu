@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Bell, CheckCircle2, ShieldAlert, X, Settings, Check } from "lucide-react";
+import { Bell, CheckCircle2, ShieldAlert, Settings, Check } from "lucide-react";
+import { useLanguage } from "@/hooks/use-language";
 
 interface Notification {
   id: string;
@@ -12,10 +13,24 @@ interface Notification {
 }
 
 export function NotificationCenter({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const { language } = useLanguage();
   const [notifications, setNotifications] = useState<Notification[]>([
-    { id: "1", title: "Document Verified", message: "Your commercial insurance has been successfully verified.", time: "10 mins ago", read: false, type: "success" },
-    { id: "2", title: "Route Alert", message: "Heavy traffic detected on NH-48 near Lonavala. ETA delayed by 15m.", time: "1 hour ago", read: false, type: "alert" },
-    { id: "3", title: "New Booking Request", message: "You received a new table booking request for 4 people at 8 PM.", time: "2 hours ago", read: true, type: "info" },
+    { 
+      id: "1", 
+      title: language === "hi" ? "दस्तावेज़ सत्यापित" : "Document Verified", 
+      message: language === "hi" ? "आपका व्यावसायिक बीमा सफलतापूर्वक सत्यापित हो गया है।" : "Your commercial insurance has been successfully verified.", 
+      time: language === "hi" ? "10 मिनट पहले" : "10 mins ago", 
+      read: false, 
+      type: "success" 
+    },
+    { 
+      id: "2", 
+      title: language === "hi" ? "मार्ग चेतावनी" : "Route Alert", 
+      message: language === "hi" ? "NH-48 पर भारी ट्रैफ़िक पाया गया। 15 मिनट की देरी होगी।" : "Heavy traffic detected on NH-48 near Lonavala. ETA delayed by 15m.", 
+      time: language === "hi" ? "1 घंटे पहले" : "1 hour ago", 
+      read: false, 
+      type: "alert" 
+    },
   ]);
 
   const markAllRead = () => {
@@ -42,9 +57,9 @@ export function NotificationCenter({ isOpen, onClose }: { isOpen: boolean; onClo
             <div className="p-4 border-b dark:border-foreground/10 border-foreground flex justify-between items-center bg-background/50">
               <div className="flex items-center gap-2">
                 <Bell className="w-5 h-5 dark:text-foreground/80 text-foreground" />
-                <h3 className="font-bold text-foreground">Notifications</h3>
+                <h3 className="font-bold text-foreground">{language === "hi" ? "सूचनाएं" : "Notifications"}</h3>
                 <span className="bg-blue text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
-                  {notifications.filter(n => !n.read).length} New
+                  {notifications.filter(n => !n.read).length} {language === "hi" ? "नया" : "New"}
                 </span>
               </div>
               <div className="flex gap-2">
@@ -59,7 +74,9 @@ export function NotificationCenter({ isOpen, onClose }: { isOpen: boolean; onClo
 
             <div className="flex-1 overflow-y-auto hidden-scrollbar">
               {notifications.length === 0 ? (
-                <div className="p-8 text-center dark:text-foreground/50 text-foreground text-sm">No notifications right now.</div>
+                <div className="p-8 text-center dark:text-foreground/50 text-foreground text-sm">
+                  {language === "hi" ? "कोई सूचना नहीं है।" : "No notifications right now."}
+                </div>
               ) : (
                 <div className="divide-y divide-white/5">
                   {notifications.map((n) => (
@@ -84,7 +101,7 @@ export function NotificationCenter({ isOpen, onClose }: { isOpen: boolean; onClo
             
             <div className="p-3 border-t dark:border-foreground/10 border-foreground bg-background/50">
               <button className="w-full text-center text-xs font-semibold text-blue hover:text-blue/80 transition-colors">
-                View All Notifications
+                {language === "hi" ? "सभी सूचनाएं देखें" : "View All Notifications"}
               </button>
             </div>
           </motion.div>

@@ -5,6 +5,7 @@ import "leaflet/dist/leaflet.css";
 import { Reveal } from "@/components/ui/reveal";
 import { GradientText } from "@/components/ui/gradient-text";
 import { MapPin, Utensils, Star, Clock, Phone, Search } from "lucide-react";
+import { useLanguage } from "@/hooks/use-language";
 
 /* ── Sample dhaba data along major Indian highways ── */
 const dhabas: {
@@ -58,40 +59,11 @@ const dhabas: {
   { name: "Pind Balluchi Highway", lat: 31.1048, lng: 77.1734, highway: "NH-21", rating: 4.6, registered: true, specialty: "Sarson da Saag", timing: "24 Hours" },
 ];
 
-/* Custom marker icons */
-const registeredIcon = new L.DivIcon({
-  html: `<div style="background: linear-gradient(135deg, #f97316, #ea580c); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
-  </div>`,
-  className: "",
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32],
-});
-
-const unregisteredIcon = new L.DivIcon({
-  html: `<div style="background: linear-gradient(135deg, #94a3b8, #64748b); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.25); opacity: 0.85;">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
-  </div>`,
-  className: "",
-  iconSize: [28, 28],
-  iconAnchor: [14, 28],
-  popupAnchor: [0, -28],
-});
-
-/* Animate to a location */
-function FlyTo({ center, zoom }: { center: [number, number]; zoom: number }) {
-  const map = useMap();
-  useEffect(() => {
-    map.flyTo(center, zoom, { duration: 1.5 });
-  }, [center, zoom, map]);
-  return null;
-}
-
 /* Filter pills */
 const highways = ["All", ...Array.from(new Set(dhabas.map((d) => d.highway)))];
 
 export function DhabaMap() {
+  const { language, t } = useLanguage();
   const [filter, setFilter] = useState("All");
   const [showRegistered, setShowRegistered] = useState<"all" | "registered" | "unregistered">("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -111,9 +83,6 @@ export function DhabaMap() {
     return matchHighway && matchStatus && matchSearch;
   });
 
-  const registeredCount = dhabas.filter((d) => d.registered).length;
-  const totalCount = dhabas.length;
-
   return (
     <section className="relative px-4 py-12">
       <div className="mx-auto max-w-7xl">
@@ -121,11 +90,11 @@ export function DhabaMap() {
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-orange-500">
               <MapPin className="mr-1 inline-block h-4 w-4" />
-              Dhaba Network
+              {t("dhabaMap.title", "Dhaba Network")}
             </p>
             <h2 className="mx-auto mt-3 max-w-2xl text-3xl font-bold md:text-5xl">
-              Discover dhabas across{" "}
-              <GradientText>India's highways.</GradientText>
+              {language === "hi" ? "भारत के राजमार्गों पर " : "Discover dhabas across "}
+              <GradientText>{language === "hi" ? "ढाबे खोजें।" : "India's highways."}</GradientText>
             </h2>
           </div>
         </Reveal>
@@ -135,19 +104,24 @@ export function DhabaMap() {
           <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
             {/* Status filter */}
             <div className="flex rounded-full border dark:border-foreground/10 border-foreground light:border-slate-200 bg-foreground/5 light:bg-white p-1">
-              {(["all", "registered", "unregistered"] as const).map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setShowRegistered(s)}
-                  className={`rounded-full px-4 py-1.5 text-xs font-medium capitalize transition-all ${
-                    showRegistered === s
-                      ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30"
-                      : "dark:text-foreground/60 text-foreground light:text-slate-500 hover:text-foreground light:hover:text-slate-900"
-                  }`}
-                >
-                  {s}
-                </button>
-              ))}
+              {(["all", "registered", "unregistered"] as const).map((s) => {
+                const label = language === "hi" 
+                  ? (s === "all" ? "सभी" : s === "registered" ? "पंजीकृत" : "गैर-पंजीकृत")
+                  : s;
+                return (
+                  <button
+                    key={s}
+                    onClick={() => setShowRegistered(s)}
+                    className={`rounded-full px-4 py-1.5 text-xs font-medium capitalize transition-all ${
+                      showRegistered === s
+                        ? "bg-orange-500 text-white shadow-lg shadow-orange-500/30"
+                        : "dark:text-foreground/60 text-foreground light:text-slate-500 hover:text-foreground light:hover:text-slate-900"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -163,7 +137,7 @@ export function DhabaMap() {
                     : "bg-foreground/5 light:bg-slate-100 dark:text-foreground/60 text-foreground light:text-slate-500 ring-1 ring-white/10 light:ring-slate-200 hover:bg-foreground/10 light:hover:bg-slate-200"
                 }`}
               >
-                {h}
+                {h === "All" && language === "hi" ? "सभी राजमार्ग" : h}
               </button>
             ))}
           </div>
@@ -177,15 +151,13 @@ export function DhabaMap() {
               <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
               <input
                 type="text"
-                placeholder="Search dhabas by name, highway or specialty..."
+                placeholder={language === "hi" ? "नाम, हाईवे या व्यंजन द्वारा ढाबा खोजें..." : "Search dhabas by name, highway or specialty..."}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full rounded-xl border dark:border-foreground/10 border-foreground light:border-slate-200 bg-foreground/5 light:bg-white py-2.5 pl-10 pr-4 text-sm text-foreground light:text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500/50 shadow-sm"
               />
             </div>
           </div>
-
-
         </Reveal>
       </div>
     </section>

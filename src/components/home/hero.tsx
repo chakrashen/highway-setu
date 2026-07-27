@@ -4,9 +4,11 @@ import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { GradientText } from "@/components/ui/gradient-text";
 import { DemoModal, DemoTriggerButton } from "@/components/ui/demo-modal";
+import { useLanguage } from "@/hooks/use-language";
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const { language, t } = useLanguage();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -38,8 +40,6 @@ export function Hero() {
           />
         ))}
       </div>
-
-
 
       {/* Animated highway */}
       <motion.div
@@ -86,22 +86,27 @@ export function Hero() {
         </div>
       </motion.div>
 
-
-
       {/* Content */}
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-10 mx-auto w-full text-center"
+        className="relative z-10 mx-auto w-full text-center px-4"
       >
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground light:text-foreground whitespace-nowrap tracking-wide mb-8"
+          className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground light:text-foreground tracking-wide mb-8"
         >
-          Connecting Every Mile of <span className="text-[#d89cf6]">India's</span> <span className="text-[#d89cf6]">Highway</span> <span className="text-[#a7f3d0]">Ecosystem</span>
+          {language === "hi" ? (
+            <>
+              भारत के <span className="text-[#d89cf6]">राजमार्गों</span> के हर मील को <span className="text-[#a7f3d0]">जोड़ना</span>
+            </>
+          ) : (
+            <>
+              Connecting Every Mile of <span className="text-[#d89cf6]">India's</span> <span className="text-[#d89cf6]">Highway</span> <span className="text-[#a7f3d0]">Ecosystem</span>
+            </>
+          )}
         </motion.h1>
-
       </motion.div>
     </section>
   );

@@ -42,8 +42,9 @@ import { DemoModal, DemoTriggerButton } from "@/components/ui/demo-modal";
 import { GradientText } from "@/components/ui/gradient-text";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { Marquee } from "@/components/ui/marquee";
-import { ROLES, ACCENT_META } from "@/lib/roles";
+import { ROLES, getRoles, ACCENT_META } from "@/lib/roles";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/hooks/use-language";
 
 /* ----------------------------- Problem ----------------------------- */
 const problems: { icon: LucideIcon; title: string; desc: string }[] = [
@@ -133,11 +134,13 @@ export function ProblemSection() {
 
 /* ----------------------------- Solution / Ecosystem ----------------------------- */
 export function EcosystemSection() {
+  const { language, t } = useLanguage();
+  const rolesList = getRoles(language);
   const nodes = [
-    { ...ROLES[0] },
-    { ...ROLES[3] },
-    { ...ROLES[1] },
-    { ...ROLES[2] },
+    { ...rolesList[0] },
+    { ...rolesList[3] },
+    { ...rolesList[1] },
+    { ...rolesList[2] },
   ];
 
   const iconColors: Record<string, string> = {
@@ -153,15 +156,14 @@ export function EcosystemSection() {
         <Reveal>
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-widest text-blue">
-              The Solution
+              {language === "hi" ? "समाधान" : "The Solution"}
             </p>
             <h2 className="mx-auto mt-3 max-w-3xl text-3xl font-bold md:text-5xl text-slate-900 dark:text-foreground">
-              One unified ecosystem,{" "}
-              <GradientText>connected end to end</GradientText>
+              {language === "hi" ? "एक एकीकृत पारिस्थितिकी तंत्र, " : "One unified ecosystem, "}
+              <GradientText>{language === "hi" ? "शुरू से अंत तक जुड़ा हुआ" : "connected end to end"}</GradientText>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-slate-600 dark:text-muted-foreground">
-              Highways24 links every participant of the highway economy
-              through a single intelligent platform.
+              {language === "hi" ? "हाईवे24 हाईवे अर्थव्यवस्था के हर भागीदार को एक ही बुद्धिमान प्लेटफॉर्म के माध्यम से जोड़ता है।" : "Highways24 links every participant of the highway economy through a single intelligent platform."}
             </p>
           </div>
         </Reveal>
@@ -264,16 +266,21 @@ export function EcosystemSection() {
 
 /* ----------------------------- Role teasers ----------------------------- */
 export function RoleTeasers() {
+  const { language, t } = useLanguage();
+  const rolesList = getRoles(language);
+
   return (
     <section className="relative px-4 pt-8 pb-24">
       <div className="mx-auto max-w-7xl">
         <Reveal>
           <h2 className="text-3xl font-bold md:text-5xl">
-            Built for <GradientText>every role</GradientText> on the highway
+            {language === "hi" ? "राजमार्ग पर " : "Built for "}
+            <GradientText>{language === "hi" ? "हर भूमिका के लिए" : "every role"}</GradientText>
+            {language === "hi" ? " निर्मित" : " on the highway"}
           </h2>
         </Reveal>
         <div className="mt-12 grid gap-5 md:grid-cols-2">
-          {ROLES.map((r, i) => {
+          {rolesList.map((r, i) => {
             const a = ACCENT_META[r.key];
             const Icon = r.icon;
             return (
@@ -322,7 +329,7 @@ export function RoleTeasers() {
                         {r.headline}
                       </p>
                       <span className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold">
-                        Explore{" "}
+                        {language === "hi" ? "देखें" : "Explore"}{" "}
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </span>
                     </div>
@@ -836,6 +843,7 @@ export function Testimonials() {
 
 /* ----------------------------- CTA ----------------------------- */
 export function CtaSection() {
+  const { language, t } = useLanguage();
   return (
     <section id="cta" className="relative scroll-mt-24 px-4 pb-28 pt-12">
       <div className="mx-auto max-w-5xl">
@@ -844,17 +852,16 @@ export function CtaSection() {
             <div className="pointer-events-none absolute -top-32 left-1/2 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-gradient-to-r from-blue via-purple to-emerald opacity-30 blur-[120px]" />
             <Sparkles className="mx-auto h-10 w-10 text-purple" />
             <h2 className="mx-auto mt-5 max-w-3xl text-balance text-4xl font-extrabold md:text-6xl">
-              Ready to{" "}
-              <GradientText>Transform Highway Operations?</GradientText>
+              {language === "hi" ? "हाईवे परिचालन में " : "Ready to "}
+              <GradientText>{language === "hi" ? "क्रांति लाने के लिए तैयार हैं?" : "Transform Highway Operations?"}</GradientText>
             </h2>
             <p className="mx-auto mt-5 max-w-xl text-muted-foreground">
-              Join thousands already building India's most connected highway
-              ecosystem.
+              {language === "hi" ? "भारत के सबसे जुड़े हाईवे नेटवर्क का निर्माण कर रहे हजारों लोगों से जुड़ें।" : "Join thousands already building India's most connected highway ecosystem."}
             </p>
             <div className="mt-9 flex flex-wrap justify-center gap-4">
               <GetStartedModal>
                 <button className="rounded-full bg-gradient-to-r from-blue via-primary to-purple px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-purple/25 transition-transform hover:scale-105">
-                  Register
+                  {t("nav.register", "Register")}
                 </button>
               </GetStartedModal>
               <Link
@@ -862,7 +869,7 @@ export function CtaSection() {
                 hash="ecosystem"
                 className="rounded-full border dark:border-foreground/15 border-foreground light:border-black/15 bg-foreground/5 light:bg-black/5 px-8 py-4 text-sm font-semibold backdrop-blur transition-colors hover:bg-foreground/10 light:hover:bg-black/10"
               >
-                Book a Demo
+                {language === "hi" ? "डेमो देखें" : "Book a Demo"}
               </Link>
             </div>
           </div>

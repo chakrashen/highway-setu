@@ -9,41 +9,7 @@ import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { Truck, UtensilsCrossed, Wrench, Building2, ChevronRight } from "lucide-react";
 import { ReactNode, useState } from "react";
-
-const roles = [
-  {
-    id: "driver",
-    title: "Truck Driver",
-    description: "Find loads, navigate, and manage trips",
-    icon: Truck,
-    color: "from-blue-500 to-cyan-400",
-    href: "/auth/register/driver",
-  },
-  {
-    id: "dhaba",
-    title: "Dhaba Owner",
-    description: "Manage your menu and attract more drivers",
-    icon: UtensilsCrossed,
-    color: "from-orange-500 to-amber-400",
-    href: "/auth/register/dhaba",
-  },
-  {
-    id: "mechanic",
-    title: "Mechanic",
-    description: "Provide roadside assistance and workshop services",
-    icon: Wrench,
-    color: "from-purple-500 to-pink-400",
-    href: "/auth/register/mechanic",
-  },
-  {
-    id: "fleet",
-    title: "Fleet Owner",
-    description: "Manage vehicles, drivers, and operations",
-    icon: Building2,
-    color: "from-emerald-500 to-teal-400",
-    href: "/auth/register/fleet",
-  },
-];
+import { useLanguage } from "@/hooks/use-language";
 
 interface GetStartedModalProps {
   children: ReactNode;
@@ -51,6 +17,42 @@ interface GetStartedModalProps {
 
 export function GetStartedModal({ children }: GetStartedModalProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const { language, t } = useLanguage();
+
+  const modalRoles = [
+    {
+      id: "driver",
+      title: t("role.drivers.name", "Truck Driver"),
+      description: language === "hi" ? "स्मार्ट नेविगेशन और यात्रा प्रबंधन" : "Find loads, navigate, and manage trips",
+      icon: Truck,
+      color: "from-blue-500 to-cyan-400",
+      href: "/auth/register/driver",
+    },
+    {
+      id: "dhaba",
+      title: t("role.dhaba.name", "Dhaba Owner"),
+      description: language === "hi" ? "मेनू प्रबंधित करें और ऑर्डर प्राप्त करें" : "Manage your menu and attract more drivers",
+      icon: UtensilsCrossed,
+      color: "from-orange-500 to-amber-400",
+      href: "/auth/register/dhaba",
+    },
+    {
+      id: "mechanic",
+      title: t("role.mechanics.name", "Mechanic"),
+      description: language === "hi" ? "सड़क किनारे सहायता और मरम्मत सेवाएं प्रदान करें" : "Provide roadside assistance and workshop services",
+      icon: Wrench,
+      color: "from-purple-500 to-pink-400",
+      href: "/auth/register/mechanic",
+    },
+    {
+      id: "fleet",
+      title: t("role.fleet.name", "Fleet Owner"),
+      description: language === "hi" ? "वाहन, चालक और परिचालन प्रबंधित करें" : "Manage vehicles, drivers, and operations",
+      icon: Building2,
+      color: "from-emerald-500 to-teal-400",
+      href: "/auth/register/fleet",
+    },
+  ];
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -62,15 +64,15 @@ export function GetStartedModal({ children }: GetStartedModalProps) {
         <div className="relative z-10 p-6 md:p-8">
           <DialogHeader className="mb-6">
             <DialogTitle className="text-2xl md:text-3xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
-              Join Highways24
+              {t("auth.modalTitle", "Join Highways24")}
             </DialogTitle>
             <p className="text-center text-muted-foreground mt-2">
-              Select your role to get started with the platform
+              {t("auth.modalSubtitle", "Select your role to get started with the platform")}
             </p>
           </DialogHeader>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {roles.map((role, idx) => (
+            {modalRoles.map((role, idx) => (
               <motion.div
                 key={role.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -105,9 +107,9 @@ export function GetStartedModal({ children }: GetStartedModalProps) {
           </div>
           
           <div className="mt-8 text-center text-sm text-muted-foreground">
-            Already have an account?{" "}
+            {language === "hi" ? "पहले से पंजीकृत हैं? " : "Already have an account? "}
             <Link to="/auth/login" onClick={() => setIsOpen(false)} className="text-primary hover:text-primary-foreground transition-colors font-medium">
-              Sign In
+              {t("auth.loginButton", "Sign In")}
             </Link>
           </div>
         </div>

@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { Search, MapPin, Wrench, User, FileText, ArrowRight, X } from "lucide-react";
+import { Search, User, FileText, ArrowRight, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useNavigate } from "@tanstack/react-router";
+import { useLanguage } from "@/hooks/use-language";
 
 export function GlobalSearch() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+  const { language, t } = useLanguage();
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -23,8 +25,8 @@ export function GlobalSearch() {
   }, []);
 
   const results = [
-    { type: "Driver", name: "Rajesh Kumar", icon: User, route: "/dashboard/fleet" },
-    { type: "Document", name: "RC Book (MH-12-AB-1234)", icon: FileText, route: "/dashboard/driver" },
+    { type: language === "hi" ? "चालक" : "Driver", name: "Rajesh Kumar", icon: User, route: "/dashboard/fleet" },
+    { type: language === "hi" ? "दस्तावेज़" : "Document", name: "RC Book (MH-12-AB-1234)", icon: FileText, route: "/dashboard/driver" },
   ];
 
   const handleSelect = (route: string) => {
@@ -55,7 +57,7 @@ export function GlobalSearch() {
                 <input 
                   type="text" 
                   autoFocus
-                  placeholder="Search across Highways24..." 
+                  placeholder={language === "hi" ? "हाईवे24 पर खोजें..." : "Search across Highways24..."} 
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   className="flex-1 bg-transparent text-lg text-foreground placeholder:dark:text-foreground/40 text-foreground focus:outline-none"
@@ -69,7 +71,7 @@ export function GlobalSearch() {
                 {query ? (
                   <div className="space-y-1">
                     <div className="px-3 py-2 text-xs font-semibold dark:text-foreground/40 text-foreground uppercase tracking-wider">
-                      Search Results
+                      {language === "hi" ? "खोज परिणाम" : "Search Results"}
                     </div>
                     {results.filter(r => r.name.toLowerCase().includes(query.toLowerCase())).map((result, i) => (
                       <button 
@@ -93,13 +95,13 @@ export function GlobalSearch() {
                 ) : (
                   <div className="p-8 text-center dark:text-foreground/40 text-foreground">
                     <Search className="w-12 h-12 mx-auto mb-4 opacity-20" />
-                    <p>Start typing to search for dhabas, mechanics, drivers, or documents...</p>
+                    <p>{language === "hi" ? "ढाबे, मैकेनिक, चालक या दस्तावेज़ खोजने के लिए टाइप करें..." : "Start typing to search for dhabas, mechanics, drivers, or documents..."}</p>
                   </div>
                 )}
               </div>
               <div className="p-3 border-t dark:border-foreground/10 border-foreground bg-black/20 text-xs dark:text-foreground/40 text-foreground flex items-center justify-between">
-                <div>Press <kbd className="px-1.5 py-0.5 rounded bg-foreground/10 font-mono">ESC</kbd> to close</div>
-                <div>Search by <span className="font-semibold dark:text-foreground/60 text-foreground">Highways24 AI</span></div>
+                <div>{language === "hi" ? "बंद करने के लिए ESC दबाएं" : "Press ESC to close"}</div>
+                <div>{language === "hi" ? "हाईवे24 एआई द्वारा संचालित" : "Search by Highways24 AI"}</div>
               </div>
             </div>
           </motion.div>

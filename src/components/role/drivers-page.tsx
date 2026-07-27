@@ -2,24 +2,17 @@ import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import {
     Truck,
-    ArrowRight,
-    ShieldAlert,
-    Users,
     Navigation,
-    Route as RouteIcon,
-    RadioTower,
     MapPin
 } from "lucide-react";
 import { roleBySlug } from "@/lib/roles";
 import { Reveal } from "@/components/ui/reveal";
-import { AnimatedCounter } from "@/components/ui/animated-counter";
-import { DemoModal, DemoTriggerButton } from "@/components/ui/demo-modal";
+import { useLanguage } from "@/hooks/use-language";
 
-const role = roleBySlug("/drivers");
-
-/* Truck Driver experience: Deep highway night theme, glowing road lines,
-   animated truck crossing, and a smart navigation dashboard mock. */
 export function DriversPage() {
+    const { language, t } = useLanguage();
+    const role = roleBySlug("/drivers", language);
+
     return (
         <div className="relative overflow-hidden bg-[#020617] light:bg-slate-50 text-blue-50 light:text-slate-900">
             {/* Background & highway lines */}
@@ -56,7 +49,7 @@ export function DriversPage() {
                     <div>
                         <Reveal>
                             <span className="inline-flex items-center gap-2 rounded-full bg-[#3b82f6]/15 px-4 py-1.5 text-sm font-medium text-blue ring-1 ring-blue/40">
-                                <Truck className="h-4 w-4" /> Driver's Seat
+                                <Truck className="h-4 w-4" /> {role.name}
                             </span>
                         </Reveal>
                         <Reveal delay={0.05}>
@@ -64,7 +57,11 @@ export function DriversPage() {
                                 {role.headline}
                             </h1>
                         </Reveal>
-
+                        <Reveal delay={0.15}>
+                            <p className="mt-6 max-w-xl text-lg text-blue-100/70 light:text-slate-600">
+                                {role.description}
+                            </p>
+                        </Reveal>
                     </div>
 
                     <Reveal delay={0.2}>
@@ -75,13 +72,13 @@ export function DriversPage() {
                 </div>
             </section>
 
-
-
             {/* Features */}
             <section className="relative px-4 py-20">
                 <div className="mx-auto max-w-6xl">
                     <Reveal>
-                        <h2 className="font-display text-3xl font-bold md:text-4xl">Everything for the road</h2>
+                        <h2 className="font-display text-3xl font-bold md:text-4xl">
+                            {language === "hi" ? "सड़क यात्रा के लिए सब कुछ" : "Everything for the road"}
+                        </h2>
                         <p className="mt-3 max-w-2xl text-blue-100/60 light:text-slate-600">{role.tagline}</p>
                     </Reveal>
                     <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -106,23 +103,23 @@ export function DriversPage() {
                             <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-96 -translate-x-1/2 rounded-full bg-blue/20 blur-[100px]" />
                             <Navigation className="mx-auto h-10 w-10 text-blue" />
                             <h2 className="mt-5 font-display text-3xl font-bold md:text-4xl">
-                                Ready to hit the road safely?
+                                {language === "hi" ? "सुरक्षित सड़क यात्रा के लिए तैयार हैं?" : "Ready to hit the road safely?"}
                             </h2>
                             <p className="mx-auto mt-3 max-w-xl text-blue-100/70 light:text-slate-600">
-                                Join thousands of truck drivers who rely on Highways24 every day.
+                                {language === "hi" ? "उन हजारों ट्रक चालकों में शामिल हों जो हर दिन हाईवे24 पर भरोसा करते हैं।" : "Join thousands of truck drivers who rely on Highways24 every day."}
                             </p>
                             <div className="mt-8 flex justify-center gap-4">
                                 <Link
                                     to="/"
                                     className="rounded-full border border-blue/30 bg-blue/10 px-8 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-blue/20"
                                 >
-                                    View Platform
+                                    {language === "hi" ? "प्लेटफॉर्म देखें" : "View Platform"}
                                 </Link>
                                 <Link
                                     to="/auth/register/driver"
                                     className="rounded-full border border-blue/30 bg-blue/10 px-8 py-3.5 text-sm font-semibold backdrop-blur transition-colors hover:bg-blue/20"
                                 >
-                                    Sign Up
+                                    {t("nav.register", "Sign Up")}
                                 </Link>
                             </div>
                         </div>

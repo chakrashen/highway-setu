@@ -142,23 +142,26 @@ function RootShell({ children }: { children: ReactNode }) {
 }
 
 import { AuthProvider } from "../hooks/use-auth";
+import { LanguageProvider } from "../hooks/use-language";
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <LoadingScreen />
-        <GlowCursor />
-        <Navbar />
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <main className="relative">
-          <Outlet />
-        </main>
-        <Footer />
-        <GlobalSearch />
-      </AuthProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <LoadingScreen />
+          <GlowCursor />
+          <Navbar />
+          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+          <main className="relative">
+            <Outlet />
+          </main>
+          <Footer />
+          <GlobalSearch />
+        </AuthProvider>
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }

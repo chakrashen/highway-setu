@@ -6,8 +6,8 @@ import {
   UtensilsCrossed, Wrench, Fuel, Car, Truck, LocateFixed
 } from "lucide-react";
 import { POICategory } from "@/lib/mock-data/pois";
-
 import { RouteInfo } from "@/lib/services/routing";
+import { useLanguage } from "@/hooks/use-language";
 
 interface MapSidebarProps {
   onSearch: (query: string) => void;
@@ -32,9 +32,8 @@ export function MapSidebar({
   activeTab, setActiveTab, startPoint, setStartPoint, endPoint, setEndPoint
 }: MapSidebarProps) {
   const [activeFilters, setActiveFilters] = useState<POICategory[]>([]);
+  const { language, t } = useLanguage();
   
-
-
   const toggleFilter = (category: POICategory) => {
     const newFilters = activeFilters.includes(category)
       ? activeFilters.filter(c => c !== category)
@@ -44,12 +43,12 @@ export function MapSidebar({
   };
 
   const categories: { id: POICategory; label: string; icon: React.ElementType }[] = [
-    { id: 'dhaba', label: 'Dhabas', icon: UtensilsCrossed },
-    { id: 'mechanic', label: 'Mechanics', icon: Wrench },
-    { id: 'fuel', label: 'Fuel & EV', icon: Fuel },
-    { id: 'toll', label: 'Tolls', icon: IndianRupee },
-    { id: 'hospital', label: 'Hospitals', icon: MapPin }, // using generic map pin for now
-    { id: 'police', label: 'Police', icon: ShieldAlert },
+    { id: 'dhaba', label: t("map.dhabas", "Dhabas"), icon: UtensilsCrossed },
+    { id: 'mechanic', label: t("map.mechanics", "Mechanics"), icon: Wrench },
+    { id: 'fuel', label: t("map.fuel", "Fuel & EV"), icon: Fuel },
+    { id: 'toll', label: language === "hi" ? "टोल" : "Tolls", icon: IndianRupee },
+    { id: 'hospital', label: t("map.medical", "Hospitals"), icon: MapPin },
+    { id: 'police', label: language === "hi" ? "पुलिस" : "Police", icon: ShieldAlert },
   ];
 
   return (
@@ -59,15 +58,14 @@ export function MapSidebar({
           onClick={() => setActiveTab('search')}
           className={`flex-1 py-2 text-sm font-medium rounded-lg transition-colors ${activeTab === 'search' ? 'bg-foreground/10 text-foreground' : 'dark:text-foreground/60 text-foreground hover:text-foreground'}`}
         >
-          Explore
+          {language === "hi" ? "अन्वेषण" : "Explore"}
         </button>
         <button 
           onClick={() => setActiveTab('route')}
           className={`flex-1 py-2 text-sm font-medium rounded-lg transition-colors ${activeTab === 'route' ? 'bg-blue/20 text-blue' : 'dark:text-foreground/60 text-foreground hover:text-white'}`}
         >
-          Route Planner
+          {language === "hi" ? "मार्ग योजनाकार" : "Route Planner"}
         </button>
-
       </div>
 
       <div className={`flex-1 overflow-y-auto ${(activeTab === 'search' || (activeTab === 'route' && !routeInfo)) ? 'p-0 md:p-4' : 'p-4'} space-y-6`}>
@@ -84,7 +82,7 @@ export function MapSidebar({
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 dark:text-foreground/40 text-foreground" />
                 <input 
                   type="text" 
-                  placeholder="Search dhabas, mechanics, places..." 
+                  placeholder={language === "hi" ? "ढाबे, मैकेनिक, स्थान खोजें..." : "Search dhabas, mechanics, places..."}
                   onChange={(e) => onSearch(e.target.value)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
@@ -95,6 +93,31 @@ export function MapSidebar({
                 />
               </div>
 
+              <div>
+                <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3 hidden md:block">
+                  {language === "hi" ? "त्वरित फ़िल्टर" : "Quick Filters"}
+                </h3>
+                <div className="grid grid-cols-3 md:grid-cols-2 gap-2 p-3 md:p-0">
+                  {categories.map((cat) => {
+                    const Icon = cat.icon;
+                    const isActive = activeFilters.includes(cat.id);
+                    return (
+                      <button
+                        key={cat.id}
+                        onClick={() => toggleFilter(cat.id)}
+                        className={`flex items-center gap-2 p-2.5 rounded-xl border text-xs font-medium transition-all ${
+                          isActive 
+                            ? 'bg-blue/15 border-blue text-blue' 
+                            : 'bg-foreground/5 border-transparent text-foreground hover:bg-foreground/10'
+                        }`}
+                      >
+                        <Icon className="w-4 h-4" />
+                        <span>{cat.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             </motion.div>
           )}
 
@@ -113,16 +136,16 @@ export function MapSidebar({
                     type="text" 
                     value={startPoint}
                     onChange={(e) => setStartPoint(e.target.value)}
-                    placeholder="Starting point (e.g., Pune)" 
+                    placeholder={language === "hi" ? "प्रारंभिक बिंदु (उदा. पुणे)" : "Starting point (e.g., Pune)"} 
                     className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-lg py-2.5 px-3 text-foreground focus:ring-1 focus:ring-blue outline-none text-sm"
                   />
                   <button 
                     onClick={() => {
-                      setStartPoint("Current Location");
+                      setStartPoint(language === "hi" ? "वर्तमान स्थिति" : "Current Location");
                       onRequestLocation?.();
                     }}
                     className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-blue hover:text-blue-600 transition-colors"
-                    title="Use Current Location"
+                    title={language === "hi" ? "वर्तमान स्थिति का उपयोग करें" : "Use Current Location"}
                   >
                     <LocateFixed className="w-4 h-4" />
                   </button>
@@ -133,7 +156,7 @@ export function MapSidebar({
                     type="text" 
                     value={endPoint}
                     onChange={(e) => setEndPoint(e.target.value)}
-                    placeholder="Destination (e.g., Mumbai)" 
+                    placeholder={language === "hi" ? "गंतव्य स्थान (उदा. मुंबई)" : "Destination (e.g., Mumbai)"} 
                     className="w-full bg-foreground/5 border dark:border-foreground/10 border-foreground rounded-lg py-2.5 px-3 text-foreground focus:ring-1 focus:ring-red-500 outline-none text-sm"
                   />
                 </div>
@@ -148,20 +171,20 @@ export function MapSidebar({
                 ) : (
                   <Navigation className="w-4 h-4" />
                 )}
-                {isRouting ? "Calculating..." : "Find Best Route"}
+                {isRouting ? (language === "hi" ? "गणना हो रही है..." : "Calculating...") : (language === "hi" ? "सर्वोत्तम मार्ग खोजें" : "Find Best Route")}
               </button>
 
-              {/* Real Route Stats - Shows after calculate */}
+              {/* Real Route Stats */}
               {routeInfo && !isRouting && (
                 <div className="pt-4 border-t dark:border-foreground/10 border-foreground space-y-3">
                   <div className="flex items-center justify-between p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
                     <div>
-                      <div className="text-emerald-500 font-semibold text-sm">Fastest Route</div>
-                      <div className="text-xs text-emerald-500/70 mt-0.5">Live traffic applied</div>
+                      <div className="text-emerald-500 font-semibold text-sm">{language === "hi" ? "सबसे तेज़ मार्ग" : "Fastest Route"}</div>
+                      <div className="text-xs text-emerald-500/70 mt-0.5">{language === "hi" ? "लाइव ट्रैफ़िक लागू" : "Live traffic applied"}</div>
                     </div>
                     <div className="text-right">
                       <div className="text-foreground font-bold">
-                        {Math.floor(routeInfo.durationMinutes / 60)}h {Math.round(routeInfo.durationMinutes % 60)}m
+                        {Math.floor(routeInfo.durationMinutes / 60)}{language === "hi" ? "घं " : "h "} {Math.round(routeInfo.durationMinutes % 60)}{language === "hi" ? "मि" : "m"}
                       </div>
                       <div className="text-xs dark:text-foreground/50 text-foreground">
                         {Math.round(routeInfo.distanceKm)} km
@@ -172,14 +195,14 @@ export function MapSidebar({
                   <div className="flex gap-2">
                     <div className="flex-1 p-3 rounded-lg bg-foreground/5 border dark:border-foreground/5 border-foreground text-center">
                       <IndianRupee className="w-4 h-4 dark:text-foreground/40 text-foreground mx-auto mb-1" />
-                      <div className="text-xs dark:text-foreground/60 text-foreground">Est. Toll</div>
+                      <div className="text-xs dark:text-foreground/60 text-foreground">{language === "hi" ? "अनुमानित टोल" : "Est. Toll"}</div>
                       <div className="text-sm font-semibold text-foreground">
                         ₹{Math.round(routeInfo.distanceKm * 1.5)}
                       </div>
                     </div>
                     <div className="flex-1 p-3 rounded-lg bg-foreground/5 border dark:border-foreground/5 border-foreground text-center">
                       <Fuel className="w-4 h-4 dark:text-foreground/40 text-foreground mx-auto mb-1" />
-                      <div className="text-xs dark:text-foreground/60 text-foreground">Fuel Cost</div>
+                      <div className="text-xs dark:text-foreground/60 text-foreground">{language === "hi" ? "ईंधन लागत" : "Fuel Cost"}</div>
                       <div className="text-sm font-semibold text-foreground">
                         ~₹{Math.round((routeInfo.distanceKm / 15) * 100)}
                       </div>
@@ -189,7 +212,6 @@ export function MapSidebar({
               )}
             </motion.div>
           )}
-
         </AnimatePresence>
       </div>
 
@@ -201,10 +223,12 @@ export function MapSidebar({
           <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity" />
           <div className="relative flex items-center justify-center gap-2">
             <ShieldAlert className="w-5 h-5 animate-pulse" />
-            <span className="tracking-widest">EMERGENCY SOS</span>
+            <span className="tracking-widest">{language === "hi" ? "आपातकालीन एसओएस" : "EMERGENCY SOS"}</span>
           </div>
         </button>
-        <p className="text-[10px] text-center dark:text-foreground/40 text-foreground mt-2 uppercase tracking-wide">Dispatches Highway Patrol & Ambulance</p>
+        <p className="text-[10px] text-center dark:text-foreground/40 text-foreground mt-2 uppercase tracking-wide">
+          {language === "hi" ? "हाईवे गश्त और एम्बुलेंस अलर्ट भेजता है" : "Dispatches Highway Patrol & Ambulance"}
+        </p>
       </div>
     </div>
   );

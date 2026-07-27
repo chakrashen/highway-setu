@@ -2,24 +2,17 @@ import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import {
     Wrench,
-    ArrowRight,
-    Gauge,
-    Star,
     Hammer,
     Settings,
-    Cpu,
-    ClipboardCheck,
 } from "lucide-react";
 import { roleBySlug } from "@/lib/roles";
 import { Reveal } from "@/components/ui/reveal";
-import { AnimatedCounter } from "@/components/ui/animated-counter";
-import { DemoModal, DemoTriggerButton } from "@/components/ui/demo-modal";
+import { useLanguage } from "@/hooks/use-language";
 
-const role = roleBySlug("/mechanics");
-
-/* Mechanics experience: Blueprint grid, diagnostics UI,
-   rotating gears, and neon purple accents. */
 export function MechanicsPage() {
+    const { language, t } = useLanguage();
+    const role = roleBySlug("/mechanics", language);
+
     return (
         <div className="relative overflow-hidden bg-[#0a0510] light:bg-slate-50 text-purple-50 light:text-slate-900">
             {/* Background grid & glow */}
@@ -43,7 +36,7 @@ export function MechanicsPage() {
                     <div>
                         <Reveal>
                             <span className="inline-flex items-center gap-2 rounded-full bg-purple/15 px-4 py-1.5 text-sm font-medium text-purple ring-1 ring-purple/40">
-                                <Wrench className="h-4 w-4" /> Mechanic Bay
+                                <Wrench className="h-4 w-4" /> {role.name}
                             </span>
                         </Reveal>
                         <Reveal delay={0.05}>
@@ -51,7 +44,11 @@ export function MechanicsPage() {
                                 {role.headline}
                             </h1>
                         </Reveal>
-
+                        <Reveal delay={0.15}>
+                            <p className="mt-6 max-w-xl text-lg text-purple-100/70 light:text-slate-600">
+                                {role.description}
+                            </p>
+                        </Reveal>
                     </div>
 
                     <Reveal delay={0.2}>
@@ -78,13 +75,13 @@ export function MechanicsPage() {
                 </div>
             </section>
 
-
-
             {/* Features (Tool rack) */}
             <section className="relative px-4 py-20">
                 <div className="mx-auto max-w-6xl">
                     <Reveal>
-                        <h2 className="font-display text-3xl font-bold md:text-4xl">The complete tool rack</h2>
+                        <h2 className="font-display text-3xl font-bold md:text-4xl">
+                            {language === "hi" ? "स्मार्ट टूलसेट" : "The complete tool rack"}
+                        </h2>
                         <p className="mt-3 max-w-2xl text-purple-100/60 light:text-slate-600">{role.tagline}</p>
                     </Reveal>
                     <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -103,19 +100,17 @@ export function MechanicsPage() {
                             to="/"
                             className="rounded-full border border-purple/30 bg-purple/10 px-8 py-3.5 text-sm font-semibold text-purple transition-colors hover:bg-purple/20"
                         >
-                            Explore Platform
+                            {language === "hi" ? "प्लेटफ़ॉर्म देखें" : "Explore Platform"}
                         </Link>
                         <Link
                             to="/auth/register/mechanic"
                             className="rounded-full border border-purple/30 bg-purple/10 px-8 py-3.5 text-sm font-semibold text-purple transition-colors hover:bg-purple/20"
                         >
-                            Sign Up
+                            {t("nav.register", "Sign Up")}
                         </Link>
                     </div>
                 </div>
             </section>
-
-
         </div>
     );
 }

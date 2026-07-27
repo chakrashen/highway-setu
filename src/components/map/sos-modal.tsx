@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ShieldAlert, Ambulance, Wrench, Flame, TriangleAlert, CheckCircle2, PhoneCall } from "lucide-react";
+import { useLanguage } from "@/hooks/use-language";
 
 interface SOSModalProps {
   isOpen: boolean;
@@ -11,14 +12,15 @@ export function SOSModal({ isOpen, onClose }: SOSModalProps) {
   const [step, setStep] = useState<1 | 2>(1);
   const [selectedEmergency, setSelectedEmergency] = useState<string | null>(null);
   const [isDispatching, setIsDispatching] = useState(false);
+  const { language, t } = useLanguage();
 
   const emergencies = [
-    { id: 'medical', label: 'Medical Emergency', icon: Ambulance, color: 'text-blue', bg: 'bg-blue/10 hover:bg-blue/20', border: 'border-blue/30' },
-    { id: 'accident', label: 'Major Accident', icon: ShieldAlert, color: 'text-red-500', bg: 'bg-red-500/10 hover:bg-red-500/20', border: 'border-red-500/30' },
-    { id: 'breakdown', label: 'Vehicle Breakdown', icon: Wrench, color: 'text-orange', bg: 'bg-orange/10 hover:bg-orange/20', border: 'border-orange/30' },
-    { id: 'fire', label: 'Fire', icon: Flame, color: 'text-orange-500', bg: 'bg-orange-500/10 hover:bg-orange-500/20', border: 'border-orange-500/30' },
-    { id: 'tyre', label: 'Flat Tyre / Minor', icon: TriangleAlert, color: 'text-yellow-500', bg: 'bg-yellow-500/10 hover:bg-yellow-500/20', border: 'border-yellow-500/30' },
-    { id: 'modi', label: 'Call Modi Ji (Ultimate SOS)', icon: PhoneCall, color: 'text-purple-500', bg: 'bg-purple-500/10 hover:bg-purple-500/20', border: 'border-purple-500/30' },
+    { id: 'medical', label: t("sos.typeMedical", "Medical Emergency"), icon: Ambulance, color: 'text-blue', bg: 'bg-blue/10 hover:bg-blue/20', border: 'border-blue/30' },
+    { id: 'accident', label: t("sos.typeAccident", "Major Accident"), icon: ShieldAlert, color: 'text-red-500', bg: 'bg-red-500/10 hover:bg-red-500/20', border: 'border-red-500/30' },
+    { id: 'breakdown', label: t("sos.typeBreakdown", "Vehicle Breakdown"), icon: Wrench, color: 'text-orange', bg: 'bg-orange/10 hover:bg-orange/20', border: 'border-orange/30' },
+    { id: 'fire', label: language === "hi" ? "आग लगना" : "Fire", icon: Flame, color: 'text-orange-500', bg: 'bg-orange-500/10 hover:bg-orange-500/20', border: 'border-orange-500/30' },
+    { id: 'tyre', label: language === "hi" ? "पंचर / टायर खराबी" : "Flat Tyre / Minor", icon: TriangleAlert, color: 'text-yellow-500', bg: 'bg-yellow-500/10 hover:bg-yellow-500/20', border: 'border-yellow-500/30' },
+    { id: 'modi', label: language === "hi" ? "आपातकालीन हेल्पलाइन" : "Emergency Helpline", icon: PhoneCall, color: 'text-purple-500', bg: 'bg-purple-500/10 hover:bg-purple-500/20', border: 'border-purple-500/30' },
   ];
 
   const handleDispatch = () => {
@@ -75,9 +77,11 @@ export function SOSModal({ isOpen, onClose }: SOSModalProps) {
                   <div className="p-2 rounded-xl bg-red-500/20 text-red-500 animate-pulse">
                     <ShieldAlert className="w-6 h-6" />
                   </div>
-                  <h2 className="text-2xl font-bold text-foreground">SOS Emergency</h2>
+                  <h2 className="text-2xl font-bold text-foreground">{t("sos.modalTitle", "SOS Emergency")}</h2>
                 </div>
-                <p className="text-sm dark:text-foreground/60 text-foreground mb-6">Select the type of emergency. Your live GPS location will be sent immediately.</p>
+                <p className="text-sm dark:text-foreground/60 text-foreground mb-6">
+                  {t("sos.modalSubtitle", "Select the type of emergency. Your live GPS location will be sent immediately.")}
+                </p>
 
                 <div className="grid grid-cols-1 gap-3 mb-6">
                   {emergencies.map((em) => (
@@ -106,10 +110,10 @@ export function SOSModal({ isOpen, onClose }: SOSModalProps) {
                   {isDispatching ? (
                     <>
                       <div className="w-5 h-5 border-2 dark:border-foreground/30 border-foreground border-t-white rounded-full animate-spin" />
-                      Dispatching Help...
+                      {t("sos.sending", "Dispatching Help...")}
                     </>
                   ) : (
-                    <>DISPATCH HELP TO MY LOCATION</>
+                    <>{t("sos.sendAlert", "DISPATCH HELP TO MY LOCATION")}</>
                   )}
                 </button>
               </motion.div>
@@ -126,21 +130,19 @@ export function SOSModal({ isOpen, onClose }: SOSModalProps) {
                   <div className="absolute inset-0 rounded-full border-4 border-emerald-500/30 animate-ping" />
                   <CheckCircle2 className="w-10 h-10 text-emerald-500" />
                 </div>
-                <h3 className="text-2xl font-bold text-foreground mb-2">Help is on the way!</h3>
+                <h3 className="text-2xl font-bold text-foreground mb-2">{t("sos.successTitle", "Help is on the way!")}</h3>
                 <p className="dark:text-foreground/70 text-foreground mb-6">
-                  {selectedEmergency === 'modi' 
-                    ? "PMO has received your request. Modi Ji is personally reviewing your situation."
-                    : "Highway Patrol and Emergency Services have received your location coordinates (18.6811° N, 73.5323° E)."}
+                  {t("sos.successSubtitle", "Highway Patrol and Emergency Services have received your location coordinates.")}
                 </p>
                 <div className="p-4 rounded-xl bg-foreground/5 border dark:border-foreground/10 border-foreground mb-6">
-                  <p className="text-sm font-semibold text-emerald-400 mb-1">Estimated Arrival Time</p>
-                  <p className="text-3xl font-bold text-foreground">08 mins</p>
+                  <p className="text-sm font-semibold text-emerald-400 mb-1">{language === "hi" ? "अनुमानित आगमन समय" : "Estimated Arrival Time"}</p>
+                  <p className="text-3xl font-bold text-foreground">08 {language === "hi" ? "मिनट" : "mins"}</p>
                 </div>
                 <button
                   onClick={handleClose}
                   className="w-full py-3 rounded-xl border dark:border-foreground/20 border-foreground text-foreground hover:bg-foreground/5 transition-colors font-medium"
                 >
-                  Close Window
+                  {language === "hi" ? "विंडो बंद करें" : "Close Window"}
                 </button>
               </motion.div>
             )}

@@ -4,20 +4,17 @@ import {
     UtensilsCrossed,
     ArrowRight,
     Flame,
-    Star,
     ChefHat,
     Soup,
 } from "lucide-react";
 import { roleBySlug } from "@/lib/roles";
 import { Reveal } from "@/components/ui/reveal";
-import { AnimatedCounter } from "@/components/ui/animated-counter";
-import { DemoModal, DemoTriggerButton } from "@/components/ui/demo-modal";
+import { useLanguage } from "@/hooks/use-language";
 
-const role = roleBySlug("/dhaba");
-
-/* Dhaba owner experience: warm chalkboard menu, rising steam,
-   string-light header and a hand-written specials board. */
 export function DhabaPage() {
+    const { language, t } = useLanguage();
+    const role = roleBySlug("/dhaba", language);
+
     return (
         <div className="relative overflow-hidden bg-[#140c04] light:bg-slate-50 text-orange-50 light:text-slate-900">
             {/* Warm glow background */}
@@ -68,11 +65,10 @@ export function DhabaPage() {
                         <Reveal delay={0.25}>
                             <div className="mt-8 flex flex-wrap items-center gap-4">
                                 <Link
-                                    to="/"
-                                    hash="cta"
+                                    to="/auth/register/dhaba"
                                     className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange to-orange-glow px-7 py-3.5 text-sm font-semibold text-[#140c04] transition-transform hover:scale-105"
                                 >
-                                    List My Dhaba <ArrowRight className="h-4 w-4" />
+                                    {language === "hi" ? "अपना ढाबा सूचीबद्ध करें" : "List My Dhaba"} <ArrowRight className="h-4 w-4" />
                                 </Link>
                             </div>
                         </Reveal>
@@ -103,15 +99,15 @@ export function DhabaPage() {
                 </div>
             </section>
 
-
-
             {/* Features served as menu items */}
             <section className="relative px-4 py-20">
                 <div className="mx-auto max-w-3xl">
                     <Reveal>
                         <div className="text-center">
                             <ChefHat className="mx-auto h-8 w-8 text-orange" />
-                            <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">Today's specials</h2>
+                            <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">
+                                {language === "hi" ? "डिजिटल सेवाएं" : "Today's specials"}
+                            </h2>
                             <p className="mx-auto mt-3 max-w-2xl text-orange-100/60 light:text-slate-600">{role.tagline}</p>
                         </div>
                     </Reveal>
@@ -132,19 +128,17 @@ export function DhabaPage() {
                             to="/"
                             className="rounded-full border border-orange/30 bg-orange/10 px-8 py-3.5 text-sm font-semibold text-orange transition-colors hover:bg-orange/20"
                         >
-                            Explore Platform
+                            {language === "hi" ? "प्लेटफ़ॉर्म देखें" : "Explore Platform"}
                         </Link>
                         <Link
                             to="/auth/register/dhaba"
                             className="rounded-full border border-orange/30 bg-orange/10 px-8 py-3.5 text-sm font-semibold text-orange transition-colors hover:bg-orange/20"
                         >
-                            Sign Up
+                            {t("nav.register", "Sign Up")}
                         </Link>
                     </div>
                 </div>
             </section>
-
-
         </div>
     );
 }

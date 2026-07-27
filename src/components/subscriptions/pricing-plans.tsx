@@ -1,39 +1,56 @@
 import { CheckCircle2, Shield, Star, Zap } from "lucide-react";
+import { useLanguage } from "@/hooks/use-language";
 
 export function PricingPlans() {
+  const { language, t } = useLanguage();
+
   const plans = [
     {
-      name: "Free",
+      name: language === "hi" ? "मुफ्त योजना" : "Free",
       price: "₹0",
-      period: "forever",
-      description: "Basic access for individual drivers.",
-      features: ["Basic map access", "Emergency SOS", "Standard support", "Limited history"],
-      button: "Current Plan",
+      period: language === "hi" ? "हमेशा" : "forever",
+      description: language === "hi" ? "व्यक्तिगत चालकों के लिए बुनियादी पहुंच।" : "Basic access for individual drivers.",
+      features: [
+        language === "hi" ? "बुनियादी मानचित्र पहुंच" : "Basic map access", 
+        language === "hi" ? "आपातकालीन एसओएस" : "Emergency SOS", 
+        language === "hi" ? "मानक सहायता" : "Standard support"
+      ],
+      button: language === "hi" ? "वर्तमान योजना" : "Current Plan",
       current: true,
       icon: Shield,
       color: "dark:text-foreground/60 text-foreground",
       bg: "bg-foreground/5 dark:border-foreground/10 border-foreground"
     },
     {
-      name: "Premium Driver",
+      name: language === "hi" ? "प्रीमियम ड्राइवर" : "Premium Driver",
       price: "₹199",
-      period: "per month",
-      description: "Advanced tools for professional drivers.",
-      features: ["Smart route optimization", "Ad-free experience", "Priority SOS response", "Unlimited history", "Advanced weather alerts"],
-      button: "Upgrade Now",
+      period: language === "hi" ? "प्रति माह" : "per month",
+      description: language === "hi" ? "पेशेवर चालकों के लिए उन्नत टूल।" : "Advanced tools for professional drivers.",
+      features: [
+        language === "hi" ? "स्मार्ट मार्ग अनुकूलन" : "Smart route optimization", 
+        language === "hi" ? "विज्ञापन-मुक्त अनुभव" : "Ad-free experience", 
+        language === "hi" ? "प्राथमिकता एसओएस प्रतिक्रिया" : "Priority SOS response", 
+        language === "hi" ? "उन्नत मौसम अलर्ट" : "Advanced weather alerts"
+      ],
+      button: language === "hi" ? "अभी अपग्रेड करें" : "Upgrade Now",
       current: false,
       icon: Star,
       color: "text-blue",
       bg: "bg-blue/5 border-blue/30 shadow-[0_0_30px_rgba(59,130,246,0.1)] relative overflow-hidden",
-      badge: "Most Popular"
+      badge: language === "hi" ? "सबसे लोकप्रिय" : "Most Popular"
     },
     {
-      name: "Enterprise Fleet",
+      name: language === "hi" ? "एंटरप्राइज फ्लीट" : "Enterprise Fleet",
       price: "₹1999",
-      period: "per month",
-      description: "Complete suite for fleet operations.",
-      features: ["Up to 50 vehicles", "Advanced analytics", "Driver performance tracking", "Bulk payments", "Dedicated account manager"],
-      button: "Contact Sales",
+      period: language === "hi" ? "प्रति माह" : "per month",
+      description: language === "hi" ? "फ्लीट संचालन के लिए पूर्ण पैकेज।" : "Complete suite for fleet operations.",
+      features: [
+        language === "hi" ? "50 वाहनों तक" : "Up to 50 vehicles", 
+        language === "hi" ? "उन्नत विश्लेषण" : "Advanced analytics", 
+        language === "hi" ? "चालक प्रदर्शन ट्रैकिंग" : "Driver performance tracking", 
+        language === "hi" ? "समर्पित सहायता" : "Dedicated account manager"
+      ],
+      button: language === "hi" ? "बिक्री टीम से संपर्क करें" : "Contact Sales",
       current: false,
       icon: Zap,
       color: "text-emerald-400",

@@ -1,15 +1,23 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Sparkles, X, Send, Mic, MapPin, Wrench, Settings, Coffee, Wind, Truck } from "lucide-react";
+import { Sparkles, X, Send, Mic, MapPin, Coffee, Wind } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
+import { useLanguage } from "@/hooks/use-language";
 
 export function AIAssistantWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const { language, t } = useLanguage();
+  const { user } = useAuth();
+
   const [messages, setMessages] = useState([
-    { role: "assistant", text: "Hi there! I'm your Highways24 AI Assistant. How can I help you on your journey today?" }
+    { 
+      role: "assistant", 
+      text: language === "hi" 
+        ? "नमस्ते! मैं आपका हाईवे24 एआई सहायक हूं। आज आपकी यात्रा में मैं आपकी क्या मदद कर सकता हूं?" 
+        : "Hi there! I'm your Highways24 AI Assistant. How can I help you on your journey today?" 
+    }
   ]);
   const [input, setInput] = useState("");
-  const { user } = useAuth();
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -20,15 +28,23 @@ export function AIAssistantWidget() {
     
     // Mock AI response
     setTimeout(() => {
-      let reply = "I'm processing your request...";
+      let reply = language === "hi" ? "मैं आपके अनुरोध पर काम कर रहा हूं..." : "I'm processing your request...";
       if (user?.role === 'driver') {
-        reply = "Based on your current route on NH-48, there is a recommended Dhaba (Sher-e-Punjab) 15km ahead with safe truck parking. Would you like me to add it to your route?";
+        reply = language === "hi"
+          ? "NH-48 पर आपकी वर्तमान स्थिति के अनुसार, 15 किमी आगे शेर-ए-पंजाब ढाबा है जहां सुरक्षित ट्रक पार्किंग उपलब्ध है।"
+          : "Based on your current route on NH-48, there is a recommended Dhaba (Sher-e-Punjab) 15km ahead with safe truck parking.";
       } else if (user?.role === 'dhaba') {
-        reply = "Looking at historical data, expect a 40% surge in truck drivers arriving between 8 PM and 11 PM tonight. I recommend preparing extra vegetarian meals.";
+        reply = language === "hi"
+          ? "आज रात 8 बजे से 11 बजे के बीच चालकों की संख्या में 40% की वृद्धि का अनुमान है। अतिरिक्त भोजन तैयार रखने की सलाह दी जाती है।"
+          : "Looking at historical data, expect a 40% surge in truck drivers arriving between 8 PM and 11 PM tonight.";
       } else if (user?.role === 'fleet') {
-        reply = "Vehicle MH-12-AB-1234 has been showing 12% higher fuel consumption over the last 3 trips. A mechanical check is highly recommended.";
+        reply = language === "hi"
+          ? "वाहन MH-12-AB-1234 की पिछले 3 दौरों में 12% अधिक ईंधन खपत दर्ज हुई है। मैकेनिक जांच की सलाह दी जाती है।"
+          : "Vehicle MH-12-AB-1234 has been showing 12% higher fuel consumption over the last 3 trips.";
       } else if (user?.role === 'mechanic') {
-        reply = "You have 3 upcoming service requests in your 10km radius for heavy commercial vehicles. Should I auto-accept them for you?";
+        reply = language === "hi"
+          ? "आपके 10 किमी क्षेत्र में 3 नए सेवा अनुरोध आए हैं। क्या आप इन्हें स्वीकार करना चाहते हैं?"
+          : "You have 3 upcoming service requests in your 10km radius for heavy commercial vehicles.";
       }
       
       setMessages([...newMsgs, { role: "assistant", text: reply }]);
@@ -66,8 +82,10 @@ export function AIAssistantWidget() {
                   <Sparkles className="w-4 h-4 text-foreground" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-foreground text-sm">Highway AI</h3>
-                  <p className="text-[10px] dark:text-foreground/70 text-foreground">Always ready to assist</p>
+                  <h3 className="font-bold text-foreground text-sm">{t("ai.widgetTitle", "Highways24 AI")}</h3>
+                  <p className="text-[10px] dark:text-foreground/70 text-foreground">
+                    {language === "hi" ? "सहायता के लिए सदैव तैयार" : "Always ready to assist"}
+                  </p>
                 </div>
               </div>
               <button 
@@ -101,13 +119,19 @@ export function AIAssistantWidget() {
                 <div className="flex flex-wrap gap-2 mt-4">
                   {user?.role === 'driver' && (
                     <>
-                      <button onClick={() => setInput("Find a dhaba nearby")} className="text-xs px-3 py-1.5 rounded-full bg-foreground/5 border dark:border-foreground/10 border-foreground dark:text-foreground/80 text-foreground hover:bg-foreground/10 transition-colors flex items-center gap-1"><Coffee className="w-3 h-3" /> Find Dhaba</button>
-                      <button onClick={() => setInput("How is the weather ahead?")} className="text-xs px-3 py-1.5 rounded-full bg-foreground/5 border dark:border-foreground/10 border-foreground dark:text-foreground/80 text-foreground hover:bg-foreground/10 transition-colors flex items-center gap-1"><Wind className="w-3 h-3" /> Weather Check</button>
+                      <button onClick={() => setInput(language === "hi" ? "पास में ढाबा खोजें" : "Find a dhaba nearby")} className="text-xs px-3 py-1.5 rounded-full bg-foreground/5 border dark:border-foreground/10 border-foreground dark:text-foreground/80 text-foreground hover:bg-foreground/10 transition-colors flex items-center gap-1">
+                        <Coffee className="w-3 h-3" /> {language === "hi" ? "ढाबा खोजें" : "Find Dhaba"}
+                      </button>
+                      <button onClick={() => setInput(language === "hi" ? "आगे मौसम कैसा है?" : "How is the weather ahead?")} className="text-xs px-3 py-1.5 rounded-full bg-foreground/5 border dark:border-foreground/10 border-foreground dark:text-foreground/80 text-foreground hover:bg-foreground/10 transition-colors flex items-center gap-1">
+                        <Wind className="w-3 h-3" /> {language === "hi" ? "मौसम जांचें" : "Weather Check"}
+                      </button>
                     </>
                   )}
                   {user?.role === 'fleet' && (
                     <>
-                      <button onClick={() => setInput("Optimize routes for my active trucks")} className="text-xs px-3 py-1.5 rounded-full bg-foreground/5 border dark:border-foreground/10 border-foreground dark:text-foreground/80 text-foreground hover:bg-foreground/10 transition-colors flex items-center gap-1"><MapPin className="w-3 h-3" /> Optimize Routes</button>
+                      <button onClick={() => setInput(language === "hi" ? "सक्रिय ट्रकों का मार्ग अनुकूलित करें" : "Optimize routes for my active trucks")} className="text-xs px-3 py-1.5 rounded-full bg-foreground/5 border dark:border-foreground/10 border-foreground dark:text-foreground/80 text-foreground hover:bg-foreground/10 transition-colors flex items-center gap-1">
+                        <MapPin className="w-3 h-3" /> {language === "hi" ? "मार्ग अनुकूलित करें" : "Optimize Routes"}
+                      </button>
                     </>
                   )}
                 </div>
@@ -121,7 +145,7 @@ export function AIAssistantWidget() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Ask anything..." 
+                  placeholder={t("ai.inputPlaceholder", "Ask anything...")} 
                   className="w-full bg-background border dark:border-foreground/10 border-foreground rounded-full py-2.5 pl-4 pr-12 text-sm text-foreground focus:outline-none focus:border-blue/50"
                 />
                 <div className="absolute right-1 flex items-center">

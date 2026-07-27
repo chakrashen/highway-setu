@@ -5,6 +5,7 @@ import {
   LayoutDashboard,
   type LucideIcon,
 } from "lucide-react";
+import { Language } from "@/hooks/use-language";
 
 export type AccentKey = "blue" | "purple" | "orange" | "emerald";
 
@@ -164,4 +165,118 @@ export const ROLES: RoleData[] = [
   },
 ];
 
-export const roleBySlug = (slug: string) => ROLES.find((r) => r.slug === slug)!;
+export const HI_ROLES: RoleData[] = [
+  {
+    key: "blue",
+    slug: "/drivers",
+    name: "ट्रक चालक",
+    icon: Truck,
+    headline: "आपका बुद्धिमान हाईवे साथी",
+    tagline: "भारत को गतिमान रखने वाले चालकों के लिए विशेष रूप से निर्मित।",
+    description:
+      "स्मार्ट नेविगेशन से लेकर आपातकालीन सहायता तक, हाईवे24 हर यात्रा पर चालकों को सुरक्षित, सूचित और कनेक्टेड रखता है।",
+    features: [
+      "स्मार्ट नेविगेशन",
+      "चालक समुदाय",
+      "डिजिटल दस्तावेज़",
+      "सुरक्षा अलर्ट",
+      "लाइव सड़क अपडेट",
+      "पहचान सत्यापन",
+    ],
+    stats: [
+      { label: "सक्रिय चालक", value: 48000, suffix: "+" },
+      { label: "औसत एसओएस प्रतिक्रिया", value: 4, suffix: " मिनट" },
+      { label: "अनुकूलित मार्ग", value: 2.1, prefix: "", suffix: "M" },
+    ],
+    accentClass: "text-blue",
+    gradient: "from-blue to-blue-glow",
+    glow: "glow-blue",
+  },
+  {
+    key: "purple",
+    slug: "/mechanics",
+    name: "मैकेनिक",
+    icon: Wrench,
+    headline: "हर कार्यशाला को स्मार्ट सर्विस सेंटर में बदलें",
+    tagline: "अपने गैराज को एक डिजिटल सर्विस हब बनाएं।",
+    description:
+      "सेवा अनुरोध प्राप्त करें, तेजी से निदान करें, स्पेयर पार्ट्स प्रबंधित करें और भुगतान प्राप्त करें — हाईवे कार्यशालाओं के लिए निर्मित डैशबोर्ड से।",
+    features: [
+      "सेवा अनुरोध प्राप्त करें",
+      "नौकरी स्वीकार करें",
+      "वाहन निदान",
+      "स्पेयर पार्ट्स प्रबंधन",
+      "ग्राहक संचार",
+      "आय डैशबोर्ड",
+    ],
+    stats: [
+      { label: "पंजीकृत कार्यशालाएं", value: 9200, suffix: "+" },
+      { label: "पूर्ण किए गए काम", value: 310, suffix: "K" },
+      { label: "औसत रेटिंग", value: 4.8, suffix: "★" },
+    ],
+    accentClass: "text-purple",
+    gradient: "from-purple to-purple-glow",
+    glow: "glow-purple",
+  },
+  {
+    key: "orange",
+    slug: "/dhaba",
+    name: "ढाबा मालिक",
+    icon: UtensilsCrossed,
+    headline: "हाईवे व्यवसायों को सशक्त बनाना",
+    tagline: "अपने ढाबे को डिजिटल युग में लाएं।",
+    description:
+      "मेनू प्रबंधित करें, ऑनलाइन ऑर्डर लें, पीक आवर्स समझें और हाईवे हॉस्पिटैलिटी विश्लेषण से अपनी आय बढ़ाएं।",
+    features: [
+      "स्मार्ट मेनू प्रबंधन",
+      "ऑनलाइन ऑर्डर",
+      "ग्राहक समीक्षाएं",
+      "व्यावसायिक प्रोफ़ाइल",
+      "लोकप्रिय व्यंजन",
+      "डिजिटल भुगतान",
+    ],
+    stats: [
+      { label: "सूचीबद्ध ढाबे", value: 6400, suffix: "+" },
+      { label: "ऑर्डर / माह", value: 1.4, suffix: "M" },
+      { label: "औसत आय वृद्धि", value: 32, suffix: "%" },
+    ],
+    accentClass: "text-orange",
+    gradient: "from-orange to-orange-glow",
+    glow: "glow-orange",
+  },
+  {
+    key: "emerald",
+    slug: "/fleet",
+    name: "फ्लीट मैनेजर",
+    icon: LayoutDashboard,
+    headline: "पूर्ण फ्लीट कमांड सेंटर",
+    tagline: "प्रत्येक वाहन और चालक पर पूर्ण दृश्यता।",
+    description:
+      "वाहनों को ट्रैक करें, चालकों को प्रबंधित करें, रखरखाव शेड्यूल करें और डेटा को सही निर्णयों में बदलें — आपका पूरा फ्लीट एक ही स्थान पर।",
+    features: [
+      "फ्लीट डैशबोर्ड",
+      "चालक प्रबंधन",
+      "वाहन प्रबंधन",
+      "आय रिपोर्ट",
+      "दस्तावेज़ प्रबंधन",
+      "सुरक्षा अलर्ट",
+    ],
+    stats: [
+      { label: "प्रबंधित वाहन", value: 120000, suffix: "+" },
+      { label: "अपटाइम सुधार", value: 27, suffix: "%" },
+      { label: "ईंधन बचत", value: 18, suffix: "%" },
+    ],
+    accentClass: "text-emerald",
+    gradient: "from-emerald to-emerald-glow",
+    glow: "glow-emerald",
+  },
+];
+
+export const getRoles = (lang: Language = "en"): RoleData[] => {
+  return lang === "hi" ? HI_ROLES : ROLES;
+};
+
+export const roleBySlug = (slug: string, lang: Language = "en") => {
+  const rolesList = getRoles(lang);
+  return rolesList.find((r) => r.slug === slug) || rolesList[0];
+};
