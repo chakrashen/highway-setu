@@ -658,7 +658,7 @@ export function Testimonials() {
       quote: language === "hi" 
         ? "जब मध्यरात्रि में मेरा ट्रक खराब हुआ, तो हाईवे24 के एसओएस फीचर से 4 मिनट में सहायता आ गई। यह वास्तव में जीवनरक्षक है।"
         : "Highways24's SOS feature got me help within minutes when I broke down at midnight. It's a lifesaver.",
-      name: "बलविंदर सिंह",
+      name: language === "hi" ? "बलविंदर सिंह" : "Balwinder Singh",
       role: language === "hi" ? "ट्रक चालक" : "Truck Driver",
       c: "text-blue",
     },
@@ -666,7 +666,7 @@ export function Testimonials() {
       quote: language === "hi"
         ? "हमने वाहनों के खराब रहने के समय को 25% कम किया और अब पूरे फ्लीट पर स्पष्ट दृश्यता है।"
         : "We cut vehicle downtime by a quarter and finally have real visibility across the whole fleet.",
-      name: "अनिता राव",
+      name: language === "hi" ? "अनिता राव" : "Anita Rao",
       role: language === "hi" ? "फ्लीट मालिक" : "Fleet Owner",
       c: "text-emerald",
     },
@@ -674,7 +674,7 @@ export function Testimonials() {
       quote: language === "hi"
         ? "काम के अनुरोध सीधे मेरे डैशबोर्ड पर आते हैं। मेरी कार्यशाला अब व्यवस्थित है और आय बढ़ी है।"
         : "Job requests come straight to my dashboard. My workshop is busier and better organized than ever.",
-      name: "इमरान खान",
+      name: language === "hi" ? "इमरान खान" : "Imran Khan",
       role: language === "hi" ? "मैकेनिक" : "Mechanic",
       c: "text-purple",
     },
@@ -682,7 +682,7 @@ export function Testimonials() {
       quote: language === "hi"
         ? "ऑनलाइन ऑर्डर और विश्लेषण से शाम की बिक्री दोगुनी हो गई। मेरा ढाबा अब डिजिटल मानचित्र पर है।"
         : "Online orders and analytics doubled my evening rush. My dhaba is finally on the map — literally.",
-      name: "लक्ष्मी देवी",
+      name: language === "hi" ? "लक्ष्मी देवी" : "Lakshmi Devi",
       role: language === "hi" ? "ढाबा मालिक" : "Dhaba Owner",
       c: "text-orange",
     },
@@ -690,7 +690,7 @@ export function Testimonials() {
       quote: language === "hi"
         ? "हाईवे24 के साथ, मुझे कभी भी रुकने और खाने के लिए सुरक्षित स्थान की चिंता नहीं होती। यह सभी सत्यापित स्थानों को दिखाता है।"
         : "With Highways24, I never worry about finding a safe spot to park and eat. It shows all the verified stops.",
-      name: "रमेश पटेल",
+      name: language === "hi" ? "रमेश पटेल" : "Ramesh Patel",
       role: language === "hi" ? "लंबी दूरी का चालक" : "Long-haul Driver",
       c: "text-blue",
     },
@@ -698,7 +698,7 @@ export function Testimonials() {
       quote: language === "hi"
         ? "स्वचालित बिलिंग और त्वरित टोल पास एकीकरण से कागजी कार्रवाई का समय काफी बच गया है।"
         : "The automated billing and fast toll pass integrations have saved my transport business hours of paperwork every week.",
-      name: "सुरेश गुप्ता",
+      name: language === "hi" ? "सुरेश गुप्ता" : "Suresh Gupta",
       role: language === "hi" ? "ट्रांसपोर्ट ऑपरेटर" : "Transport Operator",
       c: "text-emerald",
     },

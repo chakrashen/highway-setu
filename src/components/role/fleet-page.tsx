@@ -34,7 +34,7 @@ export function FleetPage() {
                     <div>
                         <Reveal>
                             <span className="inline-flex items-center gap-2 rounded-md bg-emerald/15 px-4 py-1.5 font-mono text-sm font-medium text-emerald ring-1 ring-emerald/40">
-                                <LayoutDashboard className="h-4 w-4" /> {role.name} · Mission Control
+                                <LayoutDashboard className="h-4 w-4" /> {role.name} {language === "hi" ? "· मिशन कंट्रोल" : "· Mission Control"}
                             </span>
                         </Reveal>
                         <Reveal delay={0.05}>
@@ -71,7 +71,7 @@ export function FleetPage() {
                                     <div className="mb-3 flex items-center justify-between">
                                         <BarChart3 className="h-5 w-5 text-emerald" />
                                         <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-widest text-emerald-100/50 light:text-slate-500">
-                                            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald" /> online
+                                            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald" /> {language === "hi" ? "ऑनलाइन" : "online"}
                                         </span>
                                     </div>
                                     <h3 className="font-sans font-semibold">{f}</h3>

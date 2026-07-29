@@ -51,7 +51,7 @@ export function DhabaPage() {
                     <div>
                         <Reveal>
                             <span className="inline-flex items-center gap-2 rounded-full bg-orange/15 px-4 py-1.5 text-sm font-medium text-orange ring-1 ring-orange/40">
-                                <UtensilsCrossed className="h-4 w-4" /> {role.name} Kitchen
+                                <UtensilsCrossed className="h-4 w-4" /> {role.name} {language === "hi" ? "किचन" : "Kitchen"}
                             </span>
                         </Reveal>
                         <Reveal delay={0.05}>
