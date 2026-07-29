@@ -12,8 +12,8 @@ import {
   Globe
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { GetStartedModal } from "@/components/auth/get-started-modal";
 import { useLanguage } from "@/hooks/use-language";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
 
 const navRoles = [
   { to: "/drivers", key: "nav.truckDrivers", fallback: "Truck Drivers", icon: Truck, color: "text-blue" },
@@ -87,11 +87,19 @@ export function Navbar() {
               <Globe className="w-4 h-4 text-blue" />
               <span>{language === "en" ? "EN | English" : "HI | हिंदी"}</span>
             </button>
-            <GetStartedModal>
-              <button className="rounded-full bg-gradient-to-r from-blue to-purple px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple/20 transition-transform hover:scale-105">
-                {t("nav.register", "Register")}
-              </button>
-            </GetStartedModal>
+            <Dialog>
+              <DialogTrigger asChild>
+                <button className="rounded-full bg-gradient-to-r from-blue to-purple px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple/20 transition-transform hover:scale-105">
+                  Get App
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px] flex items-center justify-center min-h-[200px]">
+                <DialogTitle className="sr-only">App Coming Soon</DialogTitle>
+                <h2 className="text-4xl font-bold text-center uppercase bg-clip-text text-transparent bg-gradient-to-r from-blue to-purple">
+                  App is coming soon
+                </h2>
+              </DialogContent>
+            </Dialog>
           </div>
 
           <div className="flex items-center gap-2 lg:hidden">
@@ -144,14 +152,19 @@ export function Navbar() {
                   </span>
                   <span className="font-bold text-blue">{language === "en" ? "English (EN)" : "हिंदी (HI)"}</span>
                 </button>
-                <GetStartedModal>
-                  <button
-                    onClick={() => setOpen(false)}
-                    className="rounded-xl w-full bg-gradient-to-r from-blue to-purple px-4 py-3 text-center text-sm font-semibold text-white"
-                  >
-                    {t("nav.register", "Register")}
-                  </button>
-                </GetStartedModal>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button className="rounded-xl w-full bg-gradient-to-r from-blue to-purple px-4 py-3 text-center text-sm font-semibold text-white">
+                      Get App
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="w-[90%] max-w-[425px] flex items-center justify-center min-h-[200px] rounded-2xl">
+                    <DialogTitle className="sr-only">App Coming Soon</DialogTitle>
+                    <h2 className="text-3xl font-bold text-center uppercase bg-clip-text text-transparent bg-gradient-to-r from-blue to-purple">
+                      App is coming soon
+                    </h2>
+                  </DialogContent>
+                </Dialog>
               </div>
             </motion.div>
           )}
