@@ -27,7 +27,7 @@ export function Footer() {
             {[
               { Icon: Twitter, href: "#" },
               { Icon: Linkedin, href: "https://www.linkedin.com/company/highways24/" },
-              { Icon: Instagram, href: "https://www.instagram.com/futuretravel2050?igsh=MTI0eXkwbzJjZ280ZQ==" },
+              { Icon: Instagram, href: "https://www.instagram.com/highwaynexus/" },
               { Icon: Youtube, href: "https://www.youtube.com/channel/UConnQnaclz6VJQhZHxQ1pUQ" },
             ].map(({ Icon, href }, i) => (
               <a
