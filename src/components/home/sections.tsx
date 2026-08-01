@@ -1,5 +1,11 @@
 import { useState } from "react";
 import { GetStartedModal } from "@/components/auth/get-started-modal";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import {
@@ -113,6 +119,28 @@ export function EcosystemSection() {
       <div className="mx-auto max-w-6xl">
         <Reveal>
           <div className="text-center">
+            {/* Mobile Get App Button */}
+            <div className="md:hidden mb-8 mt-4 flex justify-center">
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button className="rounded-full bg-gradient-to-r from-blue to-purple px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-purple/20 transition-transform hover:scale-105">
+                    {language === "hi" ? "ऐप प्राप्त करें" : "Get App"}
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="w-11/12 max-w-[320px] rounded-2xl p-6 flex items-center justify-center min-h-[120px] sm:max-w-[320px]">
+                  <DialogTitle className="sr-only">App Coming Soon</DialogTitle>
+                  <motion.h2 
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: "spring", bounce: 0.5, duration: 0.6 }}
+                    className="text-2xl md:text-3xl font-bold text-center uppercase bg-clip-text text-transparent bg-gradient-to-r from-blue to-purple"
+                  >
+                    App is coming soon
+                  </motion.h2>
+                </DialogContent>
+              </Dialog>
+            </div>
+            
             <p className="text-sm font-semibold uppercase tracking-widest text-blue">
               {language === "hi" ? "समाधान" : "The Solution"}
             </p>
