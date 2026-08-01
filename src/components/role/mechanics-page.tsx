@@ -4,6 +4,7 @@ import {
     Wrench,
     Hammer,
     Settings,
+    ArrowRight,
 } from "lucide-react";
 import { roleBySlug } from "@/lib/roles";
 import { Reveal } from "@/components/ui/reveal";
@@ -48,6 +49,18 @@ export function MechanicsPage() {
                             <p className="mt-6 max-w-xl text-lg text-purple-100/70 light:text-slate-600">
                                 {role.description}
                             </p>
+                        </Reveal>
+                        <Reveal delay={0.25}>
+                            <div className="mt-8 flex flex-wrap items-center gap-4">
+                                <a
+                                    href="https://docs.google.com/forms/d/e/1FAIpQLSdjevnZPEToUeIP1vxj1aN_dVk-6OSz5gm3m_7Lat_jkyy89A/viewform"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple to-purple-glow px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:scale-105"
+                                >
+                                    {language === "hi" ? "अपना गैराज सूचीबद्ध करें" : "List My Garage"} <ArrowRight className="h-4 w-4" />
+                                </a>
+                            </div>
                         </Reveal>
                     </div>
 
