@@ -64,12 +64,14 @@ export function DhabaPage() {
                         </Reveal>
                         <Reveal delay={0.25}>
                             <div className="mt-8 flex flex-wrap items-center gap-4">
-                                <Link
-                                    to="/auth/register/dhaba"
+                                <a
+                                    href="https://docs.google.com/forms/d/e/1FAIpQLSefLsc5-sALFRi71dITCAupPYT0SFV158WDxqnvU7Muo1DwoQ/viewform"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-orange to-orange-glow px-7 py-3.5 text-sm font-semibold text-[#140c04] transition-transform hover:scale-105"
                                 >
                                     {language === "hi" ? "अपना ढाबा सूचीबद्ध करें" : "List My Dhaba"} <ArrowRight className="h-4 w-4" />
-                                </Link>
+                                </a>
                             </div>
                         </Reveal>
                     </div>
