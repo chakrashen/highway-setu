@@ -52,14 +52,12 @@ export function MechanicsPage() {
                         </Reveal>
                         <Reveal delay={0.25}>
                             <div className="mt-8 flex flex-wrap items-center gap-4">
-                                <a
-                                    href="https://docs.google.com/forms/d/e/1FAIpQLSdjevnZPEToUeIP1vxj1aN_dVk-6OSz5gm3m_7Lat_jkyy89A/viewform"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
+                                <Link
+                                    to="/auth/register/mechanic"
                                     className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple to-purple-glow px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:scale-105"
                                 >
                                     {language === "hi" ? "अपना गैराज सूचीबद्ध करें" : "List My Garage"} <ArrowRight className="h-4 w-4" />
-                                </a>
+                                </Link>
                             </div>
                         </Reveal>
                     </div>
@@ -130,14 +128,14 @@ export function MechanicsPage() {
 
 function DiagnosticsMockup() {
     return (
-        <div 
+        <div
             className="absolute inset-0 z-10 lg:-right-[50%] lg:w-[150%] lg:-translate-x-48"
             style={{ WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 25%)", maskImage: "linear-gradient(to right, transparent 0%, black 25%)" }}
         >
-            <img 
-                src="/mechanic independent.png" 
-                alt="Mechanic Dashboard" 
-                className="h-full w-full object-cover lg:object-left" 
+            <img
+                src="/mechanic independent.png"
+                alt="Mechanic Dashboard"
+                className="h-full w-full object-cover lg:object-left"
             />
         </div>
     );
