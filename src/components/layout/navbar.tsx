@@ -9,7 +9,8 @@ import {
   UtensilsCrossed,
   LayoutDashboard,
   Home,
-  Globe
+  Globe,
+  Soup
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/hooks/use-language";
@@ -24,6 +25,13 @@ const navRoles = [
     fallback: "Dhaba Owners",
     icon: UtensilsCrossed,
     color: "text-orange",
+  },
+  {
+    to: "/food-order",
+    key: "nav.foodOrder",
+    fallback: "Food Order",
+    icon: Soup,
+    color: "text-amber-400",
   },
   {
     to: "/fleet",

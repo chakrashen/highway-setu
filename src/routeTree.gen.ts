@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as MechanicsRouteImport } from './routes/mechanics'
 import { Route as MapRouteImport } from './routes/map'
+import { Route as FoodOrderRouteImport } from './routes/food-order'
 import { Route as FleetRouteImport } from './routes/fleet'
 import { Route as DriversRouteImport } from './routes/drivers'
 import { Route as DhabaRouteImport } from './routes/dhaba'
@@ -39,6 +40,11 @@ const MechanicsRoute = MechanicsRouteImport.update({
 const MapRoute = MapRouteImport.update({
   id: '/map',
   path: '/map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FoodOrderRoute = FoodOrderRouteImport.update({
+  id: '/food-order',
+  path: '/food-order',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FleetRoute = FleetRouteImport.update({
@@ -144,6 +150,7 @@ export interface FileRoutesByFullPath {
   '/dhaba': typeof DhabaRoute
   '/drivers': typeof DriversRoute
   '/fleet': typeof FleetRoute
+  '/food-order': typeof FoodOrderRoute
   '/map': typeof MapRoute
   '/mechanics': typeof MechanicsRoute
   '/auth/login': typeof AuthLoginRoute
@@ -167,6 +174,7 @@ export interface FileRoutesByTo {
   '/dhaba': typeof DhabaRoute
   '/drivers': typeof DriversRoute
   '/fleet': typeof FleetRoute
+  '/food-order': typeof FoodOrderRoute
   '/map': typeof MapRoute
   '/mechanics': typeof MechanicsRoute
   '/auth/login': typeof AuthLoginRoute
@@ -191,6 +199,7 @@ export interface FileRoutesById {
   '/dhaba': typeof DhabaRoute
   '/drivers': typeof DriversRoute
   '/fleet': typeof FleetRoute
+  '/food-order': typeof FoodOrderRoute
   '/map': typeof MapRoute
   '/mechanics': typeof MechanicsRoute
   '/auth/login': typeof AuthLoginRoute
@@ -216,6 +225,7 @@ export interface FileRouteTypes {
     | '/dhaba'
     | '/drivers'
     | '/fleet'
+    | '/food-order'
     | '/map'
     | '/mechanics'
     | '/auth/login'
@@ -239,6 +249,7 @@ export interface FileRouteTypes {
     | '/dhaba'
     | '/drivers'
     | '/fleet'
+    | '/food-order'
     | '/map'
     | '/mechanics'
     | '/auth/login'
@@ -262,6 +273,7 @@ export interface FileRouteTypes {
     | '/dhaba'
     | '/drivers'
     | '/fleet'
+    | '/food-order'
     | '/map'
     | '/mechanics'
     | '/auth/login'
@@ -286,6 +298,7 @@ export interface RootRouteChildren {
   DhabaRoute: typeof DhabaRoute
   DriversRoute: typeof DriversRoute
   FleetRoute: typeof FleetRoute
+  FoodOrderRoute: typeof FoodOrderRoute
   MapRoute: typeof MapRoute
   MechanicsRoute: typeof MechanicsRoute
 }
@@ -304,6 +317,13 @@ declare module '@tanstack/react-router' {
       path: '/map'
       fullPath: '/map'
       preLoaderRoute: typeof MapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/food-order': {
+      id: '/food-order'
+      path: '/food-order'
+      fullPath: '/food-order'
+      preLoaderRoute: typeof FoodOrderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fleet': {
@@ -493,6 +513,7 @@ const rootRouteChildren: RootRouteChildren = {
   DhabaRoute: DhabaRoute,
   DriversRoute: DriversRoute,
   FleetRoute: FleetRoute,
+  FoodOrderRoute: FoodOrderRoute,
   MapRoute: MapRoute,
   MechanicsRoute: MechanicsRoute,
 }
