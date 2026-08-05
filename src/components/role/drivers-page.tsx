@@ -3,7 +3,8 @@ import { motion } from "motion/react";
 import {
     Truck,
     Navigation,
-    MapPin
+    MapPin,
+    ArrowRight
 } from "lucide-react";
 import { roleBySlug } from "@/lib/roles";
 import { Reveal } from "@/components/ui/reveal";
@@ -61,6 +62,16 @@ export function DriversPage() {
                             <p className="mt-6 max-w-xl text-lg text-blue-100/70 light:text-slate-600">
                                 {role.description}
                             </p>
+                        </Reveal>
+                        <Reveal delay={0.25}>
+                            <div className="mt-8 flex flex-wrap items-center gap-4">
+                                <Link
+                                    to="/auth/register/driver"
+                                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue to-blue-glow px-7 py-3.5 text-sm font-semibold text-white transition-transform hover:scale-105"
+                                >
+                                    {language === "hi" ? "अपना ट्रक पंजीकृत करें" : "Register My Truck"} <ArrowRight className="h-4 w-4" />
+                                </Link>
+                            </div>
                         </Reveal>
                     </div>
 
