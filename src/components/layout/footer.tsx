@@ -3,6 +3,7 @@ import {
   Twitter,
   Linkedin,
   Instagram,
+  Facebook,
   Youtube,
   Mail,
   MapPin,
@@ -28,6 +29,7 @@ export function Footer() {
               { Icon: Twitter, href: "#" },
               { Icon: Linkedin, href: "https://www.linkedin.com/company/highways24/" },
               { Icon: Instagram, href: "https://www.instagram.com/highways24official/" },
+              { Icon: Facebook, href: "https://www.facebook.com/profile.php?id=61591364972925" },
               { Icon: Youtube, href: "https://www.youtube.com/channel/UConnQnaclz6VJQhZHxQ1pUQ" },
             ].map(({ Icon, href }, i) => (
               <a
