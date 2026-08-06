@@ -331,7 +331,7 @@ export function FoodOrderPage() {
       {/* Hero Header */}
       <section className="relative z-10 px-4 pb-12 pt-36 md:pt-44">
         <div className="mx-auto max-w-7xl">
-          <div className="text-center">
+          <div className="text-left">
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full bg-orange/15 px-4 py-1.5 text-sm font-medium text-orange ring-1 ring-orange/40">
                 <Soup className="h-4 w-4" /> {language === "hi" ? "हाईवे एक्सप्रेस फ़ूड आर्डर" : "Highway Dhaba Express Food Ordering"}
@@ -345,7 +345,7 @@ export function FoodOrderPage() {
             </Reveal>
 
             <Reveal delay={0.15}>
-              <p className="mx-auto mt-4 max-w-2xl text-base md:text-lg text-orange-100/75 light:text-slate-600">
+              <p className="mt-4 max-w-2xl text-base md:text-lg text-orange-100/75 light:text-slate-600">
                 {language === "hi" 
                   ? "असली पंजाबी और प्रांतीय ढाबा भोजन का पहले से ऑर्डर करें। अगले हाईवे स्टॉप पर उठाएं या सीधे अपने ट्रक केबिन में डिलीवरी पाएं।"
                   : "Pre-order authentic Punjabi thalis, tandoori rotis, and regional delicacies from verified highway dhabas. Pick up at your next stop or get direct truck-cabin delivery."}
@@ -356,7 +356,7 @@ export function FoodOrderPage() {
           </div>
 
           {/* Search & Filter Bar */}
-          <div className="mt-10 mx-auto max-w-4xl">
+          <div className="mt-10 max-w-4xl">
             <Reveal delay={0.25}>
               <div className="glass-strong rounded-2xl p-3 border border-orange/20 light:border-slate-200 shadow-2xl flex flex-col md:flex-row gap-3 items-center light:bg-white/90">
                 <div className="relative flex-1 w-full">
